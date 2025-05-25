@@ -1,14 +1,24 @@
 class AgentsPage {
     visitAgent(){
-        cy.visit('/pages/agents/index')
+        cy.visit('https://qc-community.com/WABP_LIB/AdminTool/pages/agents/index')
     }
     AddNewAgent(FullName,email){
-        cy.get('.btn-primary').click();
-        cy.get('#mat-input-2').type(FullName);
-        cy.get('#mat-input-3').type(email);
+        cy.get('button.btn.btn-primary').click()
+
+        cy.get('input[data-placeholder="Full Name"]').type(FullName)
+
+        cy.get('input[formcontrolname="email"]').type(email)
+        cy.get('span.ng-star-inserted').contains('Select Role').click()
+
+        cy.contains('li', 'Raya role').find('input[type="checkbox"]').check({ force: true });
+
+        cy.get('input[data-placeholder="Integration Id"]').type(FullName)
+
+
         cy.get('#roleDD').click(); 
         cy.get('.lazyContainer > :nth-child(1) > label').click(); // 🔹 Click to select "Admin"
-        cy.get('#mat-radio-2 > .mat-radio-label > .mat-radio-container > .mat-radio-outer-circle').click();
+        cy.contains('label.mat-radio-label', 'Male').click();
+
 
         cy.get('.btn').click();
 

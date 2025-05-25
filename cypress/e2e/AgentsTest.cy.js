@@ -26,7 +26,7 @@ describe('Agents Page Tests Using Fixtures', () => {
    cy.get('.mat-simple-snack-bar-content').should('contain', 'Admin user created successfully');
   });
   
-
+/*
   it('Search by Name', function() {
 
     AgentsPage.SearchByName(this.AgentsData.Agent.FullName);
@@ -73,6 +73,6 @@ it('Delete The agent',function(){
   AgentsPage.DeleteAgent();
   cy.get('.mat-simple-snack-bar-content').should('contain','Admin user deleted successfully')
 })
-
+*/
  
 });

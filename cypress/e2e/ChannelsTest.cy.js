@@ -1,19 +1,18 @@
  import ChannelsPage from '../Pages/ChannelsPage';
  import LoginPage from '../pages/LoginPage';
  describe('Agents Page Tests Using Fixtures', () => {
- 
-   beforeEach(function () {
-    
-       LoginPage.visit();
-       cy.fixture('LoginData').then((data) => {
-         this.LoginData = data; // ✅ Assign fixture data to "this"
-       }).then(() => {
+     beforeEach(function () {
+
          LoginPage.visit();
-         LoginPage.login(this.LoginData.admin.email, this.LoginData.admin.password);
-       });
-    //ChannelsPage.visitChannelPage();
-    cy.visit('https://qc-community.com/WABP/AdminTool/pages/channels/index');
-    });
+         cy.fixture('LoginData').then((data) => {
+             this.LoginData = data; // ✅ Assign fixture data to "this"
+         }).then(() => {
+             LoginPage.visit();
+             LoginPage.login(this.LoginData.admin.email, this.LoginData.admin.password);
+         });
+
+     });
+
     /*
 
     it ('Template is synced Suceessfully',function() {
@@ -22,7 +21,8 @@
     });
     */
 
-    it ('Change not active channel',function(){
+     it('Change not active channel', function () {
+         
         ChannelsPage.changetoNotactive();
 
        cy.get('.mat-snack-bar-container').should('contain','Channel deactivated successfully');
