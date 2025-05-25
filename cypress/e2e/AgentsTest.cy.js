@@ -3,39 +3,47 @@ import AgentsPage from '../Pages/AgentsPage';
 
 describe('Agents Page Tests Using Fixtures', () => {
 
-  beforeEach(function () {
-   
+beforeEach(function () {
+    // Load fixtures first
+    cy.fixture('LoginData').as('LoginData');
+    cy.fixture('categoryLogsData').as('data');
+
+    // Perform login and wait for successful navigation
+    cy.get('@LoginData').then((loginData) => {
       LoginPage.visit();
-      cy.fixture('LoginData').then((data) => {
-        this.LoginData = data; // ✅ Assign fixture data to "this"
-      }).then(() => {
-        LoginPage.visit();
-        LoginPage.login(this.LoginData.admin.email, this.LoginData.admin.password);
-      });
-  
-    cy.fixture('AgentsData').then((data) => {
-      cy.wrap(data).as('AgentsData'); // 🔹 Store fixture data globally
+      LoginPage.login(loginData.admin.email, loginData.admin.password);
+
+      // Wait for successful login (adjust the selector to match your app)
+      cy.url().should('not.include', '/auth/login');
     });
-  
+
+
+    // Now visit the category log page after login
     AgentsPage.visitAgent();
+    cy.fixture('AgentsData').then((data) => {
+  cy.wrap(data).as('AgentsData'); // 🔹 Store fixture data globally
+});
+
   });
+
   
   it('Should add a new agent successfully', function () {
-    AgentsPage.AddNewAgent(this.AgentsData.Agent.FullName,this.AgentsData.Agent.email);
+    AgentsPage.AddNewAgent(this.AgentsData.FullName ,this.AgentsData.email,this.AgentsData.integrationId);
    
-   cy.get('.mat-simple-snack-bar-content').should('contain', 'Admin user created successfully');
+   cy.get('.mat-simple-snack-bar-content').should(be.visible).should('contain', 'Agent created successfully');
   });
   
-/*
+
   it('Search by Name', function() {
 
-    AgentsPage.SearchByName(this.AgentsData.Agent.FullName);
+    AgentsPage.SearchByName(this.AgentsData.FullName);
     cy.get('.mat-row > .cdk-column-fullName').should('contain','Ahmed');
 
   });
+  
   it('Search by Email', function() {
 
-    AgentsPage.SearchByEmail(this.AgentsData.Agent.email);
+    AgentsPage.SearchByEmail(this.AgentsData.email);
     cy.get('.mat-row > .cdk-column-email').should('contain','Ahmed@ntchnco.com');
 
 
@@ -43,16 +51,17 @@ describe('Agents Page Tests Using Fixtures', () => {
 
   it('Clear', function() {
 
-    AgentsPage.SearchByEmail(this.AgentsData.Agent.email);
+    AgentsPage.SearchByEmail(this.AgentsData.email);
     AgentsPage.clearButton();
-
+    cy.get('input[data-placeholder="Email"]').should('have.value', '');
 
   });
+  
 
   it('Edit name and email' , function(){
-    AgentsPage.SearchByName(this.AgentsData.Agent.FullName);
+    AgentsPage.SearchByName(this.AgentsData.FullName);
 
-    AgentsPage.EditAgent(this.AgentsData.Agent.editname,this.AgentsData.Agent.editemail)
+    AgentsPage.EditAgent(this.AgentsData.editname,this.AgentsData.editemail)
   })
     
 
@@ -73,6 +82,6 @@ it('Delete The agent',function(){
   AgentsPage.DeleteAgent();
   cy.get('.mat-simple-snack-bar-content').should('contain','Admin user deleted successfully')
 })
-*/
+
  
 });
