@@ -26,14 +26,14 @@ beforeEach(function () {
 
   });
 
-  
+
+
   it('Should add a new agent successfully', function () {
     AgentsPage.AddNewAgent(this.AgentsData.FullName ,this.AgentsData.email,this.AgentsData.integrationId);
    
-   cy.get('.mat-simple-snack-bar-content').should(be.visible).should('contain', 'Agent created successfully');
+   cy.get('.mat-simple-snack-bar-content').should('contain', 'Agent created successfully');
   });
   
-
   it('Search by Name', function() {
 
     AgentsPage.SearchByName(this.AgentsData.FullName);
@@ -56,31 +56,47 @@ beforeEach(function () {
     cy.get('input[data-placeholder="Email"]').should('have.value', '');
 
   });
-  
+ 
 
   it('Edit name and email' , function(){
     AgentsPage.SearchByName(this.AgentsData.FullName);
 
     AgentsPage.EditAgent(this.AgentsData.editname,this.AgentsData.editemail)
+    cy.get('.mat-simple-snack-bar-content').should('contain', 'Agent updated successfully');
   })
-    
+     
 
   it ('should Be the user not active ',function(){
-    AgentsPage.SearchByName(this.AgentsData.Agent.FullName);
+    cy.wait(1000);
+    AgentsPage.SearchByName(this.AgentsData.editname);
     AgentsPage.changetoNotactive();
-    cy.get('.mat-simple-snack-bar-content').should('contain','Admin user deactivated successfully')
+    cy.get('.mat-simple-snack-bar-content').should('contain','Agent deactivated successfully')
   })
 
   it ('should Be the user active ',function(){
-     AgentsPage.SearchByName(this.AgentsData.Agent.FullName);
+    cy.wait(1000);
+     AgentsPage.SearchByName(this.AgentsData.editname);
      AgentsPage.changetoActive();
-     cy.get('.mat-simple-snack-bar-content').should('contain','Admin user activated successfully')
+     cy.get('.mat-simple-snack-bar-content').should('contain','Agent activated successfully')
    })
  
 it('Delete The agent',function(){
-  AgentsPage.SearchByEmail(this.AgentsData.Agent.editemail);
+  AgentsPage.SearchByEmail(this.AgentsData.editemail);
   AgentsPage.DeleteAgent();
-  cy.get('.mat-simple-snack-bar-content').should('contain','Admin user deleted successfully')
+  cy.get('.mat-simple-snack-bar-content').should('contain','Agent deleted successfully')
+})
+
+it('should export the Excel file', () => {
+  // Click the Export to Excel button
+  AgentsPage.ExportAgents();
+
+  // Wait for the file to be downloaded
+  const today = new Date();
+const formattedDate = today.toISOString().split('T')[0].replace(/-/g, ''); // e.g. 20250526
+const downloadedFilename = `Agents_${formattedDate}.xlsx`;
+
+
+  cy.readFile(`cypress/downloads/${downloadedFilename}`, { timeout: 15000 }).should('exist')
 })
 
  

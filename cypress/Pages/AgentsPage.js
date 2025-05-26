@@ -45,33 +45,43 @@ class AgentsPage {
     EditAgent(Name,Email){
 
         cy.contains('span', 'Edit').first().click();
-        cy.get('input[data-placeholder="Name"]').should('be.visible').type(Name)
-        cy.get('input[data-placeholder="Email"]').should('be.visible').type(Email)
+        cy.get('input[data-placeholder="Full Name"]').should('be.visible').clear().type(Name)
+        cy.get('input[data-placeholder="agent email"]').should('be.visible').clear().type(Email)
 
 
         cy.get('span').contains('Save').click()
     }
     changetoNotactive(){
-        cy.get('mat-slide-toggle-content').contains('Active').first().click();
+        cy.wait(1000);
+
+        cy.contains('span.mat-slide-toggle-content', 'Active').should('be.visible').click();
+
 
         cy.get('#mat-dialog-title-0').should('be.visible');
-        cy.get('btn btn-black ng-star-inserted').contains('Ok').click()
+        cy.get('.mat-dialog-actions > .btn-black').click()
 
     }
     changetoActive(){
-        cy.get('mat-slide-toggle-content').contains('Not Active').first().click();
+        cy.wait(1000);
+
+        cy.contains('span.mat-slide-toggle-content', 'Not Active').should('be.visible').click();
 
      cy.get('#mat-dialog-title-0').should('be.visible');
-      cy.get('btn btn-black ng-star-inserted').contains('Ok').click()
+      cy.get('.mat-dialog-actions > .btn-black').click()
 
 
     }
     DeleteAgent()
     {
-        cy.contains('span', 'delete').first().click()
+        cy.get(':nth-child(1) > .cdk-column-actions > .btn-group-actions-list > :nth-child(2) > .btn > span').click()
         cy.get('#mat-dialog-0').should('be.visible');
-        cy.get('btn btn-black ng-star-inserted').contains('Ok').click()
-        cy.get('.mat-simple-snack-bar-content')
+        cy.get('.mat-dialog-actions > .btn-black').click()
+    }
+    ExportAgents()
+    {
+        cy.get('button[title="Export To Excel"]').click()
+
+
     }
 
 
