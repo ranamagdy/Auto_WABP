@@ -6,7 +6,7 @@ describe('Agents Page Tests Using Fixtures', () => {
 beforeEach(function () {
     // Load fixtures first
     cy.fixture('LoginData').as('LoginData');
-    cy.fixture('categoryLogsData').as('data');
+    
 
     // Perform login and wait for successful navigation
     cy.get('@LoginData').then((loginData) => {
@@ -18,7 +18,6 @@ beforeEach(function () {
     });
 
 
-    // Now visit the category log page after login
     AgentsPage.visitAgent();
     cy.fixture('AgentsData').then((data) => {
   cy.wrap(data).as('AgentsData'); // 🔹 Store fixture data globally
@@ -91,10 +90,7 @@ it('should export the Excel file', () => {
   AgentsPage.ExportAgents();
 
   // Wait for the file to be downloaded
-  const today = new Date();
-const formattedDate = today.toISOString().split('T')[0].replace(/-/g, ''); // e.g. 20250526
-const downloadedFilename = `Agents_${formattedDate}.xlsx`;
-
+  const downloadedFilename = 'Agents_20250526.xlsx' // Change as needed
 
   cy.readFile(`cypress/downloads/${downloadedFilename}`, { timeout: 15000 }).should('exist')
 })

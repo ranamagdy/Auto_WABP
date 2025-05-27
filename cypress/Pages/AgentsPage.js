@@ -1,6 +1,6 @@
 class AgentsPage {
     visitAgent(){
-        cy.visit('https://qc-community.com/WABP_LIB/AdminTool/pages/agents')
+        cy.visit('/pages/agents')
     }
     AddNewAgent(FullName,email,integrationId){
         cy.get('button.btn.btn-primary').click()
@@ -10,13 +10,13 @@ class AgentsPage {
         cy.get('input[formcontrolname="email"]').type(email)
         cy.get('span.ng-star-inserted').contains('Select Role').click()
 
-        cy.contains('li', 'Raya role').find('input[type="checkbox"]').check({ force: true });
+        cy.contains('li', 'Admin').find('input[type="checkbox"]').check({ force: true });
 
         cy.get('input[data-placeholder="Integration Id"]').type(integrationId)
 
        cy.get('#teamDD > .cuppa-dropdown > .selected-list > .c-btn').contains(' Select Team').click()
         
-        cy.contains('li', 'Motor Renewals Team (Cairo)').find('input[type="checkbox"]').check({ force: true });
+        cy.contains('li', 'EFB').find('input[type="checkbox"]').check({ force: true });
         cy.get('#mat-checkbox-1 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
 
 
