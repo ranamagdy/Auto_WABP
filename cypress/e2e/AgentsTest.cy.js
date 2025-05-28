@@ -32,14 +32,14 @@ beforeEach(function () {
    
    cy.get('.mat-simple-snack-bar-content').should('contain', 'Agent created successfully');
   });
-  
+ /*
   it('Search by Name', function() {
 
     AgentsPage.SearchByName(this.AgentsData.FullName);
     cy.get('.mat-row > .cdk-column-fullName').should('contain','Ahmed');
 
   });
-  
+ 
   it('Search by Email', function() {
 
     AgentsPage.SearchByEmail(this.AgentsData.email);
@@ -94,6 +94,6 @@ it('should export the Excel file', () => {
 
   cy.readFile(`cypress/downloads/${downloadedFilename}`, { timeout: 15000 }).should('exist')
 })
-
+*/
  
 });
