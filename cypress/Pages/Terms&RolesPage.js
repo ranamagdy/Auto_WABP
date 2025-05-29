@@ -1,6 +1,7 @@
 class RolesPage {
     visitRole(){
-        cy.visit('/pages/roles')
+       // cy.visit('/pages/roles')
+       cy.get('#cdk-accordion-child-1 > .mat-expansion-panel-body > .subnav-dropdown > :nth-child(2) > .subnav-link > .nav-link-text').click();
     }
 
     AddNewRole(Name){

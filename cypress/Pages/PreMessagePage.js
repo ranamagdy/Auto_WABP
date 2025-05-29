@@ -1,6 +1,8 @@
 class PreMessagePage {
     visit () {
-        cy.visit ('https://qc-community.com/WABP_LIB/AdminTool/pages/preMessages/index');
+        //cy.visit ('/preMessages/index');
+        cy.get('#cdk-accordion-child-1 > .mat-expansion-panel-body > .subnav-dropdown > :nth-child(4) > .subnav-link').click();
+        
     }
     getSearchInput() {
 return cy.get('input[formcontrolname="message"]');
