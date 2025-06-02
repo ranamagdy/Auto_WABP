@@ -1,5 +1,9 @@
 {
-    "CampaignName":"Test Auto Campaign",
-    "Mobilenumber":"01017985099",
-    "TemplateName":"templatewithheadetext"
+  "templateNames": ["new_temp_image", "templatewithvideo", "doc_temp","templatewithheadetext"],
+  "campaigns": [
+    {
+      "CampaignName": "Test Auto Campaign",
+      "BaseMobileNumber": "01273196"
+    }
+  ]
 }

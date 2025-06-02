@@ -25,18 +25,53 @@ beforeEach(function () {
 });
 
   });
-    it('Should add a new normal onspot Campaign successfully', function () {
-      CampaignPage.AddNewCampaignInfoTab(this.CampaignData.CampaignName);
-      CampaignPage.AddNewCampaignContactsTabByAdditionalNumber(this.CampaignData.Mobilenumber);
-      CampaignPage.AddNewCampaignTemplateTab(this.CampaignData.TemplateName);
+  /*
+it('Should add new normal onspot Campaigns with dynamic data', function () {
+    // Number of campaigns you want to create dynamically
+    const numberOfCampaigns = 50;
 
-    });
-    
+    for (let i = 45; i <= numberOfCampaigns; i++) {
+      const campaignBase = this.CampaignData[0];
 
+      // Generate dynamic CampaignName
+      const dynamicCampaignName = `${campaignBase.CampaignName} ${i}`;
 
+      // Generate dynamic MobileNumber (last 3 digits random)
+      const randomSuffix = Math.floor(100 + Math.random() * 900); // Random 3 digits
+      const dynamicMobileNumber = `${campaignBase.BaseMobileNumber}${randomSuffix}`;
 
+      cy.log(`Creating campaign: ${dynamicCampaignName} with mobile: ${dynamicMobileNumber}`);
 
+      CampaignPage.AddNewCampaignInfoTab(dynamicCampaignName);
+      CampaignPage.AddNewCampaignContactsTab(dynamicMobileNumber);
+      CampaignPage.AddNewCampaignTemplateTab(campaignBase.TemplateName || 'defaultTemplate');
+    }
+  });
 
+*/
+it('Should create campaigns with dynamic template names from fixture', function () {
+    const campaignsToCreate = 95; // or whatever number you want
 
+    for (let i = 90; i <= campaignsToCreate; i++) {
+      const campaignBase = this.CampaignData.campaigns[0];
+      const randomSuffix = Math.floor(100 + Math.random() * 900); // Random last 3 digits
+      const dynamicMobileNumber = `${campaignBase.BaseMobileNumber}${randomSuffix}`;
+      const dynamicCampaignName = `${campaignBase.CampaignName} ${i}`;
+
+      // Randomly pick a template from the fixture
+      const templateNames = this.CampaignData.templateNames;
+      const randomTemplate = templateNames[Math.floor(Math.random() * templateNames.length)];
+
+      cy.log(`Creating campaign: ${dynamicCampaignName} with mobile: ${dynamicMobileNumber} and template: ${randomTemplate}`);
+
+      CampaignPage.AddNewCampaignInfoTab(dynamicCampaignName);
+      CampaignPage.AddNewCampaignContactsTab(dynamicMobileNumber);
+      CampaignPage.AddNewCampaignTemplateTab(randomTemplate);
+    }
+  });
 
 });
+
+
+
+
