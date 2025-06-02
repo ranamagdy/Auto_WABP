@@ -25,30 +25,7 @@ beforeEach(function () {
 });
 
   });
-  /*
-it('Should add new normal onspot Campaigns with dynamic data', function () {
-    // Number of campaigns you want to create dynamically
-    const numberOfCampaigns = 50;
 
-    for (let i = 45; i <= numberOfCampaigns; i++) {
-      const campaignBase = this.CampaignData[0];
-
-      // Generate dynamic CampaignName
-      const dynamicCampaignName = `${campaignBase.CampaignName} ${i}`;
-
-      // Generate dynamic MobileNumber (last 3 digits random)
-      const randomSuffix = Math.floor(100 + Math.random() * 900); // Random 3 digits
-      const dynamicMobileNumber = `${campaignBase.BaseMobileNumber}${randomSuffix}`;
-
-      cy.log(`Creating campaign: ${dynamicCampaignName} with mobile: ${dynamicMobileNumber}`);
-
-      CampaignPage.AddNewCampaignInfoTab(dynamicCampaignName);
-      CampaignPage.AddNewCampaignContactsTab(dynamicMobileNumber);
-      CampaignPage.AddNewCampaignTemplateTab(campaignBase.TemplateName || 'defaultTemplate');
-    }
-  });
-
-*/
 it('Should create campaigns with dynamic template names from fixture', function () {
     const campaignsToCreate = 95; // or whatever number you want
 
