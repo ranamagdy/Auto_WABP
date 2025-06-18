@@ -3,6 +3,7 @@
   "campaigns": [
     {
       "CampaignName": "Test Auto Campaign",
+      "CampaignScheduleName": "Test Scheduled Campaign",
       "BaseMobileNumber": "01273196"
     }
   ]
