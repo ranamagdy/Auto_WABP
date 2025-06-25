@@ -1,15 +1,18 @@
 class PreMessagePage {
     visit () {
+
         //cy.visit ('/preMessages/index');
         cy.get('#cdk-accordion-child-1 > .mat-expansion-panel-body > .subnav-dropdown > :nth-child(4) > .subnav-link').click();
         
+
+        cy.visit ('https://qc-community.com/WABP_lib/AdminTool/pages/preMessages/index');
     }
     getSearchInput() {
-return cy.get('input[formcontrolname="message"]');
+      return cy.get('input[formcontrolname="message"]');
     }
 
     enterSearchMessage(message) {
-        this.getSearchInput().clear().type(message);
+    cy.get('[formcontrolname="message"]').type(message);
     }
 
     clickSearch() {
@@ -29,7 +32,7 @@ return cy.get('input[formcontrolname="message"]');
   }
 
   fillnewMessage(message) {
-    cy.get('input[formcontrolname="message"]').clear().type(message);
+    cy.get('[formcontrolname="message"]').clear().type(message);
   }
 
 clickSave() {

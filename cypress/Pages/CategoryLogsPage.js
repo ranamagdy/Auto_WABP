@@ -1,7 +1,7 @@
 class CategoryLogsPage {
   visit() {
-    cy.visit('https://qc-community.com/WABP_LIB/AdminTool/pages/categoryLogs/index');
-  }
+    cy.visit('https://qc-community.com/WABP_lib/AdminTool/pages/categoryLogs/index');
+  }            
 
   getSearchInput() {
     return cy.get('input[formcontrolname="categoryLogName"]');

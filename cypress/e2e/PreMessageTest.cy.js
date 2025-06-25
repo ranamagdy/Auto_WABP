@@ -14,7 +14,7 @@ describe('Pre Message Page Tests', () => {
       LoginPage.login(loginData.admin.email, loginData.admin.password);
 
       // Wait for successful login (adjust the selector to match your app)
-      cy.url().should('not.include', '/auth/login');
+    cy.url().should('include', '/pages/dashboard');
     });
 
     // Now visit the category log page after login
@@ -44,7 +44,7 @@ describe('Pre Message Page Tests', () => {
     PreMessagePage.clickEditFirst();
     PreMessagePage.fillnewMessage(this.data.editedMessage.Message);
     PreMessagePage.clickSave();
-    PreMessagePage.getSearchResults().should('contain', this.data.editedMessage.name);
+    PreMessagePage.getSearchResults().should('contain', this.data.editedMessage.Message);
   });
 
   it('5️⃣ Should delete the first Message', () => {
