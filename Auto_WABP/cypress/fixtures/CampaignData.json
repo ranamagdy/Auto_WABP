@@ -1,0 +1,10 @@
+{
+  "templateNames": ["new_temp_image", "templatewithvideo", "doc_temp","templatewithheadetext"],
+  "campaigns": [
+    {
+      "CampaignName": "Test Auto Campaign",
+      "CampaignScheduleName": "Test Scheduled Campaign",
+      "BaseMobileNumber": "01273196"
+    }
+  ]
+}
