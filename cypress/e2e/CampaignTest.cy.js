@@ -24,7 +24,7 @@ beforeEach(function () {
     cy.wrap(data).as('CampaignData'); // 🔹 Store fixture data globally
 });
   });
-/*
+
 it('Should create Onspot campaigns Successfully', function () {
     const campaignsToCreate = 95; // or whatever number you want
 
@@ -70,7 +70,7 @@ it('Should create Onspot campaigns Successfully', function () {
     }
 
   });
-   */
+   
     it('Should Search by the Campaign Title Successfully', function () {
 
       CampaignPage.SearchByCampaignName(this.CampaignData.campaigns.CampaignName);
