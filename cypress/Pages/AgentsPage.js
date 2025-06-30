@@ -13,9 +13,8 @@ class AgentsPage {
         cy.get('input[data-placeholder="Full Name"]').type(FullName);
         cy.get('input[formcontrolname="email"]').type(email);
         cy.get('span.ng-star-inserted').contains('Select Role').click();
-
-        cy.contains('li', 'Admin').find('input[type="checkbox"]').check({ force: true });
-
+       cy.get('#roleDD > .cuppa-dropdown > .dropdown-list > .list-area > [style="overflow: auto; max-height: 160px;"] > .lazyContainer > .pure-checkbox > label').click();
+    
         cy.get('body').then(($body) => {
 
             // Check if the Integration ID input exists in the DOM
@@ -40,23 +39,39 @@ class AgentsPage {
         });
 
         cy.get('#teamDD > .cuppa-dropdown > .selected-list > .c-btn').contains(' Select Team').click();
-        cy.contains('li', 'EFB').find('input[type="checkbox"]').check({ force: true });
-        cy.get('#mat-checkbox-1 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
-
+        cy.get (".ng-star-inserted").click;
+       // cy.contains('li', 'EFB').find('input[type="checkbox"]').check({ force: true });
+        cy.get('#teamDD > .cuppa-dropdown > .dropdown-list > .list-area > [style="overflow: auto; max-height: 160px;"] > .lazyContainer > :nth-child(1) > label').click();
         cy.get('button.btn.btn-black').click();
     }
 
+openSearch() {
+    cy.get('div.search-form-expand-wrapper').then($wrapper => {
+        const isVisible = $wrapper.css('opacity') === '1';
+        if (!isVisible) {
+            cy.get('.card-head-btns-wrapper > .btn-black').click();
+
+            // Wait for the panel to become visible after clicking
+            cy.get('div.search-form-expand-wrapper', { timeout: 10000 })
+              .should('have.css', 'opacity', '1');
+        }
+    });
+}
 
     SearchByName(Name) {
         cy.get('input[data-placeholder="Name"]').should('be.visible').type(Name)
         cy.get('span').contains('Search').click()
 
     }
+    
     SearchByEmail(Email) {
+    // Ensure the search section is visible
+    cy.get('div.search-form-expand-wrapper').should('have.css', 'opacity', '1')
 
-        cy.get('input[data-placeholder="Email"]').should('be.visible').type(Email)
-        cy.get('span').contains('Search').click()
-    }
+    // Now continue with input and search
+    cy.get('input[data-placeholder="Email"]', { timeout: 10000 }).should('be.visible').type(Email)
+    cy.contains('span', 'Search').click()
+}
 
     clearButton() {
 
