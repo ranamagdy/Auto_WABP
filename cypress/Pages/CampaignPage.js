@@ -123,6 +123,19 @@ SearchByCampaignName(CampaignName)
 
 }
 
+openSearch() {
+    cy.get('div.search-form-expand-wrapper').then($wrapper => {
+        const isVisible = $wrapper.css('opacity') === '1';
+        if (!isVisible) {
+            cy.get('.card-head-btns-wrapper > .btn-black').click();
+
+            // Wait for the panel to become visible after clicking
+            cy.get('div.search-form-expand-wrapper', { timeout: 10000 })
+              .should('have.css', 'opacity', '1');
+        }
+    });
+}
+
 
 
 

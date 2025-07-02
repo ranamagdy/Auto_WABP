@@ -2,7 +2,7 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   e2e: {
-        baseUrl: "https://qc-community.com/WABP_EFB/AdminTool", 
+        baseUrl: "https://qc-community.com/WABP_qc/AdminTool", 
     
     setupNodeEvents(on, config) {
       // implement node event listeners here
