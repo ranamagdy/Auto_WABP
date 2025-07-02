@@ -24,11 +24,11 @@ beforeEach(function () {
     cy.wrap(data).as('CampaignData'); // 🔹 Store fixture data globally
 });
   });
-/*
-it('Should create Onspot campaigns Successfully', function () {
-    const campaignsToCreate = 95; // or whatever number you want
 
-    for (let i = 90; i <= campaignsToCreate; i++) {
+it('Should create Onspot campaigns Successfully', function () {
+    const campaignsToCreate = 60; // or whatever number you want
+
+    for (let i = 56; i <= campaignsToCreate; i++) {
       const campaignBase = this.CampaignData.campaigns[0];
       const randomSuffix = Math.floor(100 + Math.random() * 900); // Random last 3 digits
       const dynamicMobileNumber = `${campaignBase.BaseMobileNumber}${randomSuffix}`;
@@ -45,7 +45,7 @@ it('Should create Onspot campaigns Successfully', function () {
       CampaignPage.AddNewCampaignTemplateTab(randomTemplate);
     }
   });
- 
+   /*
 
   it('Should create Scheduled campaigns Successfully', function () {
     const campaignsToCreate = 3; // or whatever number you want
@@ -70,15 +70,22 @@ it('Should create Onspot campaigns Successfully', function () {
     }
 
   });
-   */
+ 
     it('Should Search by the Campaign Title Successfully', function () {
       CampaignPage.openSearch()
 
-      CampaignPage.SearchByCampaignName(this.CampaignData.campaigns.CampaignName);
-      cy.contains('th.mat-sort-header', 'Title').should('contain',this.CampaignData.campaigns.CampaignName)
+      CampaignPage.SearchByCampaignName(this.CampaignData.campaigns[0].CampaignName);
+      cy.get('.example-element-row > .cdk-column-title').should('contain',this.CampaignData.campaigns[0].CampaignName)
 
   });
+      it('Should Search by Sending Status Successfully', function () {
+      CampaignPage.openSearch()
 
+      CampaignPage.SearchBySendingStatus();
+      cy.get('.example-element-row > .cdk-column-sendingStatus').should('contain','Sent')
+
+  });
+*/
 
 });
 

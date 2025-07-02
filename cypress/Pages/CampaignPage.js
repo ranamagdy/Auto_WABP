@@ -123,6 +123,15 @@ SearchByCampaignName(CampaignName)
 
 }
 
+SearchBySendingStatus()
+{
+ cy.get('#mat-select-value-1').click();
+ cy.get('.mat-option-text').contains('Sent').click();
+
+ cy.contains('button','Search').click();
+ 
+
+}
 openSearch() {
     cy.get('div.search-form-expand-wrapper').then($wrapper => {
         const isVisible = $wrapper.css('opacity') === '1';
