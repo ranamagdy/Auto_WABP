@@ -7,7 +7,7 @@ class GroupPage {
          cy.get('.btn btn-primary').click();
     }
    
-    getgroupname() {
+    enterGroupName(groupName) {
     cy.get('[formcontrolname="groupName"]').clear().type(groupName);
    
     }
