@@ -29,12 +29,14 @@ describe('Category Logs Page Tests', () => {
   });
 
   it('2️⃣ Should search by name and display results', function () {
+    CategoryLogsPage.openSearch();
     CategoryLogsPage.enterSearchName(this.data.searchName);
     CategoryLogsPage.clickSearch();
     CategoryLogsPage.getSearchResults().should('contain', this.data.searchName);
   });
 
   it('3️⃣ Should clear the search field', function () {
+    CategoryLogsPage.openSearch();
     CategoryLogsPage.enterSearchName(this.data.searchName);
     CategoryLogsPage.clickClear();
     CategoryLogsPage.getSearchInput().should('have.value', '');

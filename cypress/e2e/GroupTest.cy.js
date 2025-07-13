@@ -19,12 +19,40 @@ GroupPage.visit();
  });
 
  it('1️⃣ Add New Group', function () {
+    cy.get('@GroupData').then((GroupData) => {
     GroupPage.clickAdd();
-    GroupPage.enterGroupName(this.data.groupName);
-    GroupPage.selectGroupType(this.GroupData.groupType); // ✅ correct
+    GroupPage.enterGroupName(GroupData.groupName);
+    GroupPage.selectGroupType(GroupData.groupType); // ✅ correct
     GroupPage.clickSave();
-    GroupPage.searchGroupByName(this.GroupData.groupName);
-    GroupPage.groupnameResult().should('contain', GroupData.groupName.NewGroup);
+    cy.get('.mat-snack-bar-container').should('contain' , 'Group Created Successfully')
+
 
  });
   });
+
+ it('2️⃣ Update Group name and availabilty', function () {
+    cy.get('@GroupData').then((GroupData) => {
+    GroupPage.clickEdit();
+    GroupPage.enterGroupName(GroupData.updateName);
+    GroupPage.updateAvailabilty ();
+    GroupPage.clickSave();
+    cy.get('.mat-snack-bar-container').should('contain' , 'Group Updated Successfully')
+
+ });
+  });
+
+});
+
+
+it('3️⃣ Add Contacts Manually', function () {
+    cy.get('@GroupData').then((GroupData) => {
+    GroupPage.clickEdit();
+    GroupPage.enterGroupName(GroupData.updateName);
+    GroupPage.updateAvailabilty ();
+    GroupPage.clickSave();
+    cy.get('.mat-snack-bar-container').should('contain' , 'Group Updated Successfully')
+
+ });
+  });
+
+

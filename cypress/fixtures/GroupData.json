@@ -1,5 +1,9 @@
 {
-  "groupName": "New Group",
+  "groupName": "New Group 1",
   "groupType": "Normal",
-  "availability": "Yes"
+  "availability": "Yes",
+  "updateName": "Update Group",
+  "updateAvailability": "Yes",
+  "mobileNumber" : "01273196467"
+
 }
