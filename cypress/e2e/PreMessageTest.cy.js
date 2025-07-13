@@ -14,7 +14,7 @@ describe('Pre Message Page Tests', () => {
       LoginPage.login(loginData.admin.email, loginData.admin.password);
 
       // Wait for successful login (adjust the selector to match your app)
-    cy.url().should('include', '/pages/dashboard');
+      cy.url().should('include', '/pages/dashboard');
     });
 
     // Now visit the category log page after login

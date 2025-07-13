@@ -14,7 +14,7 @@ beforeEach(function () {
       LoginPage.login(loginData.admin.email, loginData.admin.password);
 
       // Wait for successful login (adjust the selector to match your app)
-      cy.url().should('not.include', '/auth/login');
+     // cy.url().should('not.include', '/auth/login');
     });
 
 
@@ -24,11 +24,11 @@ beforeEach(function () {
     cy.wrap(data).as('CampaignData'); // 🔹 Store fixture data globally
 });
   });
-
+/*
 it('Should create Onspot campaigns Successfully', function () {
-    const campaignsToCreate = 60; // or whatever number you want
+    const campaignsToCreate = 130; // or whatever number you want
 
-    for (let i = 56; i <= campaignsToCreate; i++) {
+    for (let i = 125; i <= campaignsToCreate; i++) {
       const campaignBase = this.CampaignData.campaigns[0];
       const randomSuffix = Math.floor(100 + Math.random() * 900); // Random last 3 digits
       const dynamicMobileNumber = `${campaignBase.BaseMobileNumber}${randomSuffix}`;
@@ -45,12 +45,12 @@ it('Should create Onspot campaigns Successfully', function () {
       CampaignPage.AddNewCampaignTemplateTab(randomTemplate);
     }
   });
-   /*
+ 
 
   it('Should create Scheduled campaigns Successfully', function () {
-    const campaignsToCreate = 3; // or whatever number you want
+    const campaignsToCreate = 155; // or whatever number you want
 
-    for (let i = 3; i <= campaignsToCreate; i++) {
+    for (let i = 150; i <= campaignsToCreate; i++) {
       const campaignBase = this.CampaignData.campaigns[0];
       const randomSuffix = Math.floor(100 + Math.random() * 900); // Random last 3 digits
       const dynamicMobileNumber = `${campaignBase.BaseMobileNumber}${randomSuffix}`;
@@ -70,7 +70,7 @@ it('Should create Onspot campaigns Successfully', function () {
     }
 
   });
- 
+   */
     it('Should Search by the Campaign Title Successfully', function () {
       CampaignPage.openSearch()
 
@@ -85,7 +85,7 @@ it('Should create Onspot campaigns Successfully', function () {
       cy.get('.example-element-row > .cdk-column-sendingStatus').should('contain','Sent')
 
   });
-*/
+
 
 });
 

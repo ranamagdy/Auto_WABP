@@ -5,15 +5,15 @@ describe('Teams Page Functionality', () => {
   beforeEach(() => {
     cy.fixture('LoginData').as('LoginData');
     cy.fixture('teamsData').as('data');
-    
+
     cy.get('@LoginData').then((loginData) => {
-          LoginPage.visit();
-          LoginPage.login(loginData.admin.email, loginData.admin.password);
-    
-          // Wait for successful login (adjust the selector to match your app)
-          cy.url().should('not.include', '/auth/login');
-        });
-    
+      LoginPage.visit();
+      LoginPage.login(loginData.admin.email, loginData.admin.password);
+
+      // Wait for successful login (adjust the selector to match your app)
+      cy.url().should('not.include', '/auth/login');
+    });
+
     TeamsPage.visit();
   });
 
@@ -28,7 +28,7 @@ describe('Teams Page Functionality', () => {
     TeamsPage.selectWorkingType();
     TeamsPage.clickClear();
 
-    cy.get (".mat-select-min-line").should('contain','All');
+    cy.get(".mat-select-min-line").should('contain', 'All');
   });
 
   it('3. View team details', function () {

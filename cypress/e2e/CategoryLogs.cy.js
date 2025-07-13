@@ -42,7 +42,7 @@ describe('Category Logs Page Tests', () => {
 
   it('4️⃣ Should edit the first category log', function () {
     CategoryLogsPage.clickEditFirst();
-    
+
     CategoryLogsPage.fillCategoryName(this.data.editedCategory.name);
     CategoryLogsPage.clickSave();
     CategoryLogsPage.getSearchResults().should('contain', this.data.editedCategory.name);
