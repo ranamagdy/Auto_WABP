@@ -1,14 +1,26 @@
 class CategoryLogsPage {
   visit() {
-    cy.visit('https://qc-community.com/WABP_lib/AdminTool/pages/categoryLogs/index');
-  }
+    cy.visit('./pages/categoryLogs/index');
+  }            
+
+openSearch() {
+    cy.get('div.search-form-expand-wrapper').then($wrapper => {
+        const isVisible = $wrapper.css('opacity') === '1';
+        if (!isVisible) {
+            cy.get('.card-head-btns-wrapper > .btn-black').click();
+            // Wait for the panel to become visible after clicking
+            cy.get('div.search-form-expand-wrapper', { timeout: 10000 })
+              .should('have.css', 'opacity', '1');
+        }
+    });
+}
 
   getSearchInput() {
     return cy.get('input[formcontrolname="categoryLogName"]');
   }
 
   enterSearchName(name) {
-    cy.get('input[placeholder="Name"]').type(name);
+     cy.get('input[placeholder="Name"]').type(name);
   }
 
   clickSearch() {
