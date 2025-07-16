@@ -1,67 +1,84 @@
 import LoginPage from '../pages/LoginPage';
 import CampaignPage from '../Pages/CampaignPage';
 
-describe('Agents Page Tests Using Fixtures', () => {
+describe('Campaign Page Tests Using Fixtures', () => {
 
-beforeEach(function () {
+  beforeEach(function () {
     // Load fixtures first
     cy.fixture('LoginData').as('LoginData');
-    
+
 
     // Perform login and wait for successful navigation
-      cy.get('@LoginData').then((loginData) => {
+    cy.get('@LoginData').then((loginData) => {
       LoginPage.visit();
       LoginPage.login(loginData.admin.email, loginData.admin.password);
 
       // Wait for successful login (adjust the selector to match your app)
-     // cy.url().should('not.include', '/auth/login');
+      // cy.url().should('not.include', '/auth/login');
     });
 
 
     CampaignPage.visitCampaign();
-    
+
     cy.fixture('CampaignData').then((data) => {
-    cy.wrap(data).as('CampaignData'); // 🔹 Store fixture data globally
-});
+      cy.wrap(data).as('CampaignData'); // 🔹 Store fixture data globally
+    });
   });
 /*
-it('Should create Onspot campaigns Successfully', function () {
-    const campaignsToCreate = 130; // or whatever number you want
+  it('Should create Onspot campaigns Successfully', function () {
 
-    for (let i = 125; i <= campaignsToCreate; i++) {
+    const campaignsNeeded = 5;
+
+    // to ensure the number is not repeated
+    const usedSuffixes = new Set();
+
+
+    while (usedSuffixes.size < campaignsNeeded) {
+      // random values between 100 : 999
+      const randomSuffix = Cypress._.random(100, 999);
+
+      // the loop is stopped if the random number is repeated 
+      if (usedSuffixes.has(randomSuffix)) continue;
+      usedSuffixes.add(randomSuffix);
+
       const campaignBase = this.CampaignData.campaigns[0];
-      const randomSuffix = Math.floor(100 + Math.random() * 900); // Random last 3 digits
       const dynamicMobileNumber = `${campaignBase.BaseMobileNumber}${randomSuffix}`;
-      const dynamicCampaignName = `${campaignBase.CampaignName} ${i}`;
+      const dynamicCampaignName = `${campaignBase.CampaignName} ${randomSuffix}`;
 
-      // Randomly pick a template from the fixture
-      const templateNames = this.CampaignData.templateNames;
-      const randomTemplate = templateNames[Math.floor(Math.random() * templateNames.length)];
-
-      cy.log(`Creating campaign: ${dynamicCampaignName} with mobile: ${dynamicMobileNumber} and template: ${randomTemplate}`);
+      // choose the template randomly 
+      const randomTemplate = Cypress._.sample(this.CampaignData.templateNames);
 
       CampaignPage.AddNewCampaignInfoTab(dynamicCampaignName);
       CampaignPage.AddNewCampaignContactsTab(dynamicMobileNumber);
       CampaignPage.AddNewCampaignTemplateTab(randomTemplate);
+      cy.wait(3000); // Waits for 3 seconds
+
     }
+
   });
- 
+
 
   it('Should create Scheduled campaigns Successfully', function () {
-    const campaignsToCreate = 155; // or whatever number you want
+    const campaignsNeeded = 5;
 
-    for (let i = 150; i <= campaignsToCreate; i++) {
+    // to ensure the number is not repeated
+    const usedSuffixes = new Set();
+
+
+    while (usedSuffixes.size < campaignsNeeded) {
+      // random values between 100 : 999
+      const randomSuffix = Cypress._.random(100, 999);
+
+      // the loop is stopped if the random number is repeated 
+      if (usedSuffixes.has(randomSuffix)) continue;
+      usedSuffixes.add(randomSuffix);
       const campaignBase = this.CampaignData.campaigns[0];
-      const randomSuffix = Math.floor(100 + Math.random() * 900); // Random last 3 digits
       const dynamicMobileNumber = `${campaignBase.BaseMobileNumber}${randomSuffix}`;
-      const dynamicCampaignName = `${campaignBase.CampaignScheduleName} ${i}`;
+      const dynamicCampaignName = `${campaignBase.CampaignName} ${randomSuffix}`;
 
-      // Randomly pick a template from the fixture
-      const templateNames = this.CampaignData.templateNames;
-      const randomTemplate = templateNames[Math.floor(Math.random() * templateNames.length)];
+      // choose the template randomly 
+      const randomTemplate = Cypress._.sample(this.CampaignData.templateNames);
 
-      cy.log(`Creating campaign: ${dynamicCampaignName} with mobile: ${dynamicMobileNumber} and template: ${randomTemplate}`);
-      
       CampaignPage.AdScheduleCampaignInfoTab(dynamicCampaignName);
       CampaignPage.AddNewCampaignContactsTab(dynamicMobileNumber);
       CampaignPage.AddNewCampaignTemplateTab(randomTemplate);
@@ -70,19 +87,30 @@ it('Should create Onspot campaigns Successfully', function () {
     }
 
   });
-   */
-    it('Should Search by the Campaign Title Successfully', function () {
-      CampaignPage.openSearch()
 
-      CampaignPage.SearchByCampaignName(this.CampaignData.campaigns[0].CampaignName);
-      cy.get('.example-element-row > .cdk-column-title').should('contain',this.CampaignData.campaigns[0].CampaignName)
+  it('Should Search by the Campaign Title Successfully', function () {
+    CampaignPage.openSearch()
+
+    CampaignPage.SearchByCampaignName(this.CampaignData.campaigns[0].CampaignName);
+    cy.get('.example-element-row > .cdk-column-title').should('contain', this.CampaignData.campaigns[0].CampaignName)
 
   });
-      it('Should Search by Sending Status Successfully', function () {
-      CampaignPage.openSearch()
+  it('Should Search by Sending Status Successfully', function () {
+    CampaignPage.openSearch()
 
-      CampaignPage.SearchBySendingStatus();
-      cy.get('.example-element-row > .cdk-column-sendingStatus').should('contain','Sent')
+    CampaignPage.SearchBySendingStatus();
+    cy.get('.example-element-row > .cdk-column-sendingStatus').should('contain', 'Sent')
+
+  });
+*/
+   it('Should duplicate Onspot Campaign', function () {
+    CampaignPage.openSearch()
+    CampaignPage.SearchByCampaignName(this.CampaignData.campaigns[0].CampaignName);
+    CampaignPage.DuplicateWithoutChanging();
+
+
+ 
+
 
   });
 

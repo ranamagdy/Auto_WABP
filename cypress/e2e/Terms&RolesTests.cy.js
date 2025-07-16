@@ -1,7 +1,7 @@
 import TermsRolesPage from "../Pages/Terms&RolesPage";
 import LoginPage from '../pages/LoginPage';
 
-describe('Agents Page Tests Using Fixtures', () => {
+describe('Terms&Roles Tests Using Fixtures', () => {
 
 beforeEach(function () {
     // Load fixtures first
