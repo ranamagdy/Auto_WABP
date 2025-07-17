@@ -6,7 +6,8 @@ class CampaignPage {
 
   }
   AddNewCampaignInfoTab(CampaignName) {
-    cy.get('span').contains('Create New Campaign').click();
+    cy.contains('Create New Campaign', { timeout: 10000 }).should('be.visible').click();
+
     cy.get('span').contains('Select Channel').click();
     cy.contains('li', 'Hytham WhatsApp Channel').find('input[type="checkbox"]').check({ force: true });
     cy.get('input[data-placeholder="Name your campaign"]').should('be.visible').type(CampaignName);
@@ -16,8 +17,41 @@ class CampaignPage {
     cy.scrollTo('top');
 
   }
+  ContactsTab(Mobilenumber) {
 
-  AdScheduleCampaignInfoTab(CampaignName) {
+    cy.get('#phone').type(Mobilenumber);
+    cy.get('span').contains('Add').click();
+    cy.get('button').contains('Next').click({ force: true });
+
+  }
+
+  TemplateTab(TemplateName) {
+    // 1️⃣ Click the "Select Template" to open the dropdown
+    cy.get('span').contains('Select Template').click();
+    // 2️⃣ Locate the real input that appears in the dropdown for searching
+    // Check your app’s HTML to find the real input element inside the dropdow
+    cy.get('#templatesDD > .cuppa-dropdown > .dropdown-list > .list-area > .list-filter > .c-input', { timeout: 5000 })
+      .should('be.visible')
+      .clear()
+      .type(TemplateName, { force: true });
+    // 3️⃣ Wait for the search results and click the matching checkbox
+    cy.contains('li', TemplateName, { timeout: 5000 })
+      .find('input[type="checkbox"]')
+      .check({ force: true });
+    // 4️⃣ Click the "+ Fill" button
+    cy.get('.global-card-form-input > .global-card-form-input-wrapper > .row > .col-md-3 > .btn').click();
+    // 5️⃣ Click "Fill"
+    cy.contains('button', 'Fill').click({ force: true });
+    cy.get('#cdk-step-label-0-3 > .mat-step-label > .mat-step-text-label > .d-flex > .step-title').click()
+    //cy.get('#cdk-step-label-0-2').click();
+    //cy.get('#cdk-step-label-0-3').click();
+
+    cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click({ force: true });
+
+  }
+
+
+  ScheduleCampaignInfoTab(CampaignName) {
     cy.get('span').contains('Create New Campaign').click();
     cy.get('span').contains('Select Channel').click();
     cy.contains('li', 'Hytham WhatsApp Channel').find('input[type="checkbox"]').check({ force: true });
@@ -65,39 +99,7 @@ class CampaignPage {
   }
 
 
-  AddNewCampaignContactsTab(Mobilenumber) {
-
-    cy.get('#phone').type(Mobilenumber);
-    cy.get('span').contains('Add').click();
-    cy.get('button').contains('Next').click({ force: true });
-
-  }
-
-  AddNewCampaignTemplateTab(TemplateName) {
-    // 1️⃣ Click the "Select Template" to open the dropdown
-    cy.get('span').contains('Select Template').click();
-    // 2️⃣ Locate the real input that appears in the dropdown for searching
-    // Check your app’s HTML to find the real input element inside the dropdow
-    cy.get('#templatesDD > .cuppa-dropdown > .dropdown-list > .list-area > .list-filter > .c-input', { timeout: 5000 })
-      .should('be.visible')
-      .clear()
-      .type(TemplateName, { force: true });
-    // 3️⃣ Wait for the search results and click the matching checkbox
-    cy.contains('li', TemplateName, { timeout: 5000 })
-      .find('input[type="checkbox"]')
-      .check({ force: true });
-    // 4️⃣ Click the "+ Fill" button
-    cy.get('.global-card-form-input > .global-card-form-input-wrapper > .row > .col-md-3 > .btn').click();
-    // 5️⃣ Click "Fill"
-    cy.contains('button', 'Fill').click({ force: true });
-    cy.get('button').contains('Next').click({ force: true });
-    //cy.get('#cdk-step-label-0-2').click();
-    //cy.get('#cdk-step-label-0-3').click();
-
-    cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click({ force: true });
-
-  }
-
+  
   SearchByCampaignName(CampaignName) {
     cy.get('input[formcontrolname="campaignName"]').type(CampaignName)
     cy.contains('button', 'Search').click();
@@ -125,7 +127,7 @@ class CampaignPage {
   }
 
   DuplicateWithoutChanging() {
-    const totalSteps = 4;
+
     cy.get(':nth-child(1) > .py-2 > .btn-group-actions-list > :nth-child(2) > .btn > .ng-tns-c226-17').click()
     cy.get('mat-dialog-container').should('be.visible')
 
@@ -133,22 +135,19 @@ class CampaignPage {
     cy.wait(500)
 
     cy.get('#cdk-step-label-0-0 > .mat-step-label > .mat-step-text-label > .d-flex > .step-title').click()
-        cy.wait(500)
+    cy.wait(500)
 
     cy.get('#cdk-step-label-0-1 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
-        cy.wait(500)
+    cy.wait(500)
 
     cy.get('#cdk-step-label-0-2 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
-        cy.wait(500)
+    cy.wait(500)
 
     cy.get('#cdk-step-label-0-3 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
 
     cy.wait(500)
 
- 
-
     cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click();
-
 
 
   }

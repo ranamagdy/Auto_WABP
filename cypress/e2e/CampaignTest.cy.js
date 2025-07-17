@@ -24,7 +24,7 @@ describe('Campaign Page Tests Using Fixtures', () => {
       cy.wrap(data).as('CampaignData'); // 🔹 Store fixture data globally
     });
   });
-/*
+
   it('Should create Onspot campaigns Successfully', function () {
 
     const campaignsNeeded = 5;
@@ -49,8 +49,8 @@ describe('Campaign Page Tests Using Fixtures', () => {
       const randomTemplate = Cypress._.sample(this.CampaignData.templateNames);
 
       CampaignPage.AddNewCampaignInfoTab(dynamicCampaignName);
-      CampaignPage.AddNewCampaignContactsTab(dynamicMobileNumber);
-      CampaignPage.AddNewCampaignTemplateTab(randomTemplate);
+      CampaignPage.ContactsTab(dynamicMobileNumber);
+      CampaignPage.TemplateTab(randomTemplate);
       cy.wait(3000); // Waits for 3 seconds
 
     }
@@ -102,18 +102,13 @@ describe('Campaign Page Tests Using Fixtures', () => {
     cy.get('.example-element-row > .cdk-column-sendingStatus').should('contain', 'Sent')
 
   });
-*/
+
    it('Should duplicate Onspot Campaign', function () {
     CampaignPage.openSearch()
     CampaignPage.SearchByCampaignName(this.CampaignData.campaigns[0].CampaignName);
     CampaignPage.DuplicateWithoutChanging();
 
-
- 
-
-
   });
-
 
 });
 

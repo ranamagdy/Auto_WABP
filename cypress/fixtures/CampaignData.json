@@ -6,5 +6,9 @@
       "CampaignScheduleName": "Test Scheduled Campaign",
       "BaseMobileNumber": "01273196"
     }
-  ]
+  ],
+
+  "DuplicatedCampaign":"Test Campaign Onspot"
+
+
 }
