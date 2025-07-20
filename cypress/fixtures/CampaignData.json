@@ -8,7 +8,12 @@
     }
   ],
 
-  "DuplicatedCampaign":"Test Campaign Onspot"
+  "DuplicatedCampaign":"Test Campaign Onspot",
+  "CustomCmap":"Custom Campaign",
+  "NormalCamp":"Normal To Custom",
+  "MobileNumber":"01017985099",
+  "randomcamp":"retest camp",
+  "tempName":"image"
 
 
 }

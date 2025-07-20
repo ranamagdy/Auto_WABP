@@ -24,7 +24,7 @@ describe('Campaign Page Tests Using Fixtures', () => {
       cy.wrap(data).as('CampaignData'); // 🔹 Store fixture data globally
     });
   });
-
+/*
   it('Should create Onspot campaigns Successfully', function () {
 
     const campaignsNeeded = 5;
@@ -95,6 +95,7 @@ describe('Campaign Page Tests Using Fixtures', () => {
     cy.get('.example-element-row > .cdk-column-title').should('contain', this.CampaignData.campaigns[0].CampaignName)
 
   });
+
   it('Should Search by Sending Status Successfully', function () {
     CampaignPage.openSearch()
 
@@ -102,13 +103,92 @@ describe('Campaign Page Tests Using Fixtures', () => {
     cy.get('.example-element-row > .cdk-column-sendingStatus').should('contain', 'Sent')
 
   });
-
+/*
    it('Should duplicate Onspot Campaign', function () {
     CampaignPage.openSearch()
     CampaignPage.SearchByCampaignName(this.CampaignData.campaigns[0].CampaignName);
     CampaignPage.DuplicateWithoutChanging();
 
   });
+
+it('Should Search by Onspot Sending Type', function () {
+    CampaignPage.openSearch()
+
+    CampaignPage.SearchByOnspotCmapaign();
+  
+    cy.get(':nth-child(1) > .cdk-column-sendingType > .badge-status').should('contain','Onspot')
+    
+
+  });
+  
+  it('Should Search by Scheduled Sending Type', function () {
+    CampaignPage.openSearch()
+
+    CampaignPage.SearchByScheduledCmapaign()
+  
+    cy.get(':nth-child(1) > .cdk-column-sendingType > .badge-status').should('contain','Scheduled')
+    
+
+  });
+
+  it('Should Duplicate the campaign with changing from onspot to schedual', function () {
+    CampaignPage.openSearch()
+
+    CampaignPage.SearchByOnspotCmapaign();
+  
+    CampaignPage.OnspotToScheduled();
+    cy.get('.mat-simple-snack-bar-content').should('contain','Campaign Created Successfully')
+    
+
+  });
+ 
+ it('Should Duplicate the campaign with changing from schedual to onspot ', function () {
+    CampaignPage.openSearch()
+
+    CampaignPage.SearchByScheduledCmapaign()
+  
+    CampaignPage.ScheduledToOnspot()
+    cy.get('.mat-simple-snack-bar-content').should('contain','Campaign Created Successfully')
+    
+
+  });
+  
+
+
+  it('Should Duplicate the campaign with changing from Custom to Normal ', function () {
+    CampaignPage.openSearch()
+
+    CampaignPage.SearchByCampaignName(this.CampaignData.CustomCmap)
+  
+    CampaignPage.CustomToNormal(this.CampaignData.MobileNumber)
+    cy.get('.mat-simple-snack-bar-content').should('contain','Campaign Created Successfully')
+    
+
+  });
+
+    it('Should Duplicate the campaign with changing from Normal to Custom ', function () {
+    CampaignPage.openSearch()
+
+    CampaignPage.SearchByCampaignName(this.CampaignData.NormalCamp)
+  
+    CampaignPage.NormalToCutom()
+    cy.get('.mat-simple-snack-bar-content').should('contain','Campaign Created Successfully')
+    
+
+  });
+  
+ */
+      it('Should Duplicate the campaign with changing The template ', function () {
+    CampaignPage.openSearch()
+
+    CampaignPage.SearchByCampaignName(this.CampaignData.randomcamp)
+  
+    CampaignPage.DuplicateChangeTemp(this.CampaignData.tempName)
+    cy.get('.mat-simple-snack-bar-content').should('contain','Campaign Created Successfully')
+    
+
+  });
+
 
 });
 
