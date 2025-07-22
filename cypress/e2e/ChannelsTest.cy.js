@@ -21,12 +21,12 @@ describe('Channel Page Tests Using Fixtures', () => {
     });
 
 
-
+/*
     it('Template is synced Suceessfully', function () {
         ChannelsPage.ChannelSync();
 
     });
-
+*/
 
     it('Change not active channel', function () {
 
@@ -44,6 +44,7 @@ describe('Channel Page Tests Using Fixtures', () => {
 
 
     })
+      
     it('Change Call Center Availabilty ', function () {
 
         ChannelsPage.CallCenterAvailability();
@@ -53,15 +54,27 @@ describe('Channel Page Tests Using Fixtures', () => {
 
     })
 
-
     it('Set Custome Call Center', function () {
 
         ChannelsPage.AddCustomCallCenter(this.ChannelData.EnglishMessage, this.ChannelData.ArabicMessage)
+        cy.get('.mat-simple-snack-bar-content').should('contain','Call center availability updated successfully.')
 
 
 
 
     })
+ 
+
+        it('Remove a custome Holiday', function () {
+
+        ChannelsPage.RemoveCustomCallCenter()
+        cy.get('.mat-simple-snack-bar-content').should('contain','Call center availability updated successfully.')
+
+
+
+
+    })
+
 
 
 

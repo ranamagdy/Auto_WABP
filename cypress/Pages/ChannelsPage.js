@@ -55,7 +55,7 @@ class ChannelsPage {
     }
 
 
-    AddCustomCallCenter(EnglishMessage,ArabicMessage) {
+    AddCustomCallCenter(EnglishMessage, ArabicMessage) {
         cy.get(':nth-child(1) > .cdk-column-actions > .btn-group-actions-list > :nth-child(2) > .btn > span').click();
         cy.get('.selected-list').should('be.visible').click();
         cy.contains('li.pure-checkbox', 'Custom').click();
@@ -71,15 +71,29 @@ class ChannelsPage {
         const afterTomorrowDay = afterTomorrow.getDate();
 
         // اختار "Holiday Date From" = بكرة
-cy.get('.mat-form-field.ng-tns-c79-20 > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-suffix > .mat-datepicker-toggle > .mat-focus-indicator').click()
-       cy.get('.mat-calendar-content').contains(new RegExp(`^\\s*${tomorrowDay}\\s*$`)) // يوم بكرة.click();
+        // Click the first datepicker toggle (e.g., "Holiday From")
+        cy.get('button[aria-label="Open calendar"]').eq(0).click();
+
+        cy.get('ngx-mat-calendar', { timeout: 5000 }).should('be.visible');
+
+
+        cy.get('.mat-calendar-body-cell-content').contains(new RegExp(`^\\s*${tomorrowDay}\\s*$`)).click({ force: true }); // يوم بكرة.click();
+        cy.get('mat-icon').contains('done')
+            .parents('button')
+            .click({ force: true });
+
 
         // اختار "Holiday Date To" = بعد بكرة
-        cy.get('.mat-form-field.ng-tns-c79-23 > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-suffix > .mat-datepicker-toggle > .mat-focus-indicator').click();
+        cy.get('button[aria-label="Open calendar"]').eq(1).click();
+        cy.get('ngx-mat-calendar', { timeout: 5000 }).should('be.visible');
 
-       cy.get('.mat-calendar-content').contains(new RegExp(`^\\s*${afterTomorrowDay}\\s*$`)) // يوم بعد بكرة.click();
+        cy.get('.mat-calendar-body-cell-content').contains(new RegExp(`^\\s*${afterTomorrowDay}\\s*$`)).click({ force: true }); // يوم بعد بكرة.click();
+        cy.get('mat-icon').contains('done')
+            .parents('button')
+            .click({ force: true });
 
-       cy.get('span').contains('Add').click()
+        cy.get('span').contains('Add').click()
+        cy.get('span').contains('Save').click()
 
 
 
@@ -90,6 +104,13 @@ cy.get('.mat-form-field.ng-tns-c79-20 > .mat-form-field-wrapper > .mat-form-fiel
 
     }
     RemoveCustomCallCenter() {
+        cy.get(':nth-child(1) > .cdk-column-actions > .btn-group-actions-list > :nth-child(2) > .btn > span').click();
+        cy.get('ul.btn-group-actions-list li').first().find('button').click();
+        cy.get('mat-dialog-container#mat-dialog-0').contains('button', 'Delete').click();
+        cy.get('span').contains('Save').click()
+
+
+
 
     }
 
