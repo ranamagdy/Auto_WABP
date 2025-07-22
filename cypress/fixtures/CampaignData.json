@@ -8,9 +8,11 @@
     }
   ],
 
-  "DuplicatedCampaign":"Test Campaign Onspot",
-  "CustomCmap":"Custom Campaign",
-  "NormalCamp":"Normal To Custom",
+  "NormalOnspot":"Normal Auto Camp Onspot",
+  "CustomOnspot":"Custom Auto Camp Onspot",
+  "NormalSchedual":"Normal Auto Camp schedualed",
+  "CustomSchedual":"Custom Auto Camp Schedualed",
+  
   "MobileNumber":"01017985099",
   "randomcamp":"retest camp",
   "tempName":"image"

@@ -54,7 +54,34 @@ class CampaignPage {
     cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click({ force: true });
 
   }
+  customGroupCamp(CampaignName, TemplateName) {
+    cy.contains('Create New Campaign', { timeout: 10000 }).should('be.visible').click();
 
+    cy.get('span').contains('Select Channel').click();
+    cy.contains('li', 'Hytham WhatsApp Channel').find('input[type="checkbox"]').check({ force: true });
+    cy.get('input[data-placeholder="Name your campaign"]').should('be.visible').type(CampaignName);
+    cy.get('span').contains('Onspot').click();
+    cy.get('span').contains('Customized').click();
+    cy.get('span').contains('Next').click();
+    //cy.scrollTo('top');
+    cy.get('#cdk-step-label-0-1 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
+    cy.wait(500)
+    cy.get('#groupsDD > .cuppa-dropdown > .selected-list > .c-btn').click()
+    cy.get('#groupsDD > .cuppa-dropdown > .dropdown-list > .list-area > [style="overflow: auto; max-height: 160px;"] > .lazyContainer > :nth-child(1)').click()
+
+    cy.get('#cdk-step-label-0-2 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
+    cy.wait(500)
+    this.TemplateTab(TemplateName);
+
+
+    cy.wait(1000); // زيادة مهلة بسيطة قبل الضغط
+    cy.get('#cdk-step-label-0-3 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count')
+      .should('exist')
+      .click({ force: true });
+
+    cy.wait(500)
+
+  }
 
   ScheduleCampaignInfoTab(CampaignName) {
     cy.get('span').contains('Create New Campaign').click();
@@ -103,8 +130,6 @@ class CampaignPage {
     cy.scrollTo('top');
   }
 
-
-
   SearchByCampaignName(CampaignName) {
     cy.get('input[formcontrolname="campaignName"]').type(CampaignName)
     cy.contains('button', 'Search').click();
@@ -150,6 +175,16 @@ class CampaignPage {
 
     cy.contains('button', 'Yes').click()
     cy.wait(500)
+    // Step: Generate random suffix
+    const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase(); // e.g., "A3B9"
+    const newValue = `Campaign-Rand-${randomSuffix}`; // 👈 اسم جديد تمامًا
+
+    // Step: Set new campaign name (overwrite completely)
+    cy.get('input[formcontrolname="name"]')
+      .click({ force: true })
+      .invoke('val', '')       // 🧽 يمسح القيمة القديمة
+      .trigger('input')        // 🔄 يخلي Angular يحس بالتغيير
+      .type(newValue, { force: true }); // ✍️ يكتب الاسم الجديد
     cy.get('span').contains('Onspot').click();
 
 
@@ -171,7 +206,6 @@ class CampaignPage {
 
   }
 
-
   OnspotToScheduled() {
 
     cy.get(':nth-child(1) > .py-2 > .btn-group-actions-list > :nth-child(2) > .btn > .ng-tns-c226-17').click()
@@ -179,6 +213,16 @@ class CampaignPage {
 
     cy.contains('button', 'Yes').click()
     cy.wait(500)
+    // Step: Generate random suffix
+    const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase(); // e.g., "A3B9"
+    const newValue = `Campaign-Rand-${randomSuffix}`; // 👈 اسم جديد تمامًا
+
+    // Step: Set new campaign name (overwrite completely)
+    cy.get('input[formcontrolname="name"]')
+      .click({ force: true })
+      .invoke('val', '')       // 🧽 يمسح القيمة القديمة
+      .trigger('input')        // 🔄 يخلي Angular يحس بالتغيير
+      .type(newValue, { force: true }); // ✍️ يكتب الاسم الجديد
 
     cy.get('span').contains('Scheduled').click();
     const futureDate = new Date();
@@ -242,6 +286,17 @@ class CampaignPage {
 
     cy.contains('button', 'Yes').click()
     cy.wait(500)
+    // Step: Generate random suffix
+    const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase(); // e.g., "A3B9"
+    const newValue = `Campaign-Rand-${randomSuffix}`; // 👈 اسم جديد تمامًا
+
+    // Step: Set new campaign name (overwrite completely)
+    cy.get('input[formcontrolname="name"]')
+      .click({ force: true })
+      .invoke('val', '')       // 🧽 يمسح القيمة القديمة
+      .trigger('input')        // 🔄 يخلي Angular يحس بالتغيير
+      .type(newValue, { force: true }); // ✍️ يكتب الاسم الجديد
+
     cy.get('span').contains('Onspot').click();
 
 
@@ -272,14 +327,15 @@ class CampaignPage {
     cy.wait(500)
     // Step: Generate random suffix
     const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase(); // e.g., "A3B9"
+    const newValue = `Campaign-Rand-${randomSuffix}`; // 👈 اسم جديد تمامًا
 
-    // Step: Update campaign name input
+    // Step: Set new campaign name (overwrite completely)
     cy.get('input[formcontrolname="name"]')
-      .invoke('val')
-      .then((existingValue) => {
-        const newValue = `${existingValue}-Rand-${randomSuffix}`;
-        cy.get('input[formcontrolname="name"]').clear().type(newValue);
-      });
+      .click({ force: true })
+      .invoke('val', '')       // 🧽 يمسح القيمة القديمة
+      .trigger('input')        // 🔄 يخلي Angular يحس بالتغيير
+      .type(newValue, { force: true }); // ✍️ يكتب الاسم الجديد
+
 
     cy.get('span').contains('Normal').click();
 
@@ -313,18 +369,17 @@ class CampaignPage {
     cy.wait(500)
     // Step: Generate random suffix
     const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase(); // e.g., "A3B9"
+    const newValue = `Campaign-Rand-${randomSuffix}`; // 👈 اسم جديد تمامًا
 
-    // Step: Update campaign name input
+    // Step: Set new campaign name (overwrite completely)
     cy.get('input[formcontrolname="name"]')
-      .invoke('val')
-      .then((existingValue) => {
-        const newValue = `${existingValue}-Rand-${randomSuffix}`;
-        cy.get('input[formcontrolname="name"]').clear().type(newValue);
-      });
+      .click({ force: true })
+      .invoke('val', '')       // 🧽 يمسح القيمة القديمة
+      .trigger('input')        // 🔄 يخلي Angular يحس بالتغيير
+      .type(newValue, { force: true }); // ✍️ يكتب الاسم الجديد
+
 
     cy.get('span').contains('Customized').click();
-
-
 
     cy.get('#cdk-step-label-0-0 > .mat-step-label > .mat-step-text-label > .d-flex > .step-title').click()
     cy.wait(500)
@@ -388,6 +443,7 @@ class CampaignPage {
     cy.get('.global-card-form-input > .global-card-form-input-wrapper > .row > .col-md-3 > .btn').click();
     // 5️⃣ Click "Fill"
     cy.contains('button', 'Fill').click({ force: true });
+    cy.scrollTo('bottom'); // Scrolls to bottom of the page
     cy.get('input[type="file"]').attachFile('TestImage.jpg', { force: true });
 
 
@@ -404,7 +460,6 @@ class CampaignPage {
 
 
   }
-
 
 
 
