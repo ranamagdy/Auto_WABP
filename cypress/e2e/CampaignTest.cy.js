@@ -157,19 +157,28 @@ describe('Campaign Page Tests Using Fixtures', () => {
     CampaignPage.openSearch()
     CampaignPage.SearchByCampaignName(this.CampaignData.NormalOnspot);
     CampaignPage.DuplicateWithoutChanging();
+<<<<<<< HEAD
     cy.wait(500)
+=======
+>>>>>>> main
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
 
   });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
   it('Should Duplicate the campaign with changing from Custom to Normal ', function () {
     CampaignPage.openSearch()
 
     CampaignPage.SearchByCampaignName(this.CampaignData.CustomOnspot)
 
     CampaignPage.CustomToNormal(this.CampaignData.MobileNumber)
+<<<<<<< HEAD
     cy.wait(500)
+=======
+>>>>>>> main
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
 
 

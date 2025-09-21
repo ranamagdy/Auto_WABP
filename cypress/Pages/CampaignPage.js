@@ -208,7 +208,11 @@ class CampaignPage {
 
   OnspotToScheduled() {
 
+<<<<<<< HEAD
     cy.get('span').contains('Duplicate').click();
+=======
+    cy.get(':nth-child(1) > .py-2 > .btn-group-actions-list > :nth-child(2) > .btn > .ng-tns-c226-17').click()
+>>>>>>> main
     cy.get('mat-dialog-container').should('be.visible')
 
     cy.contains('button', 'Yes').click()
@@ -281,7 +285,11 @@ class CampaignPage {
 
   ScheduledToOnspot() {
 
+<<<<<<< HEAD
     cy.get('span').contains('Duplicate').click();
+=======
+    cy.get(':nth-child(1) > .py-2 > .btn-group-actions-list > :nth-child(2) > .btn > .ng-tns-c226-17').click()
+>>>>>>> main
     cy.get('mat-dialog-container').should('be.visible')
 
     cy.contains('button', 'Yes').click()
@@ -320,7 +328,11 @@ class CampaignPage {
 
   CustomToNormal(Mobilenumber) {
 
+<<<<<<< HEAD
     cy.get('span').contains('Duplicate').click();
+=======
+    cy.get(':nth-child(1) > .py-2 > .btn-group-actions-list > :nth-child(2) > .btn > .ng-tns-c226-17').click()
+>>>>>>> main
     cy.get('mat-dialog-container').should('be.visible')
 
     cy.contains('button', 'Yes').click()
@@ -362,7 +374,11 @@ class CampaignPage {
   }
 
   NormalToCutom() {
+<<<<<<< HEAD
    cy.get('span').contains('Duplicate').click();
+=======
+    cy.get(':nth-child(1) > .py-2 > .btn-group-actions-list > :nth-child(2) > .btn > .ng-tns-c226-17').click()
+>>>>>>> main
     cy.get('mat-dialog-container').should('be.visible')
 
     cy.contains('button', 'Yes').click()
@@ -403,21 +419,35 @@ class CampaignPage {
   }
 
   DuplicateChangeTemp(TemplateName) {
+<<<<<<< HEAD
     cy.get('span').contains('Duplicate').click();
+=======
+    cy.get(':nth-child(1) > .py-2 > .btn-group-actions-list > :nth-child(2) > .btn > .ng-tns-c226-17').click()
+>>>>>>> main
     cy.get('mat-dialog-container').should('be.visible')
 
     cy.contains('button', 'Yes').click()
     cy.wait(500)
     // Step: Generate random suffix
     const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase(); // e.g., "A3B9"
+<<<<<<< HEAD
     const newValue = `Campaign-Rand-${randomSuffix}`
+=======
+    const newValue = `Campaign-Rand-${randomSuffix}`; // 👈 اسم جديد تمامًا
+>>>>>>> main
 
     // Step: Set new campaign name (overwrite completely)
     cy.get('input[formcontrolname="name"]')
       .click({ force: true })
+<<<<<<< HEAD
       .invoke('val', '')       // 
       .trigger('input')        // 
       .type(newValue, { force: true });
+=======
+      .invoke('val', '')       // 🧽 يمسح القيمة القديمة
+      .trigger('input')        // 🔄 يخلي Angular يحس بالتغيير
+      .type(newValue, { force: true }); // ✍️ يكتب الاسم الجديد
+>>>>>>> main
 
 
     cy.get('#cdk-step-label-0-0 > .mat-step-label > .mat-step-text-label > .d-flex > .step-title').click()

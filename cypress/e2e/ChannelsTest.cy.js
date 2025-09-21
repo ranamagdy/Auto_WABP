@@ -20,6 +20,10 @@ describe('Channel Page Tests Using Fixtures', () => {
 
     });
 
+<<<<<<< HEAD
+=======
+/*
+>>>>>>> main
 
     it('Template is synced Suceessfully', function () {
         ChannelsPage.ChannelSync();
@@ -52,7 +56,7 @@ describe('Channel Page Tests Using Fixtures', () => {
 
 
     })
-
+*/
 
     it('Set Custome Call Center', function () {
 
