@@ -21,12 +21,11 @@ describe('Channel Page Tests Using Fixtures', () => {
     });
 
 
-/*
     it('Template is synced Suceessfully', function () {
         ChannelsPage.ChannelSync();
 
     });
-*/
+
 
     it('Change not active channel', function () {
 
@@ -53,6 +52,7 @@ describe('Channel Page Tests Using Fixtures', () => {
 
 
     })
+
 
     it('Set Custome Call Center', function () {
 

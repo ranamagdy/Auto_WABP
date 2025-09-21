@@ -56,19 +56,23 @@ class ChannelsPage {
 
 
     AddCustomCallCenter(EnglishMessage, ArabicMessage) {
+
         cy.get(':nth-child(1) > .cdk-column-actions > .btn-group-actions-list > :nth-child(2) > .btn > span').click();
+
+        // اختار نوع القناة: Custom
         cy.get('.selected-list').should('be.visible').click();
         cy.contains('li.pure-checkbox', 'Custom').click();
+
+        // اكتب الرسائل
         cy.get('textarea[formcontrolname="enMessageHolder"]').clear().type(EnglishMessage);
         cy.get('textarea[formcontrolname="arMessageHolder"]').clear().type(ArabicMessage);
-        // نحسب بكرة و بعد بكرة
-        const tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        const tomorrowDay = tomorrow.getDate();
 
-        const afterTomorrow = new Date();
-        afterTomorrow.setDate(afterTomorrow.getDate() + 2);
-        const afterTomorrowDay = afterTomorrow.getDate();
+        const today = new Date();
+        const tomorrow = new Date();
+        tomorrow.setDate(today.getDate() + 1);
+
+        const tomorrowDay = tomorrow.getDate().toString();
+
 
         // اختار "Holiday Date From" = بكرة
         // Click the first datepicker toggle (e.g., "Holiday From")
@@ -95,14 +99,48 @@ class ChannelsPage {
         cy.get('span').contains('Add').click()
         cy.get('span').contains('Save').click()
 
+        cy.contains('Holiday From Date Time')
+            .parents('mat-form-field')
+            .find('button[aria-label="Open calendar"]')
+            .click();
+
+        // Step 2: Ensure the calendar is open and move to right month if needed
+        cy.get('.mat-calendar-body-cell-content').then(($cells) => {
+            if (!$cells.text().includes(day.toString())) {
+                cy.get('.mat-calendar-next-button').click(); // go to next month
+            }
+        });
+
+        // Step 3: Select day (with flexible regex for padding spaces)
+        cy.get('.mat-calendar-body-cell-content')
+            .contains(new RegExp(`^\\s*${day}\\s*$`))
+            .should('be.visible')
+            .click({ force: true });
 
 
+        // Step 4: Fill in hour and minute
+        cy.get('input[formcontrolname="hour"]').clear().type(hour.toString().padStart(2, '0'));
+        cy.get('input[formcontrolname="minute"]').clear().type(minute.toString().padStart(2, '0'));
+
+        // Step 5: AM/PM toggle if needed
+        cy.get('button.mat-stroked-button').then(($btn) => {
+            if (!$btn.text().includes(ampm)) {
+                cy.wrap($btn).click();
+            }
+        });
+
+        // Step 6: Click Done icon
+        cy.get('button mat-icon').contains('done').parents('button').click({ force: true })
+        // اضغط على زر Add
+        cy.contains('span', 'Add').click();
+        cy.contains('span', 'Save').click();
 
 
 
 
 
     }
+
     RemoveCustomCallCenter() {
         cy.get(':nth-child(1) > .cdk-column-actions > .btn-group-actions-list > :nth-child(2) > .btn > span').click();
         cy.get('ul.btn-group-actions-list li').first().find('button').click();
