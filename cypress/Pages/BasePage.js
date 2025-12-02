@@ -3,6 +3,7 @@ import LoginPage from "../Pages/LoginPage";
 class BasePage {
 
   elements = {
+    // to call this methods in pages
     searchBtn: () => cy.contains('span', 'Search'),
     clearBtn: () => cy.contains('span', 'Clear'),
     editBtn: () => cy.contains('span', 'Edit').first(),
