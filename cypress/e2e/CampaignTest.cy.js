@@ -5,6 +5,7 @@ import BasePage from '../Pages/BasePage';
 describe('Campaign Page Tests Using Fixtures', () => {
 
   BasePage.init(CampaignPage, 'CampaignData');
+  
 
   it('Should create Onspot with Normal group Successfully', function () {
 
@@ -67,6 +68,7 @@ it('Should create Scheduled campaigns Successfully', function () {
   it('Should Search by Sending Status Successfully', function () {
     BasePage.openSearch();
     CampaignPage.SearchBySendingStatus();
+    cy.wait(2000);
     cy.get('.example-element-row > .cdk-column-sendingStatus').should('contain', 'Sent')
 
   });
@@ -84,6 +86,7 @@ it('Should create Scheduled campaigns Successfully', function () {
   it('Should Duplicate The Campaign without any changing ', function () {
     BasePage.openSearch();
     CampaignPage.SearchByCampaignName(this.CampaignData.NormalOnspot);
+    cy.wait(2000)
     CampaignPage.DuplicateWithoutChanging();
     cy.wait(500)
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
@@ -94,6 +97,7 @@ it('Should create Scheduled campaigns Successfully', function () {
   it('Should Duplicate the campaign with changing from Custom to Normal ', function () {
     BasePage.openSearch();
     CampaignPage.SearchByCampaignName(this.CampaignData.CustomOnspot)
+    cy.wait(2000)
     CampaignPage.CustomToNormal(this.CampaignData.MobileNumber)
     cy.wait(500)
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
@@ -104,6 +108,7 @@ it('Should create Scheduled campaigns Successfully', function () {
   it('Should Duplicate the campaign with changing from Normal to Custom ', function () {
     BasePage.openSearch();
     CampaignPage.SearchByCampaignName(this.CampaignData.NormalOnspot)
+    cy.wait(2000)
     CampaignPage.NormalToCutom()
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
 
@@ -114,6 +119,7 @@ it('Should create Scheduled campaigns Successfully', function () {
   it('Should Duplicate the campaign with changing from onspot to schedual', function () {
     BasePage.openSearch();
     CampaignPage.SearchByCampaignName(this.CampaignData.NormalOnspot)
+    cy.wait(2000)
     CampaignPage.OnspotToScheduled();
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
 
@@ -123,6 +129,7 @@ it('Should create Scheduled campaigns Successfully', function () {
   it('Should Duplicate the campaign with changing from schedual to onspot ', function () {
     BasePage.openSearch();
     CampaignPage.SearchByCampaignName(this.CampaignData.NormalSchedual)
+    cy.wait(2000)
     CampaignPage.ScheduledToOnspot()
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
 
@@ -133,6 +140,7 @@ it('Should create Scheduled campaigns Successfully', function () {
   it('Should Duplicate the campaign with changing The template ', function () {
     BasePage.openSearch();
     CampaignPage.SearchByCampaignName(this.CampaignData.randomcamp)
+    cy.wait(2000)
     CampaignPage.DuplicateChangeTemp(this.CampaignData.tempName)
     cy.wait(500);
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')

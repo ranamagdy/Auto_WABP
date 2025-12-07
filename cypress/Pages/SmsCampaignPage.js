@@ -334,6 +334,7 @@ class SmsCampaignPage extends BasePage {
 
     this.step3();
     cy.wait(500)
+    
     super.clickSave({ timeout: 5000 });
 
 

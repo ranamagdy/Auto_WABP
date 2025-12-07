@@ -116,16 +116,18 @@ class BasePage {
   static generateCampaignData(fixtureData) {
     const base = fixtureData.campaigns[0];
 
-    const randomSuffix = Cypress._.random(100, 999);
+    const randomSuffix1 = Cypress._.random(100, 9999);
+    const randomSuffix2 = Cypress._.random(100, 999);
 
-    const dynamicCampaignName = `${base.CampaignName} ${randomSuffix}`;
-    const dynamicScheduleName = `${base.CampaignScheduleName} ${randomSuffix}`;
-    const dynamicMobileNumber = `${base.BaseMobileNumber}${randomSuffix}`;
+    const dynamicCampaignName = `${base.CampaignName} ${randomSuffix1}`;
+    const dynamicScheduleName = `${base.CampaignScheduleName} ${randomSuffix1}`;
+    const dynamicMobileNumber = `${base.BaseMobileNumber}${randomSuffix2}`;
 
     const randomTemplate = Cypress._.sample(fixtureData.templateNames);
 
     return {
-      randomSuffix,
+      randomSuffix1,
+      randomSuffix2,
       dynamicCampaignName,
       dynamicScheduleName,
       dynamicMobileNumber,

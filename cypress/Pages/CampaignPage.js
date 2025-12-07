@@ -167,6 +167,7 @@ class CampaignPage extends BasePage {
 
     const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
     const newName = `Campaign-Rand-${randomSuffix}`;
+    cy.wait(4000)
 
     cy.get('input[formcontrolname="name"]')
       .clear({ force: true })
