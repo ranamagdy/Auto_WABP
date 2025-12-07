@@ -32,11 +32,11 @@ describe('Category Logs Page Tests', () => {
   });
 
   it('4️⃣ Should edit the first category log', function () {
+    const data = BasePage.generateDynamicName(this.categoryLogsData.editedCategory.name);
     CategoryLogsPage.clickEditFirst();
-
-    CategoryLogsPage.fillCategoryName(this.categoryLogsData.editedCategory.name);
+    CategoryLogsPage.fillCategoryName(data);
     CategoryLogsPage.clickSave();
-    CategoryLogsPage.getSearchResults().should('contain', this.categoryLogsData.editedCategory.name);
+    CategoryLogsPage.getSearchResults().should('contain', data);
   });
 
   it('5️⃣ Should delete the first category log', () => {

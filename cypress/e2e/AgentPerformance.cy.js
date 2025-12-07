@@ -1,7 +1,7 @@
 import AgentPerformancePage from '../Pages/AgentPerformancePage';
 import BasePage from '../Pages/BasePage';
 
-describe('Agents Page Tests Using Fixtures', () => {
+describe('Agent performance Page Tests Using Fixtures', () => {
 
 
 BasePage.init(AgentPerformancePage, 'AgentPerformance');  
