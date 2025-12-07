@@ -79,7 +79,7 @@ describe('Sms Campaign tests', () => {
 
   });
 
-  it.only('Should Search by Sent Sending Status Successfully', function () {
+  it('Should Search by Sent Sending Status Successfully', function () {
     BasePage.openSearch()
 
     SmsCampaignPage.SearchBySendingStatus()

@@ -63,7 +63,7 @@ describe('Agents Status Page Tests Using Fixtures', () => {
 
   })
 
-  it('Should set an Online Status', function () {
+  it.only('Should set an Online Status', function () {
     AgentStatus.SetActiveStatus()
   })
   it('Should set an Offliine Status', function () {

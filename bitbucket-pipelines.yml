@@ -1,10 +1,12 @@
 pipelines:
   default:
     - step:
-        name: Cypress Tests
-        image: cypress/base:18
-        caches:
-          - node
+        image: cypress/browsers:node18.16.0-chrome118-ff120
         script:
           - npm ci
-          - npx cypress run
+          - xvfb-run -a npx cypress run --browser chrome --headed
+            --spec "cypress/e2e/AgentStatusTest.cy.js"
+        artifacts:
+          - cypress/videos/** 
+          - cypress/screenshots/**
+

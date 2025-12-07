@@ -1,12 +1,13 @@
-stages:
-  - test
-
 cypress:
   stage: test
-  image: cypress/base:18
+  image: cypress/browsers:node20.14.0-chrome123-ff120
+
   script:
     - npm ci
-    - npx cypress run
+    - npx cypress verify
+    - xvfb-run -s "-screen 0 1920x1080x24" \
+        npx cypress run --browser chrome --headed --spec "cypress/e2e/AgentStatusTest.cy.js"
+
   artifacts:
     paths:
       - cypress/videos

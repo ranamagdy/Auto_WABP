@@ -134,12 +134,27 @@ it('Should create Scheduled campaigns Successfully', function () {
     BasePage.openSearch();
     CampaignPage.SearchByCampaignName(this.CampaignData.randomcamp)
     CampaignPage.DuplicateChangeTemp(this.CampaignData.tempName)
+    cy.wait(500);
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
 
 
   });
+  it('Should View Campaign  Successfully', function () {
 
+    CampaignPage.ViewCampaign();
+    cy.url().should('include', '/campaigns/report');
+  });
+  it('Should Details Campaign  Successfully', function () {
 
+    CampaignPage.DetailsCampaign();
+    cy.url().should('include', '/campaigns/view');
+
+  });
+  it('Should cancel Scheduled  Campaign  Successfully', function () {
+    BasePage.openSearch();
+    CampaignPage.CancelSchadualedCampaign();
+    cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Cancelled Successfully');
+  });
 });
 
 

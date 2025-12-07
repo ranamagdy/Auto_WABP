@@ -159,7 +159,6 @@ class CampaignPage extends BasePage {
     this.clickSearch();
   }
 
-
   duplicateAndRename() {
     cy.contains('Duplicate').click();
     cy.get('mat-dialog-container').should('be.visible');
@@ -327,7 +326,26 @@ class CampaignPage extends BasePage {
 
   }
 
+  ViewCampaign() {
+    cy.contains('span', 'View').first().click();
 
+  }
+
+  DetailsCampaign() {
+    cy.contains('span', 'View').first().click();
+    cy.contains('span', 'Details').first().click();
+
+
+  }
+  CancelSchadualedCampaign() {
+   
+    this.SearchByScheduledCmapaign();
+    this.ViewCampaign();
+    cy.contains('span', 'Cancel').click();
+    this.confirmDialog();
+
+
+  }
 
 
 }
