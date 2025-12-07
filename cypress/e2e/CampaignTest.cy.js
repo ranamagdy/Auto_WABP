@@ -64,7 +64,7 @@ it('Should create Scheduled campaigns Successfully', function () {
     cy.get(':nth-child(1) > .cdk-column-sendingType > .badge-status').should('contain', 'Scheduled')
   });
 
-  it.only('Should Search by Sending Status Successfully', function () {
+  it('Should Search by Sending Status Successfully', function () {
     BasePage.openSearch();
     CampaignPage.SearchBySendingStatus();
     cy.get('.example-element-row > .cdk-column-sendingStatus').should('contain', 'Sent')
