@@ -1,0 +1,37 @@
+{
+  "governorates": [
+    "Cairo",
+    "Giza",
+    "Qalyubia",
+    "Alexandria",
+    "Beheira"
+  ]
+
+
+  , 
+  
+  "club": [
+    "Cairo",
+    "Giza",
+    "Qalyubia",
+    "Alexandria",
+    "Beheira"
+  ]
+
+, 
+  
+  "agegroups": [
+    "Under 10",
+    "Under 6",
+    "Under 14",
+    "Under 18"
+  ]
+
+
+  ,
+
+  "mobileNumber": [
+    "01273196467"
+  ]
+
+}
