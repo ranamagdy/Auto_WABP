@@ -108,14 +108,14 @@ describe('Sms Campaign tests', () => {
 
 
   });
-  it.only('Should Duplicate The Campaign without any changing ', function () {
+  it('Should Duplicate The Campaign without any changing ', function () {
     SmsCampaignPage.DuplicateWithoutChanging();
     cy.wait(500)
 
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
 
   });
-  it.only('Should Duplicate the campaign with changing from onspot to schedual', function () {
+  it('Should Duplicate the campaign with changing from onspot to schedual', function () {
     BasePage.openSearch()
     SmsCampaignPage.SearchByOnspotCmapaign();
     SmsCampaignPage.OnspotToScheduled();
@@ -148,7 +148,7 @@ describe('Sms Campaign tests', () => {
 
 
   });
-  it.only('Should Duplicate the campaign with changing from Normal to Custom ', function () {
+  it('Should Duplicate the campaign with changing from Normal to Custom ', function () {
     BasePage.openSearch()
 
     SmsCampaignPage.SearchByCampaignName(this.SmsCampaign.NormalSchedual)

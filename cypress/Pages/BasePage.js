@@ -13,8 +13,8 @@ class BasePage {
     exportBtn: () => cy.get('button[title="Export To Excel"]'),
   };
 
-  clickSearch() {
-    this.elements.searchBtn().click();
+  static clickSearch() {
+    cy.contains('span', 'Search').click();
   }
 
    static clickClear() {

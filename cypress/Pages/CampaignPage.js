@@ -160,7 +160,7 @@ class CampaignPage extends BasePage {
   }
 
   duplicateAndRename() {
-    cy.contains('Duplicate').click();
+    cy.contains('Duplicate').first().click();
     cy.get('mat-dialog-container').should('be.visible');
     cy.contains('button', 'Yes').click();
     cy.wait(300);

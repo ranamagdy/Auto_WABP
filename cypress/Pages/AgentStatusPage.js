@@ -66,12 +66,12 @@ class AgentStatus extends BasePage {
   // ----------------- Set Status -----------------
   SetActiveStatus() {
     cy.get('.agent-status-button-inner').click();
-    cy.contains('button[mat-menu-item]', 'updated Online').click();
+    cy.contains('button[mat-menu-item]', 'Online').click();
   }
 
   SetInActiveStatus() {
     cy.get('.agent-status-button-inner').click();
-    cy.contains('button[mat-menu-item]', 'Auto Offline').click();
+    cy.contains('button[mat-menu-item]', 'Offline').click();
   }
 
 
