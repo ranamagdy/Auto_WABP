@@ -2,20 +2,20 @@ import UserTrialsReservation from "../Pages/UserTrialsReservationPage";
 import BasePage from '../Pages/BasePage';
 describe('User Trials Reservation Page Tests Using Fixtures', () => {
 
-    BasePage.init(UserTrialsReservation, 'UserTrialsReservationData');
+    BasePage.init(UserTrialsReservation, 'UserTrialsReservation');
     it('Search by Mobile Number', function () {
         BasePage.openSearch();
-        UserTrialsReservation.SearchByMobileNumber(this.UserTrialsReservationData.mobileNumber);
-        cy.get('.mat-row > .cdk-column-mobile').should('contain', this.UserTrialsReservationData.mobileNumber);
+        UserTrialsReservation.SearchByMobileNumber(this.UserTrialsReservation.mobileNumber);
+        cy.get('.mat-row > .cdk-column-mobile').should('contain', this.UserTrialsReservation.mobileNumber);
 
     });
     it('Search by Government', function () {
         BasePage.openSearch();
-        UserTrialsReservation.SearchByGovernment(this.UserTrialsReservationData.government);
-        cy.get('.mat-row > .cdk-column-governorate').should('contain', this.UserTrialsReservationData.government);
+        UserTrialsReservation.SearchByGovernment(this.UserTrialsReservation.government);
+        cy.get('.mat-row > .cdk-column-governorate').should('contain', this.UserTrialsReservation.government);
     });
     it('should clear the search ', () => {
-        UserTrialsReservation.SearchByGovernment(this.UserTrialsReservationData.government);
+        UserTrialsReservation.SearchByGovernment(this.UserTrialsReservation.government);
         BasePage.clickClear();
         cy.get('mat-select[formcontrolname="governorateId"] .mat-select-value-text span').should('have.text', '');
     })

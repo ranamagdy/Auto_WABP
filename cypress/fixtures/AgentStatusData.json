@@ -1,6 +1,7 @@
 {
     "ActiveStatus": "Auto Online",
-    "InActiveStatus": "Auto Offline",
+    "InActiveStatus": "Offline",
     "EditStatus": "updated ",
-    "RandomStatus":"Status "
+    "RandomStatus":"Status ",
+    "StatusnameSearch" : "Online"
 }

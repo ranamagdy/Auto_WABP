@@ -37,8 +37,8 @@ describe('Agents Status Page Tests Using Fixtures', () => {
 
   it('Should Search By status name Sucessfully ', function () {
     BasePage.openSearch();
-    AgentStatus.SearchByName(this.AgentStatusData.EditStatus)
-    cy.get('td.mat-column-statusName').contains(this.AgentStatusData.EditStatus).should('be.visible');
+    AgentStatus.SearchByName(this.AgentStatusData.StatusnameSearch)
+    cy.get('td.mat-column-statusName').contains(this.AgentStatusData.StatusnameSearch).should('be.visible');
 
   })
   it('Should Search By Active status  Sucessfully ', function () {
