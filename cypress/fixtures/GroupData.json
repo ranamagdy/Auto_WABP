@@ -1,0 +1,14 @@
+{
+  "groupName": "New Group",
+  "customGroupname": "New Custom Group ",
+  "groupType": "Normal",
+  "customGrouptype": "Customized",
+  "availability": "Yes",
+  "updateName": "Update Group",
+  "updateCustomname":"Update Custom Group ",
+  "updateAvailability": "No",
+  "mobileNumber": "01273196467",
+  "fileName": "1K Vodafone",
+  "customeFile":"1K Vodafone Custom"
+  
+} 

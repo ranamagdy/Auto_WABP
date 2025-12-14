@@ -1,0 +1,22 @@
+{
+  "templateNames": ["English template", "arabic temp", "French template","special characters only","Discount"],
+  "smsCampaigns": [
+    {
+      "CampaignName": "Test SMS Campaign",
+      "CampaignScheduleName": "Test Scheduled SMS Campaign",
+      "BaseMobileNumber": "01273196"
+    }  
+  ],
+
+  "NormalOnspot":"Normal SMS Camp Onspot",
+  "CustomOnspot":"Custom SMS Camp Onspot",
+  "NormalSchedual":"Normal SMS Camp schedualed",
+  "CustomSchedual":"Custom SMS Camp Schedualed",
+  "randomcamp":"retest camp",
+  "MobileNumber":"01273196467",
+  "SendingPreferences":["Onspot","Scheduled"],
+  "GroupType":["Normal","Customized"]
+
+  
+
+}

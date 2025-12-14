@@ -1,0 +1,11 @@
+{
+  "admin": {
+    "email": "mdesouky@victorylink.com",
+    "password": "Admin@VL"
+  },
+  "InvalidEmail":"rmagdy@victink.com" ,
+  "InvalidPassword":"AdminVL",
+  "InvalidPattern": "rmagdyvictink.com",
+  "emptyfields":""
+}
+
