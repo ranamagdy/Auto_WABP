@@ -31,7 +31,7 @@ describe('Campaign Page Tests Using Fixtures', () => {
 
   });
 
-  it.only('Should create Onspot with Normal group using 100 mobile numbers Successfully', function () {
+  it('Should create Onspot with Normal group using 100 mobile numbers Successfully', function () {
 
   const data = BasePage.generateCampaignData(this.CampaignData);
   const sendingPreferences = this.CampaignData.SendingPreferences[0];
