@@ -2,6 +2,9 @@ import LoginPage from "../Pages/LoginPage";
 
 class BasePage {
 
+  // ==========================
+  // Elements
+  // ==========================
   elements = {
     searchBtn: () => cy.contains('span', 'Search'),
     clearBtn: () => cy.contains('span', 'Clear'),
@@ -11,28 +14,30 @@ class BasePage {
     createBtn: () => cy.contains('span', 'Create'),
     saveBtn: () => cy.contains('span', 'Save'),
     exportBtn: () => cy.get('button[title="Export To Excel"]'),
+    dialog: () => cy.get('.mat-dialog-container', { timeout: 8000 }),
+    dialogConfirm: () => cy.get('.mat-dialog-actions > .btn-black'),
+    searchPanel: () => cy.get('div.search-form-expand-wrapper'),
+    toggleSearchBtn: () => cy.get('.card-head-btns-wrapper > .btn-black')
   };
 
-  static clickSearch() {
-    cy.contains('span', 'Search').click();
+
+  // ==========================
+  // Click Actions (Instance)
+  // ==========================
+  clickSearch() {
+    this.elements.searchBtn().click();
   }
 
-   static clickClear() {
-    cy.contains('span', 'Clear').click();
+  clickClear() {
+    this.elements.clearBtn().click();
   }
 
   clickEdit() {
     this.elements.editBtn().click();
   }
 
-   static Delete() {
-           cy.contains('span', 'Delete').first().click();
-           cy.get('.mat-dialog-container', { timeout: 8000 }).should('be.visible');
-           cy.get('.mat-dialog-actions > .btn-black').click();
-            }
-
   clickAddNew() {
-    this.elements.addNewBtn({ timeout: 10000 }).click();
+    this.elements.addNewBtn().click();
   }
 
   clickCreate() {
@@ -44,130 +49,121 @@ class BasePage {
   }
 
 
-  ActivationToggle() {
-    this.elements.saveBtn().click();
+  // ==========================
+  // Delete
+  // ==========================
+  deleteFirstRow() {
+    this.elements.deleteBtn().click();
+    this.elements.dialog().should('be.visible');
+    this.elements.dialogConfirm().click();
   }
 
 
+  // ==========================
+  // Confirm Dialog
+  // ==========================
   confirmDialog() {
-
-    cy.get('.mat-dialog-container', { timeout: 8000 }).should('be.visible');
-    cy.get('.mat-dialog-actions > .btn-black').click();
+    this.elements.dialog().should('be.visible');
+    this.elements.dialogConfirm().click();
   }
 
 
-  static Export(pageName) {
-      cy.get('button[title="Export To Excel"]').click();
-      cy.wait(5000); // Wait for the export to complete
-   
-        // Wait for the file to be downloaded
-        const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-        const downloadedFilename = `${pageName}_${today}.xlsx`;
-    
-        cy.readFile(`cypress/downloads/${downloadedFilename}`, { timeout: 5000 }).should('exist')
-      
-  } 
-
-  static openSearch() {
-    cy.get('div.search-form-expand-wrapper').then($wrapper => {
-      const isVisible = $wrapper.css('opacity') === '1';
-      if (!isVisible) {
-        cy.get('.card-head-btns-wrapper > .btn-black').click();
-        cy.get('div.search-form-expand-wrapper', { timeout: 10000 })
-          .should('have.css', 'opacity', '1');
+  // ==========================
+  // Search Panel Toggle
+  // ==========================
+  openSearch() {
+    this.elements.searchPanel().then(($wrapper) => {
+      if ($wrapper.css('opacity') !== '1') {
+        this.elements.toggleSearchBtn().click();
+        this.elements.searchPanel().should('have.css', 'opacity', '1');
       }
     });
   }
 
 
-  static init(PageName, fixtureName) {
+  // ==========================
+  // Export to Excel
+  // ==========================
+  export(pageName) {
+    this.elements.exportBtn().click();
 
+    const today = new Date().toLocaleDateString('en-CA').replace(/-/g, '');
+
+    const fileName = `${pageName}_${today}.xlsx`;
+
+    cy.readFile(`cypress/downloads/${fileName}`, { timeout: 10000 })
+      .should('exist');
+  }
+
+
+  // ==========================
+  // Page INIT (Best Practice)
+  // ==========================
+  static init(PageClass, fixtureName) {
     beforeEach(function () {
 
-      // Load login data & perform login
+      // Load & login
       cy.fixture('LoginData').then((loginData) => {
-
         LoginPage.visit();
         LoginPage.login(loginData.admin.email, loginData.admin.password);
 
-        // Confirm login succeeded
         cy.url().should('not.include', '/auth/login');
         cy.wait(2000);
       })
 
-        // After login → Navigate to the target page
-        .then(() => {
-          return PageName.visit();
-        })
+        // Navigate to page
+        .then(() => PageClass.visit())
 
-        // Then load test data fixture
+        // Load fixture
         .then(() => {
           return cy.fixture(fixtureName).then((data) => {
-              
-                this[fixtureName] = data;
-
-                
-                PageName[fixtureName] = data;
+            this[fixtureName] = data;
+            PageClass[fixtureName] = data; 
+            
           });
         });
-
     });
   }
-  static generateCampaignData(fixtureData) {
-    const base = fixtureData.campaigns[0];
 
-    const randomSuffix1 = Cypress._.random(100, 9999);
-    const randomSuffix2 = Cypress._.random(100, 999);
 
-    const dynamicCampaignName = `${base.CampaignName} ${randomSuffix1}`;
-    const dynamicScheduleName = `${base.CampaignScheduleName} ${randomSuffix1}`;
-    const dynamicMobileNumber = `${base.BaseMobileNumber}${randomSuffix2}`;
-
-    const randomTemplate = Cypress._.sample(fixtureData.templateNames);
-
-    return {
-      randomSuffix1,
-      randomSuffix2,
-      dynamicCampaignName,
-      dynamicScheduleName,
-      dynamicMobileNumber,
-      randomTemplate
-    };
-
+  // ==========================
+  // Dynamic Data Helpers
+  // ==========================
+  static generateDynamicName(baseName) {
+    const random = Cypress._.random(100, 9999);
+    return `${baseName} ${random}`;
   }
 
-  static generateDynamicName(baseName) {
+  static generateDynamicEmail(baseEmail) {
+  const random = Cypress._.random(1000, 9999); // 4 digits
+  return baseEmail.replace('@', `${random}@`);
+}
 
-    const randomSuffix = Cypress._.random(100, 999);
 
-  
-    const dynamicName = `${baseName} ${randomSuffix}`;
+  static generateCampaignData(fixtureData) {
+    const base = fixtureData.campaigns[0];
+    const rnd = Cypress._.random(100, 9999);
 
-    return dynamicName;
+    return {
+      campaignName: `${base.CampaignName} ${rnd}`,
+      scheduleName: `${base.CampaignScheduleName} ${rnd}`,
+      mobileNumber: `${base.BaseMobileNumber}${Cypress._.random(100, 999)}`,
+      template: Cypress._.sample(fixtureData.templateNames),
+    };
   }
 
   static generateSMSCampaignData(fixtureData) {
     const base = fixtureData.smsCampaigns[0];
-
-    const randomSuffix = Cypress._.random(100, 999);
-
-    const dynamicCampaignName = `${base.CampaignName} ${randomSuffix}`;
-    const dynamicScheduleName = `${base.CampaignScheduleName} ${randomSuffix}`;
-    const dynamicMobileNumber = `${base.BaseMobileNumber}${randomSuffix}`;
-
-    const randomTemplate = Cypress._.sample(fixtureData.templateNames);
+    const rnd = Cypress._.random(100, 999);
 
     return {
-      randomSuffix,
-      dynamicCampaignName,
-      dynamicScheduleName,
-      dynamicMobileNumber,
-      randomTemplate,
-    }
+      campaignName: `${base.CampaignName} ${rnd}`,
+      scheduleName: `${base.CampaignScheduleName} ${rnd}`,
+      mobileNumber: `${base.BaseMobileNumber}${rnd}`,
+      template: Cypress._.sample(fixtureData.templateNames),
+    };
   }
 
 }
-
-
 
 export default BasePage;

@@ -10,15 +10,13 @@ describe('Terms&Roles Tests Using Fixtures', () => {
     const dynamicRoleName = BasePage.generateDynamicName(this.TermsRolesData.AddRoleName);
 
     TermsRolesPage.AddNewRole(dynamicRoleName);
-
     cy.get('.mat-simple-snack-bar-content')
       .should('contain', 'Role created successfully');
   });
 
 
   it('Should Search by Name Role successfully', function () {
-    BasePage.openSearch();
-
+    TermsRolesPage.openSearch();
     TermsRolesPage.SearchByName(this.TermsRolesData.AddRoleName);
     cy.get('.mat-row > .cdk-column-enName').should('contain', this.TermsRolesData.AddRoleName);
   });
@@ -34,16 +32,16 @@ describe('Terms&Roles Tests Using Fixtures', () => {
 
 
   it('Should clear the search successfully', function () {
-    BasePage.openSearch();
+    TermsRolesPage.openSearch();
     TermsRolesPage.SearchByName(this.TermsRolesData.EditRoleName);
-    BasePage.clickClear();
+    TermsRolesPage.clickClear();
     cy.get('input[formcontrolname="roleName"]').should('have.value', '');
 
 
   });
 
   it('Should Delete the Role successfully', function () {
-    BasePage.Delete();
+    TermsRolesPage.deleteFirstRow();
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Role deleted successfully');
 
 

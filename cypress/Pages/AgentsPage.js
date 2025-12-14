@@ -2,15 +2,17 @@ import BasePage from "./BasePage";
 
 class AgentsPage extends BasePage {
 
-  // ----------------- Navigation -----------------
+  // ==========================
+  // Navigation
+  // ==========================
   visit() {
     cy.contains('span.nav-link-text', 'Agents').click();
   }
 
-  // ----------------- Add New Agent -----------------
+  // ==========================
+  // Add New agent
+  // ==========================
   AddNewAgent(FullName, email, integrationId = '') {
-
-    // Use BasePage Encapsulated Action
     this.clickAddNew();
 
     // Fill Full Name and Email
@@ -21,7 +23,7 @@ class AgentsPage extends BasePage {
     cy.contains('Select Role').click();
     cy.get('#roleDD label').first().click();
 
-    // Optional Integration ID
+    // Integration ID
     cy.get('body').then($body => {
       if ($body.find('input[formcontrolname="integrationId"]').length > 0) {
         cy.get('input[formcontrolname="integrationId"]', { timeout: 10000 })
@@ -31,19 +33,24 @@ class AgentsPage extends BasePage {
               cy.wrap($input).type(integrationId, { force: true });
             }
           });
-      }
-    });
+        }
+
+    // Agent Recieves Chat
+    cy.get('#mat-checkbox-2 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
+      });
 
     // Select Team
     cy.contains('Select Team').click();
     cy.get('#teamDD label').first().click();
 
-    // Save Agent (Encapsulated)
+    // Save Agent
     this.clickSave();
   }
 
 
-  // ----------------- Search -----------------
+  // ==========================
+  // Search
+  // ==========================
   SearchByName(Name) {
     cy.get('input[data-placeholder="Name"]').type(Name);
     this.clickSearch();
@@ -55,20 +62,27 @@ class AgentsPage extends BasePage {
   }
 
 
-  // ----------------- Edit -----------------
+  // ==========================
+  // Edit Agent
+  // ==========================
   EditAgent(Name, Email) {
-
-    // Encapsulated method from BasePage
     this.clickEdit();
 
     cy.get('input[data-placeholder="Full Name"]').clear().type(Name);
     cy.get('input[formcontrolname="email"]').clear().type(Email);
 
+    // Agent doesn't Recieves Chat
+    cy.get('#mat-checkbox-2 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
+      
+    
+
     this.clickSave();
   }
 
 
-  // ----------------- Activate / Inactive -----------------
+  // ==========================
+  // Activate / Deactivate Agent
+  // ==========================
   changetoNotactive() {
         cy.wait(1000);
 

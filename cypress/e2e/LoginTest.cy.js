@@ -11,43 +11,39 @@ describe('Happy Scenario for Login ', () => {
 
     it('Should log in successfully with valid credentials', function () {
        
-        // Use fixture data inside the test
         LoginPage.login(this.LoginData.admin.email, this.LoginData.admin.password);
-
-        // Verify successful login
-        cy.url().should('include', 'pages');
+        cy.url()
+          .should('include', 'pages');
     });
+
+
     it('A validation message should display when login with Invalid Email', function () {
        
-        // Use fixture data inside the test
         LoginPage.login(this.LoginData.InvalidEmail, this.LoginData.admin.password);
-
-       
-       cy.get('.mat-simple-snack-bar-content').should('contain','Invalid email or password')
-    
+        cy.get('.mat-simple-snack-bar-content')
+          .should('contain','Invalid email or password')
     });
 
        it('A validation message should display when login with Invalid Email', function () {
-       
-        // Use fixture data inside the test
+    
         LoginPage.login(this.LoginData.admin.email, this.LoginData.InvalidPassword);
 
-       cy.get('.mat-simple-snack-bar-content').should('contain','Invalid email or password')
+        cy.get('.mat-simple-snack-bar-content')
+          .should('contain','Invalid email or password')
     });
+
     it('A validation message should display when enter invalid pattern ', function () {
        
-        // Use fixture data inside the test
         LoginPage.login(this.LoginData.InvalidPattern, this.LoginData.admin.password);
-
-       cy.contains('span',' Invalid Email Pattern').should('contain','Invalid Email Pattern')
+        cy.contains('span',' Invalid Email Pattern')
+          .should('contain','Invalid Email Pattern')
     });
+    
         it('A validation message should display when enter empty data  ', function () {
-       
-        // Use fixture data inside the test
-        LoginPage.LoginWithEmptydata('','')
 
-      // cy.contains('span',' Please Enter  ').should('contain',' Please Enter Email')
-    cy.get('#mat-error-0 > :nth-child(1)').should('contain','Please Enter ')
+        LoginPage.LoginWithEmptydata('','')
+        cy.get('#mat-error-0 > :nth-child(1)')
+          .should('contain','Please Enter ')
     });
     
 });

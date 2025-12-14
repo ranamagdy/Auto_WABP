@@ -14,11 +14,20 @@ describe('Campaign Page Tests Using Fixtures', () => {
     const SendingPreferences = this.CampaignData.SendingPreferences[0];
     const GroupType = this.CampaignData.GroupType[0];
 
-    CampaignPage.AddNewCampaignInfoTab(data.dynamicCampaignName, this.CampaignData.ChannelName,SendingPreferences,GroupType);
-    CampaignPage.ContactsTab(data.dynamicMobileNumber);
-    CampaignPage.TemplateTab(data.randomTemplate);
-    cy.wait(4000); // Waits for 4 seconds
-    cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
+    CampaignPage.AddNewCampaignInfoTab(
+      data.campaignName, 
+      this.CampaignData.ChannelName,
+      SendingPreferences,
+      GroupType
+    );
+
+
+    CampaignPage.ContactsTab(data.mobileNumber);
+    CampaignPage.TemplateTab(data.template);
+    
+    cy.wait(3000); 
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Campaign Created Successfully')
 
   });
 
@@ -26,14 +35,16 @@ describe('Campaign Page Tests Using Fixtures', () => {
     
     CampaignPage.DuplicateWithoutChanging();
     cy.wait(500)
-    cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Campaign Created Successfully')
 
   });
 
   it('Should Duplicate the campaign with changing from Normal to Custom ', function () {
     
     CampaignPage.NormalToCutom()
-    cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Campaign Created Successfully')
 
 
   });
@@ -44,22 +55,29 @@ describe('Campaign Page Tests Using Fixtures', () => {
     const GroupType = this.CampaignData.GroupType[1];
 
     const data = BasePage.generateCampaignData(this.CampaignData);
-    CampaignPage.customGroupCamp(data.dynamicCampaignName, data.randomTemplate, this.CampaignData.ChannelName,SendingPreferences,GroupType)
+    CampaignPage.customGroupCamp(
+      data.campaignName, 
+      data.template, 
+      this.CampaignData.ChannelName,
+      SendingPreferences,
+      GroupType)
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
 
   });
 
   it('Should Duplicate the campaign with changing from Custom to Normal ', function () {
     CampaignPage.CustomToNormal(this.CampaignData.MobileNumber)
-    cy.wait(4000)
-    cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
+    cy.wait(2000)
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Campaign Created Successfully')
 
 
   });
 
   it('Should Duplicate the campaign with changing from onspot to schedual', function () {
     CampaignPage.OnspotToScheduled();
-    cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Campaign Created Successfully')
 
 
   });
@@ -68,11 +86,16 @@ describe('Campaign Page Tests Using Fixtures', () => {
 it('Should create Scheduled campaigns Successfully', function () {
     const data = BasePage.generateCampaignData(this.CampaignData);
 
-    CampaignPage.ScheduleCampaignInfoTab(data.dynamicCampaignName, this.CampaignData.ChannelName);
-    CampaignPage.ContactsTab(data.dynamicMobileNumber);
-    CampaignPage.TemplateTab(data.randomTemplate);
-    cy.wait(4000); // Waits for 4 seconds
-    cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
+    CampaignPage.ScheduleCampaignInfoTab(
+      data.campaignName, 
+      this.CampaignData.ChannelName
+    );
+
+    CampaignPage.ContactsTab(data.mobileNumber);
+    CampaignPage.TemplateTab(data.template);
+    cy.wait(3000); 
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Campaign Created Successfully')
 
 
 
@@ -80,55 +103,62 @@ it('Should create Scheduled campaigns Successfully', function () {
 
   it('Should Duplicate the campaign with changing from schedual to onspot ', function () {
     CampaignPage.ScheduledToOnspot()
-    cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Campaign Created Successfully')
 
 
   });
 
 
   it('Should Search by the Campaign Title Successfully', function () {
-    BasePage.openSearch();
+    CampaignPage.openSearch();
     CampaignPage.SearchByCampaignName(this.CampaignData.campaigns[0].CampaignName);
-    cy.get('.example-element-row > .cdk-column-title').should('contain', this.CampaignData.campaigns[0].CampaignName)
+    cy.get('.example-element-row > .cdk-column-title')
+      .should('contain', this.CampaignData.campaigns[0].CampaignName)
 
   });
 
   it('Should Search by Onspot Sending Type Successfully', function () {
-    BasePage.openSearch();
+    CampaignPage.openSearch();
     CampaignPage.SearchByOnspotCmapaign();
-    cy.get(':nth-child(1) > .cdk-column-sendingType > .badge-status').should('contain', 'Onspot')
+    cy.get(':nth-child(1) > .cdk-column-sendingType > .badge-status')
+      .should('contain', 'Onspot')
 
   });
 
   it('Should Search by Scheduled Sending Type Successfully', function () {
-    BasePage.openSearch();
+    CampaignPage.openSearch();
     CampaignPage.SearchByScheduledCmapaign()
-    cy.get(':nth-child(1) > .cdk-column-sendingType > .badge-status').should('contain', 'Scheduled')
+    cy.get(':nth-child(1) > .cdk-column-sendingType > .badge-status')
+      .should('contain', 'Scheduled')
   });
 
   it('Should Search by Sending Status Successfully', function () {
-    BasePage.openSearch();
+    CampaignPage.openSearch();
     CampaignPage.SearchBySendingStatus();
     cy.wait(2000);
-    cy.get('.example-element-row > .cdk-column-sendingStatus').should('contain', 'Sent')
+    cy.get('.example-element-row > .cdk-column-sendingStatus')
+      .should('contain', 'Sent')
 
   });
 
 
   it('Should Clear Successfully', function () {
-    BasePage.openSearch();
+    CampaignPage.openSearch();
     CampaignPage.SearchByCampaignName(this.CampaignData.campaigns[0].CampaignName);
-    BasePage.clickClear();
-    cy.get('input[data-placeholder="Campaign Title"]').should('have.value', '');
+    CampaignPage.clickClear();
+    cy.get('input[data-placeholder="Campaign Title"]')
+    .should('have.value', '');
 
   });
 
   
 
   it('Should Duplicate the campaign with changing The template ', function () {
-    CampaignPage.DuplicateChangeTemp(this.CampaignData.tempName)
-    cy.wait(4000);
-    cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
+    CampaignPage.DuplicateChangeTemp(this.CampaignData.templateNames[0]);
+    cy.wait(3000);
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Campaign Created Successfully')
 
 
   });
@@ -144,9 +174,10 @@ it('Should create Scheduled campaigns Successfully', function () {
 
   });
   it('Should cancel Scheduled  Campaign  Successfully', function () {
-    BasePage.openSearch();
+    CampaignPage.openSearch();
     CampaignPage.CancelSchadualedCampaign();
-    cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Cancelled Successfully');
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Campaign Cancelled Successfully');
   });
 });
 

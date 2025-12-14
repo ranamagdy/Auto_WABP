@@ -1,14 +1,22 @@
 ///<refrence types="cypress" >
 class LoginPage {
+    
+    // ==========================
+    // Navigation
+    // ==========================
     visit() {
         cy.visit('/auth/login')
     }
+
+    // ==========================
+    // Login Form
+    // ==========================
+
     login(email, password) {
         cy.login(email, password);
-        
-        
-
     }
+
+    
     LoginWithEmptydata(email, password) {
 
         if (email) {

@@ -3,7 +3,7 @@ import BasePage from '../Pages/BasePage';
 import SMSTemplatePage from '../Pages/SMSTemplatePage';
 
 
-describe('Shpuld Add New SMS Template Successfully  ', () => {
+describe('Should Add New SMS Template Successfully  ', () => {
 
   BasePage.init(SMSTemplate, 'SMSTemplateData');
 
@@ -11,7 +11,7 @@ describe('Shpuld Add New SMS Template Successfully  ', () => {
  
     const dynamicTemplateName = BasePage.generateDynamicName(this.SMSTemplateData.TemplateName[0]);
 
-    SMSTemplate.AddNewTemplate(dynamicTemplateName, this.SMSTemplateData.Body);
+    SMSTemplatePage.AddNewTemplate(dynamicTemplateName, this.SMSTemplateData.Body);
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Template Created Successfully')
 
 
@@ -20,8 +20,8 @@ describe('Shpuld Add New SMS Template Successfully  ', () => {
   it('Should search by Template name successfully', function () {
 
 
-    BasePage.openSearch();
-    SMSTemplate.SearchByName(this.SMSTemplateData.TemplateName[0]);
+    SMSTemplatePage.openSearch();
+    SMSTemplatePage.SearchByName(this.SMSTemplateData.TemplateName[0]);
     cy.get('tbody > :nth-child(1) > .cdk-column-name').should('contain', 'Auto SMS Template')
 
   })
@@ -29,8 +29,8 @@ describe('Shpuld Add New SMS Template Successfully  ', () => {
   it('Should search by Template availability successfully', function () {
 
 
-    BasePage.openSearch();
-    SMSTemplate.SerchByAvailablity();
+    SMSTemplatePage.openSearch();
+    SMSTemplatePage.SerchByAvailablity();
     cy.get('tbody > :nth-child(1) > .cdk-column-availability').should('contain', 'Yes')
 
   })
@@ -38,41 +38,41 @@ describe('Shpuld Add New SMS Template Successfully  ', () => {
   it('Should search by Channel name successfully', function () {
 
 
-    BasePage.openSearch();
-    SMSTemplate.SerchByChannel();
+    SMSTemplatePage.openSearch();
+    SMSTemplatePage.SerchByChannel();
     cy.get('tbody > :nth-child(1) > .cdk-column-channel').should('contain', 'SMS')
 
   })
   it('Should clear the data successfully', function () {
 
 
-    BasePage.openSearch();
-    SMSTemplate.SearchByName(this.SMSTemplateData.TemplateName[0]);
-    BasePage.clickClear();
+    SMSTemplatePage.openSearch();
+    SMSTemplatePage.SearchByName(this.SMSTemplateData.TemplateName[0]);
+    SMSTemplatePage.clickClear();
     cy.get('input[formcontrolname="templateName"]').should('have.value', '')
 
   })
 
   it('Should change the template to unavailable successfully', function () {
-    BasePage.openSearch();
-    SMSTemplate.SerchByAvailablity();
-    SMSTemplate.ChangeToNotAvailable()
+    SMSTemplatePage.openSearch();
+    SMSTemplatePage.SerchByAvailablity();
+    SMSTemplatePage.ChangeToNotAvailable()
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Template deactivated successfully')
 
 
   })
 
   it('Should change the template to available successfully', function () {
-    BasePage.openSearch();
-    SMSTemplate.SearchByName(this.SMSTemplateData.TemplateName[0]);
-    SMSTemplate.ChengeToAvailable()
+    SMSTemplatePage.openSearch();
+    SMSTemplatePage.SearchByName(this.SMSTemplateData.TemplateName[0]);
+    SMSTemplatePage.ChengeToAvailable()
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Template activated successfully')
 
 
   })
 
   it('Should Export templates successfully', function () {
-    BasePage.Export('Sms Templates Report');
+    SMSTemplatePage.export('Sms Templates Report');
 
   })
 

@@ -18,8 +18,8 @@ describe('Sms Campaign tests', () => {
     const GroupType = this.SmsCampaign.GroupType[0];
 
 
-    SmsCampaignPage.AddNewSmsCampaignInfoTab(data.dynamicCampaignName, SendingPreferences, GroupType);
-    SmsCampaignPage.ContactsTab(data.dynamicMobileNumber);
+    SmsCampaignPage.AddNewSmsCampaignInfoTab(data.campaignName, SendingPreferences, GroupType);
+    SmsCampaignPage.ContactsTab(data.mobileNumber);
     SmsCampaignPage.TemplateTab(data.randomTemplate);
 
     cy.wait(3000);
@@ -62,7 +62,7 @@ describe('Sms Campaign tests', () => {
 
   });
   it('Should Search by the Campaign Title Successfully', function () {
-    BasePage.openSearch()
+    SmsCampaignPage.openSearch()
 
     SmsCampaignPage.SearchByCampaignName(this.SmsCampaign.smsCampaigns[0].CampaignName);
     cy.get('.example-element-row > .cdk-column-title').should('contain', this.SmsCampaign.smsCampaigns[0].CampaignName)
@@ -70,7 +70,7 @@ describe('Sms Campaign tests', () => {
   });
 
   it('Should Search by Onspot Sending Type Successfully', function () {
-    BasePage.openSearch()
+    SmsCampaignPage.openSearch()
 
     SmsCampaignPage.SearchBySendingStatus();
 
@@ -80,7 +80,7 @@ describe('Sms Campaign tests', () => {
   });
 
   it('Should Search by Sent Sending Status Successfully', function () {
-    BasePage.openSearch()
+    SmsCampaignPage.openSearch()
 
     SmsCampaignPage.SearchBySendingStatus()
 
@@ -90,7 +90,7 @@ describe('Sms Campaign tests', () => {
   });
 
   it('Should Search by Scheduled Sending Type Successfully', function () {
-    BasePage.openSearch()
+    SmsCampaignPage.openSearch()
 
     SmsCampaignPage.SearchByScheduledCmapaign()
 
@@ -99,7 +99,7 @@ describe('Sms Campaign tests', () => {
 
   });
   it('Should Clear data Successfully', function () {
-    BasePage.openSearch()
+    SmsCampaignPage.openSearch()
 
     SmsCampaignPage.Clearbutton()
 
@@ -116,7 +116,7 @@ describe('Sms Campaign tests', () => {
 
   });
   it('Should Duplicate the campaign with changing from onspot to schedual', function () {
-    BasePage.openSearch()
+    SmsCampaignPage.openSearch()
     SmsCampaignPage.SearchByOnspotCmapaign();
     SmsCampaignPage.OnspotToScheduled();
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
@@ -126,7 +126,7 @@ describe('Sms Campaign tests', () => {
 
   it('Should Duplicate the campaign with changing from schedual to onspot ', function () {
 
-    BasePage.openSearch()
+    SmsCampaignPage.openSearch()
 
     SmsCampaignPage.SearchByScheduledCmapaign()
 
@@ -137,7 +137,7 @@ describe('Sms Campaign tests', () => {
   });
 
   it('Should Duplicate the campaign with changing from Custom to Normal ', function () {
-    BasePage.openSearch()
+    SmsCampaignPage.openSearch()
 
     SmsCampaignPage.SearchByCampaignName(this.SmsCampaign.CustomOnspot)
 
@@ -149,7 +149,7 @@ describe('Sms Campaign tests', () => {
 
   });
   it('Should Duplicate the campaign with changing from Normal to Custom ', function () {
-    BasePage.openSearch()
+    SmsCampaignPage.openSearch()
 
     SmsCampaignPage.SearchByCampaignName(this.SmsCampaign.NormalSchedual)
     cy.wait(2000)
@@ -159,7 +159,7 @@ describe('Sms Campaign tests', () => {
 
   });
   it('Should Duplicate the campaign with changing The template ', function () {
-    BasePage.openSearch()
+    SmsCampaignPage.openSearch()
 
     SmsCampaignPage.SearchByCampaignName(this.SmsCampaign.NormalSchedual)
 
@@ -175,12 +175,12 @@ describe('Sms Campaign tests', () => {
   });
 
   it('Export Contacts', function () {
-    BasePage.openSearch()
+    SmsCampaignPage.openSearch()
 
     SmsCampaignPage.SearchBySendingStatus()
     cy.contains('span', 'View').click();
 
-   BasePage.Export('Campaigns Report');
+   SmsCampaignPage.export('Campaigns Report');
 
   });
 

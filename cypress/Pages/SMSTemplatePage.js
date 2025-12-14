@@ -2,46 +2,50 @@ import BasePage from "./BasePage";
 
 class SMSTemplate extends BasePage {
 
+
+    // ==========================
+    // Navigation
+    // ==========================
     visit() {
         cy.contains('span.nav-link-text', 'SMS Templates').click();
     }
-
+    // ==========================
+    // SMS Template Form
+    // ==========================
     AddNewTemplate(Name, Body) {
-        super.clickCreate();            //super is used to Call the parent constructor, Call a method from the parent class.
+        this.clickCreate();            //super is used to Call the parent constructor, Call a method from the parent class.
         cy.get('.mat-form-field-flex').type(Name)
         cy.get('span').contains('Select Channel').click();
         cy.get('.pure-checkbox > label').click()
 
         cy.get('#body').type(Body)
-        super.clickSave();
-
-
-
+        this.clickSave();
     }
+
+    // ==========================
+    // Search
+    // ==========================
    
     SearchByName(Name) {
         cy.get('input[formcontrolname="templateName"]').type(Name);
-        super.clickSearch();
-
-
+        this.clickSearch();
     }
 
-    SerchByAvailablity() {
+    SearchByAvailablity() {
         cy.get(':nth-child(2) > .mat-form-field > .mat-form-field-wrapper > .mat-form-field-flex').click();
         cy.get('span').contains(' Yes ').click();
-        super.clickSearch();
+        this.clickSearch();
 
     }
-    SerchByChannel() {
+    SearchByChannel() {
         cy.get('mat-select[formcontrolname="channelId"]').click();
         cy.get('mat-option .mat-option-text').contains('SMS').click();
-
-
-        super.clickSearch();
-
-
+        this.clickSearch();
     }
     
+    // ==========================
+    // Availability Change
+    // ==========================
     ChangeToNotAvailable() {
         // استهداف أول صف في الجدول - عمود Availability
         cy.get('table tbody tr')
@@ -50,15 +54,10 @@ class SMSTemplate extends BasePage {
             .uncheck({ force: true });
 
 
-
         cy.get('.mat-dialog-container').should('be.visible');
         cy.get('.mat-dialog-actions > .btn-black').click();
-
-
-
-
-
     }
+    
     ChengeToAvailable() {
         cy.get('table tbody tr')
             .first()

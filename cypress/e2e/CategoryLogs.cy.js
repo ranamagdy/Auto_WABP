@@ -10,7 +10,7 @@ describe('Category Logs Page Tests', () => {
 
     const dynamiCategoryLog = BasePage.generateDynamicName(this.categoryLogsData.newCategory.name);
 
-    CategoryLogsPage.clickAdd();
+    CategoryLogsPage.clickAddNew();
     CategoryLogsPage.fillCategoryName(dynamiCategoryLog);
     CategoryLogsPage.clickSave();
     CategoryLogsPage.getSearchResults().should('contain', this.categoryLogsData.newCategory.name);
@@ -18,16 +18,16 @@ describe('Category Logs Page Tests', () => {
   });
 
   it('2️⃣ Should search by name and display results', function () {
-    BasePage.openSearch();
+    CategoryLogsPage.openSearch();
     CategoryLogsPage.enterSearchName(this.categoryLogsData.searchName);
     CategoryLogsPage.clickSearch();
     CategoryLogsPage.getSearchResults().should('contain', this.categoryLogsData.searchName);
   });
 
   it('3️⃣ Should clear the search field', function () {
-    BasePage.openSearch();
+    CategoryLogsPage.openSearch();
     CategoryLogsPage.enterSearchName(this.categoryLogsData.searchName);
-    BasePage.clickClear();
+    CategoryLogsPage.clickClear();
     CategoryLogsPage.getSearchInput().should('have.value', '');
   });
 
@@ -40,7 +40,7 @@ describe('Category Logs Page Tests', () => {
   });
 
   it('5️⃣ Should delete the first category log', () => {
-    BasePage.Delete();
+    CategoryLogsPage.deleteFirstRow();
     cy.wait(500); // Optional: give time for delete to reflect
   });
 });

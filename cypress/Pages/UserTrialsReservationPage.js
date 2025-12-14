@@ -6,13 +6,13 @@ class UserTrialsReservation  extends BasePage {
     }
 
     SearchByMobileNumber(mobileNumber) {
-        cy.get('input[formcontrolname="mobile"]').clear().type(mobileNumber);
-        BasePage.clickSearch();
+        cy.get('input[formcontrolname="mobileNo"]').clear().type(mobileNumber);
+        this.clickSearch();
     }
     SearchByGovernment(government) {
         cy.get('mat-select[formcontrolname="governorateId"]').click();
         cy.get('mat-option .mat-option-text').contains(government).click();  
-        BasePage.clickSearch();   
+        this.clickSearch();   
     }
 
 }

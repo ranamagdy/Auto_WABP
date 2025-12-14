@@ -3,6 +3,15 @@ import BasePage from './BasePage';
 
 class CampaignPage extends BasePage {
 
+  // ==========================
+  // Navigation
+  // ==========================
+
+  visit() {
+    cy.contains('span.nav-link-text', 'Campaigns').click();
+  }
+
+
   step1() {
     cy.get('#cdk-step-label-0-1 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click();
   }
@@ -15,9 +24,9 @@ class CampaignPage extends BasePage {
     cy.get('#cdk-step-label-0-3 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
   }
 
-  visit() {
-    cy.contains('span.nav-link-text', 'Campaigns').click();
-  }
+  // ==========================
+  // Add New Campaign INFO TAB
+  // ==========================
 
   AddNewCampaignInfoTab(CampaignName, ChannelName, SendingPreferences, GroupType) {
 
@@ -29,17 +38,23 @@ class CampaignPage extends BasePage {
     cy.get('span').contains(SendingPreferences).click();
     cy.get('span').contains(GroupType).click();
     cy.get('span').contains('Next').click();
-    //cy.scrollTo('top');
   }
-
+  
+  // =============================
+  // Add New Campaign Contacts TAB
+  // =============================
+  
   ContactsTab(Mobilenumber) {
 
     cy.get('#phone').type(Mobilenumber);
     this.clickAddNew();
     cy.get('button').contains('Next').click({ force: true });
-
   }
-
+  
+  // =============================
+  // Add New Campaign Template TAB
+  // =============================
+  
   TemplateTab(TemplateName) {
     cy.get('span').contains('Select Template').click();
 
@@ -56,6 +71,10 @@ class CampaignPage extends BasePage {
     this.clickSave();
 
   }
+
+  // =====================
+  // Select Future Date
+  // =====================
 
   selectFutureDateTime() {
     const futureDate = new Date();
@@ -106,6 +125,8 @@ class CampaignPage extends BasePage {
     // Confirm selection
     cy.get('button mat-icon').contains('done').parents('button').click({ force: true });
   }
+
+
   customGroupCamp(CampaignName, TemplateName, ChannelName, SendingPreferences, GroupType) {
 
     this.AddNewCampaignInfoTab(CampaignName, ChannelName, SendingPreferences, GroupType)
@@ -118,8 +139,12 @@ class CampaignPage extends BasePage {
     cy.wait(500)
     this.TemplateTab(TemplateName);
 
-
   }
+
+  // =============================
+  // Scheduled Campaign Info Tab
+  // =============================
+
 
   ScheduleCampaignInfoTab(CampaignName, ChannelName) {
     this.clickCreate();
@@ -134,6 +159,11 @@ class CampaignPage extends BasePage {
     cy.get('span').contains('Next').click();
     cy.scrollTo('top');
   }
+
+  // ========
+  // Search
+  // ========
+
 
   SearchByCampaignName(CampaignName) {
     cy.get('input[formcontrolname="campaignName"]').type(CampaignName)
@@ -159,6 +189,10 @@ class CampaignPage extends BasePage {
     this.clickSearch();
   }
 
+  // =============================
+  // Duplicate & Rename
+  // =============================
+  
   duplicateAndRename() {
     cy.contains('Duplicate').first().click();
     cy.get('mat-dialog-container').should('be.visible');
@@ -293,7 +327,7 @@ class CampaignPage extends BasePage {
 
   }
 
-  DuplicateChangeTemp(TemplateName) {
+  DuplicateChangeTemp(templateNames) {
     this.duplicateAndRename();
 
     cy.get('#cdk-step-label-0-0 > .mat-step-label > .mat-step-text-label > .d-flex > .step-title').click()
@@ -311,8 +345,8 @@ class CampaignPage extends BasePage {
         $btn[0].click(); // native DOM click
       });
 
-    cy.get('#templatesDD > .cuppa-dropdown > .dropdown-list > .list-area > .list-filter > .c-input').should('be.visible').clear().type(TemplateName);
-    cy.get('#templatesDD > .cuppa-dropdown > .dropdown-list > .list-area > [style="overflow: auto; max-height: 160px;"] > .lazyContainer > :nth-child(2)', { timeout: 5000 }).click()
+    cy.get('#templatesDD > .cuppa-dropdown > .dropdown-list > .list-area > .list-filter > .c-input').should('be.visible').clear().type(templateNames);
+    cy.get('#templatesDD > .cuppa-dropdown > .dropdown-list > .list-area > [style="overflow: auto; max-height: 160px;"] > .lazyContainer > .pure-checkbox > label').click()
     cy.get('.global-card-form-input > .global-card-form-input-wrapper > .row > .col-md-3 > .btn').click();
 
     cy.contains('button', 'Fill').click({ force: true });

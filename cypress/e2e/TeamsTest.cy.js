@@ -8,25 +8,22 @@ describe('Teams Page Functionality', () => {
 
 
   it('1. Search for existing team', function () {
-    BasePage.openSearch();
-    Teams.enterName(this.TeamsData.team.name);
+    Teams.openSearch();
+    Teams.nameInput(this.TeamsData.team.name);
     Teams.clickSearch();
     Teams.assertTeamVisible(this.TeamsData.team.name);
   });
 
   it('2. Clear search fields', function () {
-    BasePage.openSearch();
-    Teams.enterName(this.TeamsData.team.name);
-    Teams.selectWorkingType();
-    BasePage.clickClear();
-
+    Teams.openSearch();
+    Teams.nameInput(this.TeamsData.team.name);
+    Teams.selectWorkingType('24/7');
+    Teams.clickClear();
     cy.get(".mat-select-min-line").should('contain', 'All');
   });
 
   it('3. View team details', function () {
-    Teams.clickView(this.TeamsData.team.name);
-
-    // Replace with your actual element/contenttttt
+    Teams.clickViewFirstTeam(this.TeamsData.team.name);
     cy.url().should('include', '/teams/view');
   });
 
@@ -35,18 +32,21 @@ describe('Teams Page Functionality', () => {
     const newName = BasePage.generateDynamicName(this.TeamsData.editedTeam.name);
 
 
-    BasePage.openSearch();
-    Teams.selectWorkingType();
+    Teams.openSearch();
+    Teams.selectWorkingType('Custom');
     Teams.clickSearch();
     Teams.clickEdit();
-    Teams.enterName(newName);
-    Teams.updateWorkingType();
+    Teams.nameInput(newName);
+    Teams.updateWorkingType('24/7');
     Teams.clickSave();
+    cy.get('.mat-simple-snack-bar-content')
+      .should('be.visible').and('contain', 'Team management details updated successfully.');
     
   });
+  
 
   it('4. Should Export Teams', function () {
-    BasePage.Export('Teams');
+    Teams.export('Teams');
 
   });
 

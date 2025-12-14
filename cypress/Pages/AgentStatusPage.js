@@ -2,68 +2,69 @@ import BasePage from "./BasePage";
 
 class AgentStatus extends BasePage {
 
-  visit() {
-    cy.contains('span', 'Agent Statuses').click();
+  // ==========================
+  // Navigation
+  // ==========================
+ visit() {
+    cy.contains('span.nav-link-text', 'Agent Statuses')
+      .should('be.visible')
+      .click();
   }
 
-  // ----------------- Add New Inactive Status -----------------
-  AddInActiveNewStatus(RandomStatus) {
-
+  // ==========================
+  // Add New Status (Reusable)
+  // ==========================
+  addNewStatus(statusType, statusName) {
     this.clickAddNew();
 
+    // Select Parent Status
     cy.contains('Select Parent Status').click();
-    cy.contains('li.pure-checkbox', 'Inactive')
+    cy.contains('li.pure-checkbox', statusType)
       .find('input[type="checkbox"]')
       .check({ force: true });
 
-    cy.get('input[formcontrolname="statusName"]').type(RandomStatus);
+    // Fill status name and set color
+    cy.get('input[formcontrolname="statusName"]').clear().type(statusName);
     this.setColor();
-
     this.clickSave();
   }
 
-  // ----------------- Add New Active Status -----------------
-  AddActiveNewStatus(RandomStatus) {
-
-    this.clickAddNew();
-
-    cy.contains('Select Parent Status').click();
-    cy.contains('li.pure-checkbox', 'Active')
-      .find('input[type="checkbox"]')
-      .check({ force: true });
-
-    cy.get('input[formcontrolname="statusName"]').type(RandomStatus);
-    this.setColor();
-
-    this.clickSave();
-  }
-
-  // ----------------- Edit -----------------
-  EditStatus(EditStatus) {
+  
+  // ==========================
+  // Edit Status
+  // ==========================
+  EditStatus(statusName) {
     this.clickEdit();
-    cy.get('input[formcontrolname="statusName"]').clear().type(EditStatus);
+    cy.get('input[formcontrolname="statusName"]').clear().type(statusName);
     this.clickSave();
   }
 
-  // ----------------- Search -----------------
-  SearchByName(StatusName) {
-    cy.get('input[formcontrolname="statusName"]').type(StatusName);
+  // ==========================
+  // Search
+  // ==========================
+  SearchByName(statusName) {
+    this.openSearch();
+    cy.get('input[formcontrolname="statusName"]').clear().type(statusName);
     this.clickSearch();
   }
 
   SearchByActiveStatus() {
+    this.openSearch();
     cy.get('#mat-select-value-1').click();
     cy.contains('.mat-option-text', 'Active').click();
     this.clickSearch();
   }
 
   SearchByInActiveStatus() {
+    this.openSearch();
     cy.get('#mat-select-value-1').click();
     cy.contains('.mat-option-text', 'Inactive').click();
     this.clickSearch();
   }
 
-  // ----------------- Set Status -----------------
+  // ==========================
+  // Set Agent Status
+  // ==========================
   SetActiveStatus() {
     cy.get('.agent-status-button-inner').click();
     cy.contains('button[mat-menu-item]', 'Online').click();
@@ -74,8 +75,9 @@ class AgentStatus extends BasePage {
     cy.contains('button[mat-menu-item]', 'Offline').click();
   }
 
-
-  // ----------------- Helper: Set Color -----------------
+  // ==========================
+  // Helper: Set Color
+  // ==========================
   setColor() {
     cy.get('input[formcontrolname="statusColor"]').then($input => {
       const nativeInput = $input[0];

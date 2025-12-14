@@ -1,10 +1,20 @@
 import BasePage from "./BasePage";
 
 class ClientsChatReport extends BasePage {
+    
+    // ==========================
+    // Navigation
+    // ==========================
+    
     visit() {
         cy.contains('span.nav-link-text' , 'Clients Chat').click();
         
     }
+
+
+    // ==========================
+    // Search
+    // ==========================
     SearchByMobileNumber(MobileNumber) {
         cy.get('#phone').type(MobileNumber);
         this.clickSearch();
@@ -32,6 +42,10 @@ class ClientsChatReport extends BasePage {
 
     }
     
+    // ============
+    // Search
+    // ============
+
     ViewChat() {
         cy.get('.btn-group-actions-list .btn').first().click();
 

@@ -34,12 +34,12 @@ describe('Clients Chat Report Tests Using Fixtures', () => {
   })
   it('Should clear the fields succeefully  ', function () {
     ClientsChatReport.SearchByClientName(this.ClientsChatData.ClientName)
-    BasePage.clickClear();
+    ClientsChatReport.clickClear();
     cy.get('input[formcontrolname="clientName"]').should('have.value', '');
 
   })
   it('Should Export the data as the view of the grid  successfully ', function () {
-    BasePage.Export('Client Chat Report');
+    ClientsChatReport.export('Client Chat Report');
 
 
   })

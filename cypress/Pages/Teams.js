@@ -1,59 +1,69 @@
 import BasePage from "./BasePage";
 
 class TeamsPage extends BasePage {
+
+  // ==========================
+  // Navigation
+  // ==========================
   visit() {
-    cy.contains('span', 'Teams').click();;
+    cy.contains('span.nav-link-text', 'Teams').click();
   }
 
-  enterName(name) {
-    cy.get('[formcontrolname="name"]').clear().type(name);
+  
+  // ==========================
+  // Selectors
+  // ==========================
+  nameInput() {
+    return cy.get('input[formcontrolname="name"]');
   }
 
-  selectWorkingType() {
-    // Assuming a mat-select is used, update this based on your actual UI
-    cy.get('#mat-select-value-1').click();
-    cy.get('.mat-option-text').contains("Custom").click();
+  workingTypeSelect() {
+    return cy.get('#mat-select-value-1');
   }
 
-  updateWorkingType() {
-
-    cy.get('.c-btn').click({ force: true });                // opens the dropdown
-    cy.get('.lazyContainer > :nth-child(1)').click();
-              // selects "Holiday" option
+  tableRows() {
+    return cy.get('table tbody tr');
   }
 
-  clickSearch() {
-    super.clickSearch();         //super is used to Call the parent constructor, Call a method from the parent class.
+  
+  // ==========================
+  // Form
+  // ==========================
+  enterTeamName(name) {
+    this.nameInput().clear().type(name);
   }
 
+  selectWorkingType(type) {
+    this.workingTypeSelect().click();
+    cy.contains('.mat-option-text', type).click();
+  }
+
+  updateWorkingType(type) {
+    cy.get('.c-btn').click({ force: true });
+    cy.contains('.lazyContainer li', type).click();
+  }
+
+  // ==========================
+  // Table / Actions
+  // ==========================
   getSearchResults() {
-    return cy.get('table'); // Capital "Clear"
+    return this.tableRows();
   }
 
-  clickView() {
+  clickViewFirstTeam() {
     cy.get('.btn-primary-outline').first().click();
   }
 
-  clickEdit() {
-    super.clickEdit();
-  }
-
-  clickDelete() {
-    super.clickDelete();
-  }
-
-  clickSave() {
-    super.clickSave();
-  }
-
-  assertTeamVisible(newName) {
-    cy.contains(newName).should('exist');
+  // ==========================
+  // Assertions
+  // ==========================
+  assertTeamVisible(teamName) {
+    cy.contains('td', teamName).should('be.visible');
   }
 
   assertNoResults() {
-    cy.contains('No teams found').should('exist');
+    cy.contains('No teams found').should('be.visible');
   }
-
 }
 
 export default new TeamsPage();
