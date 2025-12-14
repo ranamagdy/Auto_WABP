@@ -31,6 +31,29 @@ describe('Campaign Page Tests Using Fixtures', () => {
 
   });
 
+  it.only('Should create Onspot with Normal group using 100 mobile numbers Successfully', function () {
+
+  const data = BasePage.generateCampaignData(this.CampaignData);
+  const sendingPreferences = this.CampaignData.SendingPreferences[0];
+  const groupType = this.CampaignData.GroupType[0];
+  const mobileNumbers = Array.from({ length: 200 }, (_, i) =>`01012345${(100 + i).toString().padStart(3, '0')}`);
+  
+  
+  CampaignPage.AddNewCampaignInfoTab(
+    data.campaignName,
+    this.CampaignData.ChannelName,
+    sendingPreferences,
+    groupType
+  );
+
+  CampaignPage.addMultipleContacts(mobileNumbers);
+  CampaignPage.TemplateTab(data.template);
+
+  cy.get('.mat-simple-snack-bar-content', { timeout: 10000 })
+    .should('contain', 'Campaign Created Successfully');
+});
+
+
   it('Should Duplicate The Campaign without any changing ', function () {
     
     CampaignPage.DuplicateWithoutChanging();
