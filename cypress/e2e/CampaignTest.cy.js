@@ -167,7 +167,6 @@ it('Should create Scheduled campaigns Successfully', function () {
     CampaignPage.ViewCampaign();
     cy.url().should('include', '/campaigns/report');
   });
-
   it('Should Details Campaign  Successfully', function () {
 
     CampaignPage.DetailsCampaign();

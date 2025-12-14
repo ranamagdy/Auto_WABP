@@ -11,7 +11,7 @@ describe('Sms Campaign tests', () => {
     cy.log('Already logged in and on SMS Campaign page');
   });
 
-  it.only('Should create Onspot campaigns with normal group Successfully', function () {
+  it('Should create Onspot campaigns with normal group Successfully', function () {
 
     const data = BasePage.generateSMSCampaignData(this.SmsCampaign);
     const SendingPreferences = this.SmsCampaign.SendingPreferences[0];
