@@ -6,7 +6,12 @@ describe('Category Logs Page Tests', () => {
 
   BasePage.init(CategoryLogsPage, 'categoryLogsData');
 
-  it('1️⃣ Should add a new category log', function () {
+
+  it('Should open Category Logs page', () => {
+   CategoryLogsPage.assertPageNavigation('categoryLogs');  // dynamically asserts URL
+  });
+
+  it('Should add a new category log', function () {
 
     const dynamiCategoryLog = BasePage.generateDynamicName(this.categoryLogsData.newCategory.name);
 
@@ -17,21 +22,21 @@ describe('Category Logs Page Tests', () => {
 
   });
 
-  it('2️⃣ Should search by name and display results', function () {
+  it('Should search by name and display results', function () {
     CategoryLogsPage.openSearch();
     CategoryLogsPage.enterSearchName(this.categoryLogsData.searchName);
     CategoryLogsPage.clickSearch();
     CategoryLogsPage.getSearchResults().should('contain', this.categoryLogsData.searchName);
   });
 
-  it('3️⃣ Should clear the search field', function () {
+  it('Should clear the search field', function () {
     CategoryLogsPage.openSearch();
     CategoryLogsPage.enterSearchName(this.categoryLogsData.searchName);
     CategoryLogsPage.clickClear();
     CategoryLogsPage.getSearchInput().should('have.value', '');
   });
 
-  it('4️⃣ Should edit the first category log', function () {
+  it('Should edit the first category log', function () {
     const data = BasePage.generateDynamicName(this.categoryLogsData.editedCategory.name);
     CategoryLogsPage.clickEditFirst();
     CategoryLogsPage.fillCategoryName(data);
@@ -39,7 +44,7 @@ describe('Category Logs Page Tests', () => {
     CategoryLogsPage.getSearchResults().should('contain', data);
   });
 
-  it('5️⃣ Should delete the first category log', () => {
+  it('Should delete the first category log', () => {
     CategoryLogsPage.deleteFirstRow();
     cy.wait(500); // Optional: give time for delete to reflect
   });

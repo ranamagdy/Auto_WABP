@@ -8,6 +8,10 @@ describe('Pre Message Page Tests', () => {
 
   BasePage.init(PreMessagePage, 'PreMessageData');
 
+  it('Should open Pre Message page', () => {
+         PreMessagePage.assertPageNavigation('preMessages');  // dynamically asserts URL
+      });
+
   it('Should add a new Message ', function () {
     PreMessagePage.clickAddNew();
     PreMessagePage.fillnewMessage(this.PreMessageData.newMessage.Message);

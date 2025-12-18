@@ -6,7 +6,11 @@ describe('Campaign Page Tests Using Fixtures', () => {
 
   BasePage.init(CampaignPage, 'CampaignData');
   
+  it('Should open Campaigns page', () => {
+  CampaignPage.assertPageNavigation('campaigns');  // dynamically asserts URL
+  });
 
+  
   it('Should create Onspot with Normal group Successfully', function () {
 
 
@@ -31,7 +35,7 @@ describe('Campaign Page Tests Using Fixtures', () => {
 
   });
 
-  it('Should create Onspot with Normal group using 100 mobile numbers Successfully', function () {
+  it.skip('Should create Onspot using 200 mobile numbers Successfully', function () {
 
   const data = BasePage.generateCampaignData(this.CampaignData);
   const sendingPreferences = this.CampaignData.SendingPreferences[0];

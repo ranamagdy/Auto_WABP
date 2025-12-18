@@ -5,7 +5,10 @@ import BasePage from '../Pages/BasePage';
 describe('Teams Page Functionality', () => {
 
   BasePage.init(Teams, 'TeamsData');
-
+  
+  it('Should open Teams page', () => {
+         Teams.assertPageNavigation('teams');  // dynamically asserts URL
+      });
 
   it('1. Search for existing team', function () {
     Teams.openSearch();

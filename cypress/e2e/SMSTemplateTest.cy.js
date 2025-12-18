@@ -7,6 +7,10 @@ describe('Should Add New SMS Template Successfully  ', () => {
 
   BasePage.init(SMSTemplate, 'SMSTemplateData');
 
+  it('Should open SMS Template page', () => {
+         SMSTemplatePage.assertPageNavigation('smsTemplates');  // dynamically asserts URL
+      });
+
   it('Should Add New SMS Template Successfully', function () {
  
     const dynamicTemplateName = BasePage.generateDynamicName(this.SMSTemplateData.TemplateName[0]);

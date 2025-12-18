@@ -6,6 +6,10 @@ describe('Agents Status Page Tests Using Fixtures', () => {
   // Load fixture & login, navigate to page
   BasePage.init(AgentStatusPage, 'AgentStatusData');
 
+  it('Should open Agent Status page', () => {
+  AgentStatusPage.assertPageNavigation('AdminStatuses');  // dynamically asserts URL
+  });
+
   it('Should Add New Active Status Successfully', function () {
     const dynamicStatusName = BasePage.generateDynamicName(this.AgentStatusData.RandomStatus);
     AgentStatusPage.addNewStatus('Active',dynamicStatusName);

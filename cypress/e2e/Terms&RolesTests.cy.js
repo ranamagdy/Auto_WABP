@@ -5,6 +5,11 @@ import BasePage from '../Pages/BasePage';
 describe('Terms&Roles Tests Using Fixtures', () => {
   BasePage.init(TermsRolesPage, 'TermsRolesData');
 
+  
+  it('Should open Terms&Roles page', () => {
+         TermsRolesPage.assertPageNavigation('roles');  // dynamically asserts URL
+      });
+
   it('Should add a new Role successfully', function () {
 
     const dynamicRoleName = BasePage.generateDynamicName(this.TermsRolesData.AddRoleName);

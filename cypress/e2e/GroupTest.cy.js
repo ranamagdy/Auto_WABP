@@ -6,6 +6,9 @@ describe('Add New Group', () => {
 
   BasePage.init(GroupPage, 'GroupData');
 
+  it('Should open Group page', () => {
+       GroupPage.assertPageNavigation('groups');  // dynamically asserts URL
+    });
 
   it('Add Normal Group', function () {
     GroupPage.clickAddNew();
