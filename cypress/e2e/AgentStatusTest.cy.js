@@ -26,6 +26,23 @@ describe('Agents Status Page Tests Using Fixtures', () => {
       .should('contain', 'The agent status has been created successfully.');
   });
 
+  it('Should show validation messages when clicking Save without filling mandatory fields', () => {
+      AgentStatusPage.clickAddNew();
+      AgentStatusPage.clickSave();
+  
+      const validationMessages = [
+        'Please Select Parent Status',
+        'Please Enter Status Name',
+        'Please Select Status Color'
+      ];
+  
+      validationMessages.forEach(message => {
+        cy.contains(message).should('be.visible');
+      });
+  
+    });
+
+
   it('Should Edit a Status Successfully', function () {
     const dynamicEditName = BasePage.generateDynamicName(this.AgentStatusData.RandomStatus);
 

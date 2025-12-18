@@ -45,6 +45,7 @@ class AgentsPage extends BasePage {
 
     // Save Agent
     this.clickSave();
+
   }
 
 

@@ -21,6 +21,24 @@ describe('Agents Page Tests Using Fixtures', () => {
 
   });
 
+  it('Should show validation messages when clicking Save without filling mandatory fields', () => {
+    AgentsPage.clickAddNew();
+    AgentsPage.clickSave();
+
+    const validationMessages = [
+      'Please Enter Name',
+      'Please Enter Email',
+      'Please Select Role',
+      'Please Enter Integration Id',
+      'Please Select Team'
+    ];
+
+    validationMessages.forEach(message => {
+      cy.contains(message).should('be.visible');
+    });
+
+  });
+
 
   it('Search by Name', function () {
 

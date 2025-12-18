@@ -24,6 +24,37 @@ describe('Add New Group', () => {
 
   });
 
+  it('Should show validation messages when clicking Save without filling mandatory fields', () => {
+          GroupPage.clickAddNew();
+          GroupPage.clickSave();
+      
+          const validationMessages = [
+            'Please Enter Group Name',
+            'Please Select Group Type'
+          ];
+      
+          validationMessages.forEach(message => {
+            cy.contains(message).should('be.visible');
+          });
+      
+        }); 
+
+  it('Should show validation messages when clicking Save without Add Mobile Number', () => {
+          GroupPage.clickEdit();
+          GroupPage.addContactsManually();
+          GroupPage.saveManualContacts();
+      
+          const validationMessages = [
+            'Please Enter Mobile Number',
+          ];
+      
+          validationMessages.forEach(message => {
+            cy.contains(message).should('be.visible');
+          });
+      
+        }); 
+
+
   it('Update Group name and availability', function () {
 
 

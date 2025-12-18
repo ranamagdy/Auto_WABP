@@ -19,6 +19,19 @@ describe('Terms&Roles Tests Using Fixtures', () => {
       .should('contain', 'Role created successfully');
   });
 
+  it('Should show validation messages when clicking Save without filling mandatory fields', () => {
+        TermsRolesPage.clickAddNew();
+        TermsRolesPage.clickSave();
+    
+        const validationMessages = ['Please Enter Name','You must select at least one permission on one module'];
+    
+        validationMessages.forEach(message => {
+          cy.contains(message).should('be.visible');
+        });
+    
+      });
+  
+
 
   it('Should Search by Name Role successfully', function () {
     TermsRolesPage.openSearch();

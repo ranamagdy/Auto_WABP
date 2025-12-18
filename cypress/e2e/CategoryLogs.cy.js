@@ -22,6 +22,20 @@ describe('Category Logs Page Tests', () => {
 
   });
 
+  it('Should show validation messages when clicking Save without filling mandatory fields', () => {
+        CategoryLogsPage.clickAddNew();
+        CategoryLogsPage.clickSave();
+    
+        const validationMessages = [
+          'Please Enter Category Log Name',
+        ];
+    
+        validationMessages.forEach(message => {
+          cy.contains(message).should('be.visible');
+        });
+    
+      });
+
   it('Should search by name and display results', function () {
     CategoryLogsPage.openSearch();
     CategoryLogsPage.enterSearchName(this.categoryLogsData.searchName);
