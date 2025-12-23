@@ -21,6 +21,18 @@ describe('Should Add New SMS Template Successfully  ', () => {
 
   });
 
+  it('Should not allow creating Template with duplicate name', function () {
+ 
+    const dynamicTemplateName = BasePage.generateDynamicName(this.SMSTemplateData.TemplateName[0]);
+
+    SMSTemplatePage.AddNewTemplate(dynamicTemplateName, this.SMSTemplateData.Body);
+    SMSTemplatePage.AddNewTemplate(dynamicTemplateName, this.SMSTemplateData.Body);
+
+    cy.get('.mat-simple-snack-bar-content').should('contain', 'already exists')
+
+
+  });
+
   it('Should search by Template name successfully', function () {
 
 

@@ -19,6 +19,17 @@ describe('Terms&Roles Tests Using Fixtures', () => {
       .should('contain', 'Role created successfully');
   });
 
+  it('Should not allow creating Role with duplicate name', function () {
+
+    const dynamicRoleName = BasePage.generateDynamicName(this.TermsRolesData.AddRoleName);
+
+    TermsRolesPage.AddNewRole(dynamicRoleName);
+    TermsRolesPage.AddNewRole(dynamicRoleName);
+
+    cy.get('.mat-simple-snack-bar-content')  
+      .should('contain', 'Role already exists');
+  });
+
   it('Should show validation messages when clicking Save without filling mandatory fields', () => {
         TermsRolesPage.clickAddNew();
         TermsRolesPage.clickSave();

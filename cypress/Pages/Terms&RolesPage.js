@@ -19,7 +19,13 @@ class RolesPage extends BasePage {
     AddNewRole(Name) {
         this.clickAddNew();                 //super is used to Call the parent constructor, Call a method from the parent class.
         cy.get('input[formcontrolname="enName"]').type(Name);
-        cy.get('#mat-checkbox-1 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
+        cy.contains('mat-checkbox', 'Select all').find('input[type="checkbox"]')
+          .then($checkbox => {
+           if (!$checkbox.is(':checked')) {
+             cy.wrap($checkbox).click({ force: true });
+           }
+  });
+
         this.clickSave();
 
 

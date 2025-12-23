@@ -21,6 +21,25 @@ describe('Agents Page Tests Using Fixtures', () => {
 
   });
 
+  it('Should not allow creating agent with duplicate email', function () {
+
+  
+    const fullName1 = BasePage.generateDynamicName(this.AgentsData.FullName);
+    const fullName2 = BasePage.generateDynamicName(this.AgentsData.FullName);
+    const duplicateEmail = BasePage.generateDynamicEmail(this.AgentsData.email);
+    const integrationId1 = Math.floor(1000 + Math.random() * 9000).toString();
+    const integrationId2 = Math.floor(1000 + Math.random() * 9000).toString();
+
+  // Act - Create first agent (valid)
+    AgentsPage.AddNewAgent(fullName1, duplicateEmail, integrationId1);
+  // Act - Try to create second agent with SAME email
+    AgentsPage.AddNewAgent(fullName2, duplicateEmail, integrationId2);
+
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Email exists');
+});
+
+
   it('Should show validation messages when clicking Save without filling mandatory fields', () => {
     AgentsPage.clickAddNew();
     AgentsPage.clickSave();

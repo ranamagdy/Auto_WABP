@@ -36,8 +36,17 @@ class AgentsPage extends BasePage {
         }
 
     // Agent Recieves Chat
-    cy.get('#mat-checkbox-2 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
-      });
+    cy.contains('Receiving chats')
+  .parents('mat-checkbox')
+  .find('input[type="checkbox"]')
+  .then($checkbox => {
+    if (!$checkbox.is(':checked')) {
+      cy.wrap($checkbox).click({ force: true });
+    }
+  });
+    });
+
+
 
     // Select Team
     cy.contains('Select Team').click();

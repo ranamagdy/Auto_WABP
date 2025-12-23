@@ -24,6 +24,23 @@ describe('Add New Group', () => {
 
   });
 
+  it('Should not allow creating Group with duplicate name', function () {
+
+    const dynamiGroupBasenName = BasePage.generateDynamicName(this.GroupData.groupName);
+    GroupPage.clickAddNew();
+    GroupPage.enterGroupName(dynamiGroupBasenName);
+    GroupPage.selectGroupType(this.GroupData.groupType);
+    GroupPage.clickSave();
+    GroupPage.clickAddNew();
+    GroupPage.enterGroupName(dynamiGroupBasenName);
+    GroupPage.selectGroupType(this.GroupData.groupType);
+    GroupPage.clickSave();
+    cy.get('.mat-snack-bar-container')
+      .should('contain', 'group already exists');
+
+
+  });
+
   it('Should show validation messages when clicking Save without filling mandatory fields', () => {
           GroupPage.clickAddNew();
           GroupPage.clickSave();

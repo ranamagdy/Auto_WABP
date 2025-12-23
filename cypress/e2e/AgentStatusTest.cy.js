@@ -18,6 +18,17 @@ describe('Agents Status Page Tests Using Fixtures', () => {
       .should('contain', 'The agent status has been created successfully.');
   });
 
+  it('Should not allow duplicate Active agent status name', function () {
+
+     const duplicateName = BasePage.generateDynamicName(this.AgentStatusData.RandomStatus);
+     AgentStatusPage.addNewStatus('Active', duplicateName);
+     AgentStatusPage.addNewStatus('Active', duplicateName);
+
+     cy.get('.mat-simple-snack-bar-content')
+       .should('contain', "The agent's status already exists.");
+});
+
+
   it('Should Add New Inactive Status Successfully', function () {
     const dynamicStatusName = BasePage.generateDynamicName(this.AgentStatusData.RandomStatus);
     AgentStatusPage.addNewStatus('Inactive',dynamicStatusName);
@@ -25,6 +36,17 @@ describe('Agents Status Page Tests Using Fixtures', () => {
     cy.get('.mat-simple-snack-bar-content')
       .should('contain', 'The agent status has been created successfully.');
   });
+
+  it('Should not allow duplicate Inactive agent status name', function () {
+
+     const duplicateName = BasePage.generateDynamicName(this.AgentStatusData.RandomStatus);
+     AgentStatusPage.addNewStatus('Inactive', duplicateName);
+     AgentStatusPage.addNewStatus('Inactive', duplicateName);
+
+     cy.get('.mat-simple-snack-bar-content')
+       .should('contain', "The agent's status already exists.");
+});
+
 
   it('Should show validation messages when clicking Save without filling mandatory fields', () => {
       AgentStatusPage.clickAddNew();
