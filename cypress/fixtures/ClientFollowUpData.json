@@ -1,0 +1,11 @@
+{
+    "ChannelName": "TND",
+    "Template": "hello_world",
+    "MobileNumber": [
+        "01017985099",
+        "01273196467",
+        "201289055472"
+    ],
+    "InvalidMobileNumber": "01012365",
+    "SearchNum": "201017985099"
+}
