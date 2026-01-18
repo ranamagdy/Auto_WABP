@@ -23,13 +23,12 @@ class SmsCampaignPage extends BasePage {
   // Step 1 – Campaign Info
   // ==========================
   fillCampaignInfo(campaignName, sendingPreferences, groupType) {
-    //expect(campaignName, 'Campaign Name').to.exist;
+    expect(campaignName, 'Campaign Name').to.exist;
 
     super.clickCreate();
 
     cy.contains('span', 'Select Channel').click();
-    cy.get('.pure-checkbox > label').click();
-
+    cy.contains('mat-checkbox', 'SMS').click({ force: true });
 
     cy.get('input[data-placeholder="Name your campaign"]')
       .clear()
@@ -45,7 +44,7 @@ class SmsCampaignPage extends BasePage {
   // Step 2 – Contacts
   // ==========================
   fillContacts(mobileNumber) {
-    //expect(mobileNumber, 'Mobile Number').to.exist;
+    expect(mobileNumber, 'Mobile Number').to.exist;
 
     cy.get('#phone').clear().type(mobileNumber);
     super.clickAddNew();

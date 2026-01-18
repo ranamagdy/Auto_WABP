@@ -9,7 +9,6 @@ describe('Happy Scenario for Login ', () => {
 
     });
 
-  
     it('Should log in successfully with valid credentials', function () {
        
         LoginPage.login(this.LoginData.admin.email, this.LoginData.admin.password);

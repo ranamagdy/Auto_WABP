@@ -21,8 +21,7 @@ class CampaignPage extends BasePage {
   }
 
   step3() {
-    cy.get('mat-step-header').eq(3).click({ force: true });
-
+    cy.get('#cdk-step-label-0-3 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
   }
 
   // ==========================

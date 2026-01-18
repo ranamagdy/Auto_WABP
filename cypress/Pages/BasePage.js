@@ -55,7 +55,7 @@ class BasePage {
 
 
   // ==========================
-  // Deleteeeee
+  // Delete
   // ==========================
   deleteFirstRow() {
     this.elements.deleteBtn().click();
