@@ -391,22 +391,22 @@ class CampaignPage extends BasePage {
   mobileNumbers.forEach((number, index) => {
     expect(number, `Mobile number at index ${index}`).to.exist;
 
-    // اكتب الرقم
+  
     cy.get('#phone')
       .should('be.visible')
       .clear()
       .type(number);
 
-    // scroll للزر Add قبل الضغط عليه
+    
     cy.get('.telInput > .global-card-form-input-wrapper > .row > .col-md-3 > .btn') // غير الكلاس لو Add button مختلف
       .scrollIntoView({ easing: 'linear', duration: 200 })
       .click({ force: true });
 
-    // مهلة صغيرة لو DOM بيتغير
+    
     cy.wait(100);
   });
 
-  // بعد الانتهاء اضغط Next
+  
   this.step2();
 }
 
