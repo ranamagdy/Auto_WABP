@@ -4,7 +4,10 @@ import SlotsPage from "../Pages/SlotsPage";
 
 describe('Slots Page Tests Using Fixtures', () => {
     BasePage.init(SlotsPage, 'SlotData');
-    
+it('Should open Slots page', () => {
+       SlotsPage.assertPageNavigation('slots');  // dynamically asserts URL
+    });
+
 it('Should create a new slot successfully',function(){
 
      SlotsPage.CreateNewSlot();

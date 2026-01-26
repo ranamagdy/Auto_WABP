@@ -5,7 +5,11 @@ describe('Client Follow-Up Page Tests Using Fixtures', () => {
 
     // Initialize page & fixture
     BasePage.init(ClientFollowUpPage,'ClientFollowUpData')
-    
+
+    it('Should open Client Follow-Up page', () => {
+       ClientFollowUpPage.assertPageNavigation('clientFollowUps');  // dynamically asserts URL
+    });
+
     it('Should Sent Message Successfully With Valid Data ', function () {
         const randomMobile = this.ClientFollowUpData.MobileNumber[
             Math.floor(Math.random() * this.ClientFollowUpData.MobileNumber.length)

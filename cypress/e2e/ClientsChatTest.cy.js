@@ -6,6 +6,10 @@ describe('Clients Chat Report Tests Using Fixtures', () => {
 
   BasePage.init(ClientsChatReport, 'ClientsChatData')
 
+  it('Should open Client Chat Reportpage', () => {
+       ClientsChatReport.assertPageNavigation('clientsChat');  // dynamically asserts URL
+    });
+  
   it('Should Search by the mobile number and return related values successfully ', function () {
     ClientsChatReport.SearchByMobileNumber(this.ClientsChatData.MobileNumber);
     cy.get('td.mat-column-clientMobileNumber').should('contain.text', this.ClientsChatData.MobileNumber);

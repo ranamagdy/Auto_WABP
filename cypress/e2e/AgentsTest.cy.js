@@ -6,6 +6,10 @@ describe('Agents Page Tests Using Fixtures', () => {
   // Load fixture & login, navigate to page
   BasePage.init(AgentsPage, 'AgentsData');
 
+  it('Should open Agents page', () => {
+    AgentsPage.assertPageNavigation('agents');  // dynamically asserts URL
+    });
+
   it('Should add a new agent successfully', function () {
     const dynamicFullName = BasePage.generateDynamicName(this.AgentsData.FullName);
     const dynamicEmail = BasePage.generateDynamicEmail(this.AgentsData.email);

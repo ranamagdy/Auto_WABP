@@ -127,6 +127,20 @@ class BasePage {
 
 
   // ==========================
+  // Visit Assertions
+  // ==========================
+
+  assertPageNavigation(pageName) {
+  if (!pageName) throw new Error('pageName is required');
+
+  // Assuming baseUrl from Cypress config
+  const expectedUrlPart = `/${pageName}`;
+
+  cy.url().should('include', expectedUrlPart);
+}
+
+
+  // ==========================
   // Dynamic Data Helpers
   // ==========================
   static generateDynamicName(baseName) {

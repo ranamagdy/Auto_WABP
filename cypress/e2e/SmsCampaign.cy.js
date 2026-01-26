@@ -6,6 +6,9 @@ describe('Sms Campaign tests', () => {
 
   BasePage.init(SmsCampaignPage, 'SmsCampaign');
 
+  it('Should open SMS Campaign  page', () => {
+         SmsCampaignPage.assertPageNavigation('smsCampaigns');  // dynamically asserts URL
+      });
 
   it('should login and visit SMS campaign page', function () {
     cy.log('Already logged in and on SMS Campaign page');
