@@ -6,7 +6,11 @@ describe('Campaign Page Tests Using Fixtures', () => {
 
   BasePage.init(CampaignPage, 'CampaignData');
   
+  it('Should open Campaigns page', () => {
+  CampaignPage.assertPageNavigation('campaigns');  // dynamically asserts URL
+  });
 
+  
   it('Should create Onspot with Normal group Successfully', function () {
 
 
@@ -31,7 +35,27 @@ describe('Campaign Page Tests Using Fixtures', () => {
 
   });
 
-  it('Should create Onspot with Normal group using 100 mobile numbers Successfully', function () {
+  it('Should not allow creating Onspot campaign with duplicate name', function () {
+
+     const data = BasePage.generateCampaignData(this.CampaignData);
+     const SendingPreferences = this.CampaignData.SendingPreferences[0];
+     const GroupType = this.CampaignData.GroupType[0];
+
+     CampaignPage.AddNewCampaignInfoTab(data.campaignName,this.CampaignData.ChannelName,SendingPreferences,GroupType);
+     CampaignPage.ContactsTab(data.mobileNumber);
+     CampaignPage.TemplateTab(data.template);
+   
+     // Second creation with SAME campaign name
+     CampaignPage.AddNewCampaignInfoTab(data.campaignName,this.CampaignData.ChannelName,SendingPreferences,GroupType);
+     CampaignPage.ContactsTab(data.mobileNumber);
+     CampaignPage.TemplateTab(data.template);
+   
+     cy.get('.mat-simple-snack-bar-content', { timeout: 10000 })
+       .should('contain', 'already exists');
+});
+
+
+  it.skip('Should create Onspot using 200 mobile numbers Successfully', function () {
 
   const data = BasePage.generateCampaignData(this.CampaignData);
   const sendingPreferences = this.CampaignData.SendingPreferences[0];

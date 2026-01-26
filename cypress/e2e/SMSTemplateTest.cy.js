@@ -7,12 +7,28 @@ describe('Should Add New SMS Template Successfully  ', () => {
 
   BasePage.init(SMSTemplate, 'SMSTemplateData');
 
+  it('Should open SMS Template page', () => {
+         SMSTemplatePage.assertPageNavigation('smsTemplates');  // dynamically asserts URL
+      });
+
   it('Should Add New SMS Template Successfully', function () {
  
     const dynamicTemplateName = BasePage.generateDynamicName(this.SMSTemplateData.TemplateName[0]);
 
     SMSTemplatePage.AddNewTemplate(dynamicTemplateName, this.SMSTemplateData.Body);
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Template Created Successfully')
+
+
+  });
+
+  it('Should not allow creating Template with duplicate name', function () {
+ 
+    const dynamicTemplateName = BasePage.generateDynamicName(this.SMSTemplateData.TemplateName[0]);
+
+    SMSTemplatePage.AddNewTemplate(dynamicTemplateName, this.SMSTemplateData.Body);
+    SMSTemplatePage.AddNewTemplate(dynamicTemplateName, this.SMSTemplateData.Body);
+
+    cy.get('.mat-simple-snack-bar-content').should('contain', 'already exists')
 
 
   });

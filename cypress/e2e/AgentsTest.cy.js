@@ -6,6 +6,10 @@ describe('Agents Page Tests Using Fixtures', () => {
   // Load fixture & login, navigate to page
   BasePage.init(AgentsPage, 'AgentsData');
 
+  it('Should open Agents page', () => {
+    AgentsPage.assertPageNavigation('agents');  // dynamically asserts URL
+    });
+
   it('Should add a new agent successfully', function () {
     const dynamicFullName = BasePage.generateDynamicName(this.AgentsData.FullName);
     const dynamicEmail = BasePage.generateDynamicEmail(this.AgentsData.email);
@@ -14,6 +18,43 @@ describe('Agents Page Tests Using Fixtures', () => {
 
     cy.get('.mat-simple-snack-bar-content')
       .should('contain', 'Agent created successfully');
+
+  });
+
+  it('Should not allow creating agent with duplicate email', function () {
+
+  
+    const fullName1 = BasePage.generateDynamicName(this.AgentsData.FullName);
+    const fullName2 = BasePage.generateDynamicName(this.AgentsData.FullName);
+    const duplicateEmail = BasePage.generateDynamicEmail(this.AgentsData.email);
+    const integrationId1 = Math.floor(1000 + Math.random() * 9000).toString();
+    const integrationId2 = Math.floor(1000 + Math.random() * 9000).toString();
+
+  // Act - Create first agent (valid)
+    AgentsPage.AddNewAgent(fullName1, duplicateEmail, integrationId1);
+  // Act - Try to create second agent with SAME email
+    AgentsPage.AddNewAgent(fullName2, duplicateEmail, integrationId2);
+
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Email exists');
+});
+
+
+  it('Should show validation messages when clicking Save without filling mandatory fields', () => {
+    AgentsPage.clickAddNew();
+    AgentsPage.clickSave();
+
+    const validationMessages = [
+      'Please Enter Name',
+      'Please Enter Email',
+      'Please Select Role',
+      'Please Enter Integration Id',
+      'Please Select Team'
+    ];
+
+    validationMessages.forEach(message => {
+      cy.contains(message).should('be.visible');
+    });
 
   });
 

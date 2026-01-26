@@ -5,6 +5,11 @@ import BasePage from '../Pages/BasePage';
 describe('Terms&Roles Tests Using Fixtures', () => {
   BasePage.init(TermsRolesPage, 'TermsRolesData');
 
+  
+  it('Should open Terms&Roles page', () => {
+         TermsRolesPage.assertPageNavigation('roles');  // dynamically asserts URL
+      });
+
   it('Should add a new Role successfully', function () {
 
     const dynamicRoleName = BasePage.generateDynamicName(this.TermsRolesData.AddRoleName);
@@ -13,6 +18,30 @@ describe('Terms&Roles Tests Using Fixtures', () => {
     cy.get('.mat-simple-snack-bar-content')
       .should('contain', 'Role created successfully');
   });
+
+  it('Should not allow creating Role with duplicate name', function () {
+
+    const dynamicRoleName = BasePage.generateDynamicName(this.TermsRolesData.AddRoleName);
+
+    TermsRolesPage.AddNewRole(dynamicRoleName);
+    TermsRolesPage.AddNewRole(dynamicRoleName);
+
+    cy.get('.mat-simple-snack-bar-content')  
+      .should('contain', 'Role already exists');
+  });
+
+  it('Should show validation messages when clicking Save without filling mandatory fields', () => {
+        TermsRolesPage.clickAddNew();
+        TermsRolesPage.clickSave();
+    
+        const validationMessages = ['Please Enter Name','You must select at least one permission on one module'];
+    
+        validationMessages.forEach(message => {
+          cy.contains(message).should('be.visible');
+        });
+    
+      });
+  
 
 
   it('Should Search by Name Role successfully', function () {

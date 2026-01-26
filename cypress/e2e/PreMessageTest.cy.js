@@ -8,6 +8,10 @@ describe('Pre Message Page Tests', () => {
 
   BasePage.init(PreMessagePage, 'PreMessageData');
 
+  it('Should open Pre Message page', () => {
+         PreMessagePage.assertPageNavigation('preMessages');  // dynamically asserts URL
+      });
+
   it('Should add a new Message ', function () {
     PreMessagePage.clickAddNew();
     PreMessagePage.fillnewMessage(this.PreMessageData.newMessage.Message);
@@ -15,6 +19,20 @@ describe('Pre Message Page Tests', () => {
     cy.get('table.mat-table tr')
       .should('contain', this.PreMessageData.newMessage.Message);
   });
+
+  it('Should show validation messages when clicking Save without filling mandatory fields', () => {
+        PreMessagePage.clickAddNew();
+        PreMessagePage.clickSave();
+    
+        const validationMessages = [
+          'Please Enter Message',
+        ];
+    
+        validationMessages.forEach(message => {
+          cy.contains(message).should('be.visible');
+        });
+    
+      });
 
   it('Should edit the first Message', function () {
     PreMessagePage.clickEditFirst();

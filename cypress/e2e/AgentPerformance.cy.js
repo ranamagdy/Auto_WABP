@@ -5,6 +5,12 @@ describe('Agent Performance Page Tests Using Fixtures', () => {
 
   BasePage.init(AgentPerformancePage, 'AgentPerformance');
 
+  
+  it('Should open Agent Performance page', () => {
+  AgentPerformancePage.assertPageNavigation('agentPerformance');  // dynamically asserts URL
+});
+  
+  
   it('Should search by agent name', function () {
     const agentName = this.AgentPerformance.agentName;
     AgentPerformancePage.SearchByName(agentName);

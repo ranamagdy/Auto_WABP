@@ -5,7 +5,11 @@ describe('Client Follow-Up Page Tests Using Fixtures', () => {
 
     // Initialize page & fixture
     BasePage.init(ClientFollowUpPage,'ClientFollowUpData')
-    
+
+    it('Should open Client Follow-Up page', () => {
+       ClientFollowUpPage.assertPageNavigation('clientFollowUps');  // dynamically asserts URL
+    });
+
     it('Should Sent Message Successfully With Valid Data ', function () {
         const randomMobile = this.ClientFollowUpData.MobileNumber[
             Math.floor(Math.random() * this.ClientFollowUpData.MobileNumber.length)
@@ -18,7 +22,8 @@ describe('Client Follow-Up Page Tests Using Fixtures', () => {
 
     })
 
-    it('Check the validations when send message with empty data  ', function () {
+
+    it('Should show validation messages when clicking Save without filling mandatory fields', function () {
         ClientFollowUpPage.ValidationMessages()
         cy.contains('span', 'Please Select')
           .should('be.visible');

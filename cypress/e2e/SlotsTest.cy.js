@@ -4,13 +4,32 @@ import SlotsPage from "../Pages/SlotsPage";
 
 describe('Slots Page Tests Using Fixtures', () => {
     BasePage.init(SlotsPage, 'SlotData');
-    
+it('Should open Slots page', () => {
+       SlotsPage.assertPageNavigation('slots');  // dynamically asserts URL
+    });
+
 it('Should create a new slot successfully',function(){
 
      SlotsPage.CreateNewSlot();
      cy.get('.mat-simple-snack-bar-content').should('contain', 'Slot created successfully');
 
 });
+it('Should show validation messages when clicking Save without filling mandatory fields', () => {
+        SlotsPage.clickAddNew();
+        SlotsPage.clickSave();
+    
+        const validationMessages = [
+          'Please Enter Club',
+          'Please Enter Age Group',
+          'Please Enter From Date',
+          'Please Enter To Date'
+        ];
+    
+        validationMessages.forEach(message => {
+          cy.contains(message).should('be.visible');
+        });
+    
+      });
 
 it('Should search by club successfully', function () {
 
