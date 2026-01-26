@@ -11,19 +11,22 @@ class CampaignPage extends BasePage {
     cy.contains('span.nav-link-text', 'Campaigns').click();
   }
 
-
+step0() {
+   cy.get('#cdk-step-content-0-0 > .card-head-btns-add-campain-wrapper > .mat-stepper-next').click();
+  }
   step1() {
-    cy.get('#cdk-step-label-0-1 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click();
+    cy.get('#cdk-step-content-0-1 > .card-head-btns-add-campain-wrapper > .mat-stepper-next > span').click();
   }
 
   step2() {
-    cy.get('#cdk-step-label-0-2 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click();
+    cy.get('#cdk-step-content-0-2 > .card-head-btns-add-campain-wrapper > .mat-stepper-next > span').click();
   }
 
   step3() {
     cy.get('mat-step-header').eq(3).click({ force: true });
 
   }
+
 
   // ==========================
   // Add New Campaign INFO TAB
