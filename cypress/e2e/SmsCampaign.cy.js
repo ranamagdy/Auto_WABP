@@ -32,6 +32,27 @@ describe('Sms Campaign tests', () => {
 
   });
 
+  it('Should not allow creating Onspot campaigns with duplicate name', function () {
+
+    const data = BasePage.generateSMSCampaignData(this.SmsCampaign);
+    const SendingPreferences = this.SmsCampaign.SendingPreferences[0];
+    const GroupType = this.SmsCampaign.GroupType[0];
+  
+    // First creation (success)
+    SmsCampaignPage.AddNewSmsCampaignInfoTab(data.campaignName,SendingPreferences,GroupType);
+    SmsCampaignPage.ContactsTab(data.mobileNumber);
+    SmsCampaignPage.TemplateTab(data.randomTemplate);
+  
+    SmsCampaignPage.AddNewSmsCampaignInfoTab(data.campaignName,SendingPreferences,GroupType);
+    SmsCampaignPage.ContactsTab(data.mobileNumber);
+    SmsCampaignPage.TemplateTab(data.randomTemplate);
+  
+    cy.wait(3000);
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'already exists');
+});
+
+
   it('Should create Onspot campaigns with custom group Successfully', function () {
 
     const data = BasePage.generateSMSCampaignData(this.SmsCampaign)

@@ -14,6 +14,22 @@ it('Should create a new slot successfully',function(){
      cy.get('.mat-simple-snack-bar-content').should('contain', 'Slot created successfully');
 
 });
+it('Should show validation messages when clicking Save without filling mandatory fields', () => {
+        SlotsPage.clickAddNew();
+        SlotsPage.clickSave();
+    
+        const validationMessages = [
+          'Please Enter Club',
+          'Please Enter Age Group',
+          'Please Enter From Date',
+          'Please Enter To Date'
+        ];
+    
+        validationMessages.forEach(message => {
+          cy.contains(message).should('be.visible');
+        });
+    
+      });
 
 it('Should search by club successfully', function () {
 

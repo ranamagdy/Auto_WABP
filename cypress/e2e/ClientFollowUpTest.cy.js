@@ -22,7 +22,8 @@ describe('Client Follow-Up Page Tests Using Fixtures', () => {
 
     })
 
-    it('Check the validations when send message with empty data  ', function () {
+
+    it('Should show validation messages when clicking Save without filling mandatory fields', function () {
         ClientFollowUpPage.ValidationMessages()
         cy.contains('span', 'Please Select')
           .should('be.visible');

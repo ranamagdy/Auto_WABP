@@ -20,6 +20,20 @@ describe('Pre Message Page Tests', () => {
       .should('contain', this.PreMessageData.newMessage.Message);
   });
 
+  it('Should show validation messages when clicking Save without filling mandatory fields', () => {
+        PreMessagePage.clickAddNew();
+        PreMessagePage.clickSave();
+    
+        const validationMessages = [
+          'Please Enter Message',
+        ];
+    
+        validationMessages.forEach(message => {
+          cy.contains(message).should('be.visible');
+        });
+    
+      });
+
   it('Should edit the first Message', function () {
     PreMessagePage.clickEditFirst();
     PreMessagePage.fillnewMessage(this.PreMessageData.editedMessage.Message);

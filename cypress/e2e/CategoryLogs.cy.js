@@ -22,6 +22,36 @@ describe('Category Logs Page Tests', () => {
 
   });
 
+  it('Should not allow creating Category Log with duplicate name', function () {
+
+    const dynamiCategoryLog = BasePage.generateDynamicName(this.categoryLogsData.newCategory.name);
+
+    CategoryLogsPage.clickAddNew();
+    CategoryLogsPage.fillCategoryName(dynamiCategoryLog);
+    CategoryLogsPage.clickSave();
+    CategoryLogsPage.clickAddNew();
+    CategoryLogsPage.fillCategoryName(dynamiCategoryLog);
+    CategoryLogsPage.clickSave();
+    cy.get('.mat-simple-snack-bar-content', { timeout: 10000 })
+      .should('contain', 'Log category type already exists.');
+      
+    
+  });
+
+  it('Should show validation messages when clicking Save without filling mandatory fields', () => {
+        CategoryLogsPage.clickAddNew();
+        CategoryLogsPage.clickSave();
+    
+        const validationMessages = [
+          'Please Enter Category Log Name',
+        ];
+    
+        validationMessages.forEach(message => {
+          cy.contains(message).should('be.visible');
+        });
+    
+      });
+
   it('Should search by name and display results', function () {
     CategoryLogsPage.openSearch();
     CategoryLogsPage.enterSearchName(this.categoryLogsData.searchName);
