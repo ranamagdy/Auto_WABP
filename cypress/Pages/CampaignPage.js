@@ -11,18 +11,22 @@ class CampaignPage extends BasePage {
     cy.contains('span.nav-link-text', 'Campaigns').click();
   }
 
-
+step0() {
+   cy.get('#cdk-step-content-0-0 > .card-head-btns-add-campain-wrapper > .mat-stepper-next').click();
+  }
   step1() {
-    cy.get('#cdk-step-label-0-1 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click();
+    cy.get('#cdk-step-content-0-1 > .card-head-btns-add-campain-wrapper > .mat-stepper-next > span').click();
   }
 
   step2() {
-    cy.get('#cdk-step-label-0-2 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click();
+    cy.get('#cdk-step-content-0-2 > .card-head-btns-add-campain-wrapper > .mat-stepper-next > span').click();
   }
 
   step3() {
-    cy.get('#cdk-step-label-0-3 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
+    cy.get('mat-step-header').eq(3).click({ force: true });
+
   }
+
 
   // ==========================
   // Add New Campaign INFO TAB
@@ -390,22 +394,22 @@ class CampaignPage extends BasePage {
   mobileNumbers.forEach((number, index) => {
     expect(number, `Mobile number at index ${index}`).to.exist;
 
-    // اكتب الرقم
+  
     cy.get('#phone')
       .should('be.visible')
       .clear()
       .type(number);
 
-    // scroll للزر Add قبل الضغط عليه
+    
     cy.get('.telInput > .global-card-form-input-wrapper > .row > .col-md-3 > .btn') // غير الكلاس لو Add button مختلف
       .scrollIntoView({ easing: 'linear', duration: 200 })
       .click({ force: true });
 
-    // مهلة صغيرة لو DOM بيتغير
+    
     cy.wait(100);
   });
 
-  // بعد الانتهاء اضغط Next
+  
   this.step2();
 }
 
