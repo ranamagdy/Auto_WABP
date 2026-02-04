@@ -12,12 +12,14 @@ class AgentsPage extends BasePage {
   // ==========================
   // Add New agent
   // ==========================
-  AddNewAgent(FullName, email, integrationId = '') {
+  AddNewAgent(FullName, email, integrationId, mobileNumber = '') {
     this.clickAddNew();
 
     // Fill Full Name and Email
     cy.get('input[data-placeholder="Full Name"]').type(FullName);
     cy.get('input[formcontrolname="email"]').type(email);
+    cy.get('#phone').type(mobileNumber);
+
 
     // Select Role (first role)
     cy.contains('Select Role').click();
@@ -43,6 +45,7 @@ class AgentsPage extends BasePage {
     if (!$checkbox.is(':checked')) {
       cy.wrap($checkbox).click({ force: true });
     }
+    cy.get('[formcontrolname="maxAssignedClientCount"]').type(6);
   });
     });
 
@@ -65,6 +68,11 @@ class AgentsPage extends BasePage {
     this.clickSearch();
   }
 
+  SearchByMobile(mobileNumber) {
+    cy.get('#phone').type(mobileNumber);
+    this.clickSearch();
+  }
+
   SearchByEmail(Email) {
     cy.get('input[data-placeholder="Email"]').type(Email);
     this.clickSearch();
@@ -74,11 +82,12 @@ class AgentsPage extends BasePage {
   // ==========================
   // Edit Agent
   // ==========================
-  EditAgent(Name, Email) {
+  EditAgent(Name, Email, mobileNumber) {
     this.clickEdit();
 
     cy.get('input[data-placeholder="Full Name"]').clear().type(Name);
     cy.get('input[formcontrolname="email"]').clear().type(Email);
+    cy.get('#phone').clear().type(mobileNumber);
 
     // Agent doesn't Recieves Chat
     cy.get('#mat-checkbox-2 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
@@ -133,6 +142,17 @@ testInvalidEmails(invalidEmails) {
         .should('be.visible')
         .and('contain', 'Invalid Email Pattern');
       this.clickCancel();
+    });
+}
+
+checkonReceivingchats() {
+  cy.contains('Receiving chats')
+    .parents('mat-checkbox')
+    .find('input[type="checkbox"]')
+    .then($checkbox => {
+      if (!$checkbox.is(':checked')) {
+        cy.wrap($checkbox).click({ force: true });
+      }
     });
 }
 }

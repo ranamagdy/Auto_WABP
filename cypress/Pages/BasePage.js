@@ -182,6 +182,12 @@ class BasePage {
       template: Cypress._.sample(fixtureData.templateNames),
     };
   }
+  static generateEgyptMobile() {
+  const prefixes = ['010', '011', '012', '015'];
+  const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+  const rest = Math.floor(10000000 + Math.random() * 90000000);
+  return prefix + rest;
+}
 
 }
 
