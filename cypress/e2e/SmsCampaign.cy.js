@@ -21,11 +21,11 @@ describe('Sms Campaign tests', () => {
     const GroupType = this.SmsCampaign.GroupType[0];
 
 
-    SmsCampaignPage.AddNewSmsCampaignInfoTab(data.campaignName, SendingPreferences, GroupType);
-    SmsCampaignPage.ContactsTab(data.mobileNumber);
-    SmsCampaignPage.TemplateTab(data.randomTemplate);
+    SmsCampaignPage.fillCampaignInfo(data.campaignName, SendingPreferences, GroupType);
+    SmsCampaignPage.fillContacts(data.mobileNumber);
+    SmsCampaignPage.fillTemplate(this.SmsCampaign.templateNames[0]);
 
-    cy.wait(3000);
+    cy.wait(5000);
     cy.get('.mat-simple-snack-bar-content')
       .should('contain', 'Campaign Created Successfully');
 

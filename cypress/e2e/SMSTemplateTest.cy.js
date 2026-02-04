@@ -46,7 +46,7 @@ describe('Should Add New SMS Template Successfully  ', () => {
 
 
     SMSTemplatePage.openSearch();
-    SMSTemplatePage.SerchByAvailablity();
+    SMSTemplatePage.SearchByAvailablity();
     cy.get('tbody > :nth-child(1) > .cdk-column-availability').should('contain', 'Yes')
 
   })
@@ -55,7 +55,7 @@ describe('Should Add New SMS Template Successfully  ', () => {
 
 
     SMSTemplatePage.openSearch();
-    SMSTemplatePage.SerchByChannel();
+    SMSTemplatePage.SearchByChannel();
     cy.get('tbody > :nth-child(1) > .cdk-column-channel').should('contain', 'SMS')
 
   })
@@ -71,7 +71,7 @@ describe('Should Add New SMS Template Successfully  ', () => {
 
   it('Should change the template to unavailable successfully', function () {
     SMSTemplatePage.openSearch();
-    SMSTemplatePage.SerchByAvailablity();
+    SMSTemplatePage.SearchByAvailablity();
     SMSTemplatePage.ChangeToNotAvailable()
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Template deactivated successfully')
 

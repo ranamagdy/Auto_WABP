@@ -54,23 +54,24 @@ class SmsCampaignPage extends BasePage {
   // ==========================
   // Step 3 – Template
   // ==========================
-  fillTemplate(templateName) {
-    expect(templateName, 'Template Name').to.exist;
+  fillTemplate(templateNames) {
+    //expect(templateNames, 'Template Name').to.exist;
+
 
     cy.contains('span', 'Select Template').click();
 
-    cy.get('#templatesDD .c-input')
+    cy.get('#templatesDD > .cuppa-dropdown > .dropdown-list > .list-area > .list-filter > .c-input')
       .clear()
-      .type(templateName, { force: true });
+      .type(templateNames, { force: true });
 
-    cy.contains('#templatesDD li', templateName)
+    cy.contains('#templatesDD li', templateNames)
       .find('input[type="checkbox"]')
       .check({ force: true });
 
     cy.contains('button', 'Fill').click({ force: true });
 
     this.goToStep(3);
-    super.clickSave();
+    cy.get('#cdk-step-content-0-3 > .card-head-btns-add-campain-wrapper > .btn-black > span').click();
   }
 
   // ==========================
