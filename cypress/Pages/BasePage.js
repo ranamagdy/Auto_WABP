@@ -189,6 +189,8 @@ class BasePage {
   return prefix + rest;
 }
 
+
+
 }
 
 export default BasePage;
