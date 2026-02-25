@@ -6,14 +6,11 @@ describe('Campaign Page Tests Using Fixtures', () => {
 
   BasePage.init(CampaignPage, 'CampaignData');
   
-  it('Should open Campaigns page', () => {
+  it('Should open Campaigns page',  { tags: ['Smoke', 'Regression', 'Positive'] } , () => {
   CampaignPage.assertPageNavigation('campaigns');  // dynamically asserts URL
   });
-  // ==========================
-  // Positive Test Cases
-  // ==========================
-  
-  it('Should create Onspot with Normal group Successfully',{ tags: ['Positive'] }, function () {
+
+  it('Should create Onspot with Normal group Successfully', { tags: ['Smoke', 'Regression', 'Positive'] } , function () {
 
 
     const data = BasePage.generateCampaignData(this.CampaignData);
@@ -35,9 +32,7 @@ describe('Campaign Page Tests Using Fixtures', () => {
 
   });
 
-
-
-  it.skip('Should create Onspot using 200 mobile numbers Successfully',{ tags: ['Positive'] }, function () {
+  it.skip('Should create Onspot using 200 mobile numbers Successfully',{ tags: ['Regression', 'Positive'] }, function () {
 
   const data = BasePage.generateCampaignData(this.CampaignData);
   const sendingPreferences = this.CampaignData.SendingPreferences[0];
@@ -59,28 +54,7 @@ describe('Campaign Page Tests Using Fixtures', () => {
     .should('contain', 'Campaign Created Successfully');
 });
 
-
-  it('Should Duplicate The Campaign without any changing ',{ tags: ['Positive'] },{ tags: ['Positive'] }, function () {
-    
-    CampaignPage.DuplicateWithoutChanging();
-    cy.wait(500)
-    cy.get('.mat-simple-snack-bar-content')
-      .should('contain', 'Campaign Created Successfully')
-
-  });
-
-
-  it('Should Duplicate the campaign with changing from Normal to Custom ',{ tags: ['Positive'] }, function () {
-    
-    CampaignPage.NormalToCutom()
-    cy.get('.mat-simple-snack-bar-content')
-      .should('contain', 'Campaign Created Successfully')
-
-
-  });
-
-
-  it('Should create Onspot campaigns with custom group Successfully',{ tags: ['Positive'] }, function () {
+ it('Should create Onspot campaigns with custom group Successfully',{ tags: ['Regression', 'Positive'] }, function () {
     const SendingPreferences = this.CampaignData.SendingPreferences[0];
     const GroupType = this.CampaignData.GroupType[1];
 
@@ -94,26 +68,7 @@ describe('Campaign Page Tests Using Fixtures', () => {
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
 
   });
-
-  it('Should Duplicate the campaign with changing from Custom to Normal ',{ tags: ['Positive'] }, function () {
-    CampaignPage.CustomToNormal(this.CampaignData.MobileNumber)
-    cy.wait(2000)
-    cy.get('.mat-simple-snack-bar-content')
-      .should('contain', 'Campaign Created Successfully')
-
-
-  });
-
-  it('Should Duplicate the campaign with changing from onspot to schedual', { tags: ['Positive'] },function () {
-    CampaignPage.OnspotToScheduled();
-    cy.get('.mat-simple-snack-bar-content')
-      .should('contain', 'Campaign Created Successfully')
-
-
-  });
-
-
-it('Should create Scheduled campaigns Successfully',{ tags: ['Positive'] }, function () {
+  it('Should create Scheduled campaigns with Normal group Successfully',{ tags: ['Smoke', 'Regression', 'Positive'] }, function () {
     const data = BasePage.generateCampaignData(this.CampaignData);
 
     CampaignPage.ScheduleCampaignInfoTab(
@@ -131,6 +86,31 @@ it('Should create Scheduled campaigns Successfully',{ tags: ['Positive'] }, func
 
   });
 
+  
+
+
+ 
+
+  it('Should Duplicate the campaign with changing from Custom to Normal ',{ tags: ['Regression', 'Positive'] }, function () {
+    CampaignPage.CustomToNormal(this.CampaignData.MobileNumber)
+    cy.wait(2000)
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Campaign Created Successfully')
+
+
+  });
+
+  it('Should Duplicate the campaign with changing from onspot to schedual', { tags: ['Regression', 'Positive'] },function () {
+    CampaignPage.OnspotToScheduled();
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Campaign Created Successfully')
+
+
+  });
+
+
+
+
   it('Should Duplicate the campaign with changing from schedual to onspot ', { tags: ['Positive'] },function () {
     CampaignPage.ScheduledToOnspot()
     cy.get('.mat-simple-snack-bar-content')
@@ -140,7 +120,35 @@ it('Should create Scheduled campaigns Successfully',{ tags: ['Positive'] }, func
   });
 
 
-  it('Should Search by the Campaign Title Successfully',{ tags: ['Positive'] }, function () {
+ 
+
+  it('Should Duplicate the campaign with changing The template ', { tags: ['Regression', 'Positive'] },function () {
+    CampaignPage.DuplicateChangeTemp(this.CampaignData.templateNames[0]);
+    cy.wait(3000);
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Campaign Created Successfully')
+
+
+  });
+  it('Should Duplicate The Campaign without any changing ',{ tags: ['Regression', 'Positive' , 'Smoke'] }, function () {
+    
+    CampaignPage.DuplicateWithoutChanging();
+    cy.wait(500)
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Campaign Created Successfully')
+
+  });
+
+
+  it('Should Duplicate the campaign with changing from Normal to Custom ',{ tags: ['Regression', 'Positive'] }, function () {
+    
+    CampaignPage.NormalToCutom()
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Campaign Created Successfully')
+
+
+  });
+   it('Should Search by the Campaign Title Successfully',{ tags: ['Smoke', 'Regression', 'Positive'] }, function () {
     CampaignPage.openSearch();
     CampaignPage.SearchByCampaignName(this.CampaignData.campaigns[0].CampaignName);
     cy.get('.example-element-row > .cdk-column-title')
@@ -148,7 +156,7 @@ it('Should create Scheduled campaigns Successfully',{ tags: ['Positive'] }, func
 
   });
 
-  it('Should Search by Onspot Sending Type Successfully', { tags: ['Positive'] },function () {
+  it('Should Search by Onspot Sending Type Successfully',{ tags: ['Regression', 'Positive'] },function () {
     CampaignPage.openSearch();
     CampaignPage.SearchByOnspotCmapaign();
     cy.get(':nth-child(1) > .cdk-column-sendingType > .badge-status')
@@ -156,14 +164,14 @@ it('Should create Scheduled campaigns Successfully',{ tags: ['Positive'] }, func
 
   });
 
-  it('Should Search by Scheduled Sending Type Successfully', { tags: ['Positive'] },function () {
+  it('Should Search by Scheduled Sending Type Successfully', { tags: ['Regression', 'Positive'] },function () {
     CampaignPage.openSearch();
     CampaignPage.SearchByScheduledCmapaign()
     cy.get(':nth-child(1) > .cdk-column-sendingType > .badge-status')
       .should('contain', 'Scheduled')
   });
 
-  it('Should Search by Sending Status Successfully',{ tags: ['Positive'] }, function () {
+  it('Should Search by Sending Status Successfully',{ tags: ['Regression', 'Positive'] }, function () {
     CampaignPage.openSearch();
     CampaignPage.SearchBySendingStatus();
     cy.wait(2000);
@@ -173,7 +181,7 @@ it('Should create Scheduled campaigns Successfully',{ tags: ['Positive'] }, func
   });
 
 
-  it('Should Clear Successfully',{ tags: ['Positive'] }, function () {
+  it('Should Clear Successfully',{ tags: ['Regression', 'Positive'] }, function () {
     CampaignPage.openSearch();
     CampaignPage.SearchByCampaignName(this.CampaignData.campaigns[0].CampaignName);
     CampaignPage.clickClear();
@@ -183,21 +191,12 @@ it('Should create Scheduled campaigns Successfully',{ tags: ['Positive'] }, func
   });
 
   
-
-  it('Should Duplicate the campaign with changing The template ', { tags: ['Positive'] },function () {
-    CampaignPage.DuplicateChangeTemp(this.CampaignData.templateNames[0]);
-    cy.wait(3000);
-    cy.get('.mat-simple-snack-bar-content')
-      .should('contain', 'Campaign Created Successfully')
-
-
-  });
-  it('Should View Campaign  Successfully',{ tags: ['Positive'] }, function () {
+  it('Should View Campaign  Successfully',{ tags: ['Smoke', 'Regression', 'Positive'] }, function () {
 
     CampaignPage.ViewCampaign();
     cy.url().should('include', '/campaigns/report');
   });
-  it('Should Details Campaign  Successfully', { tags: ['Positive'] }, function () {
+  it('Should Details Campaign  Successfully', { tags: ['Regression', 'Positive'] }, function () {
 
     CampaignPage.DetailsCampaign();
     cy.url().should('include', '/campaigns/view');
@@ -209,9 +208,6 @@ it('Should create Scheduled campaigns Successfully',{ tags: ['Positive'] }, func
     cy.get('.mat-simple-snack-bar-content')
       .should('contain', 'Campaign Cancelled Successfully');
   });
-// ==========================
-  // Negative Test Cases
-  // ==========================
 
   it('Should show validation messages when clicking Save without filling mandatory fields in the Info tab', { tags: ['Negative'] },function () {
     const basePage = new BasePage();
