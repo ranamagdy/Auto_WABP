@@ -71,6 +71,7 @@ step0() {
     cy.get('.global-card-form-input > .global-card-form-input-wrapper > .row > .col-md-3 > .btn').click();
 
     cy.contains('button', 'Fill').click({ force: true });
+    cy.wait(500);
     this.step3();
     this.clickSave();
 
@@ -134,12 +135,13 @@ step0() {
   customGroupCamp(CampaignName, TemplateName, ChannelName, SendingPreferences, GroupType) {
 
     this.AddNewCampaignInfoTab(CampaignName, ChannelName, SendingPreferences, GroupType)
-    this.step1();
+    //this.step1();
     cy.wait(500)
     cy.get('#groupsDD > .cuppa-dropdown > .selected-list > .c-btn').click()
     cy.get('#groupsDD > .cuppa-dropdown > .dropdown-list > .list-area > [style="overflow: auto; max-height: 160px;"] > .lazyContainer > :nth-child(1)').click()
 
-    this.step2();
+    this.step1();
+    //cy.get('span').contains('Next').click();
     cy.wait(500)
     this.TemplateTab(TemplateName);
 
@@ -221,7 +223,7 @@ step0() {
     cy.get('span').contains('Onspot').click();
 
 
-    cy.get('#cdk-step-label-0-0 > .mat-step-label > .mat-step-text-label > .d-flex > .step-title').click()
+    this.step0();
     cy.wait(500);
     this.step1();
 
@@ -288,13 +290,13 @@ step0() {
 
     cy.get('span').contains('Normal').click();
 
-    cy.get('#cdk-step-label-0-0 > .mat-step-label > .mat-step-text-label > .d-flex > .step-title').click()
+    this.step0();
     cy.wait(500)
 
-
+this.ContactsTab(Mobilenumber)
     this.step1();
     cy.wait(500)
-    this.ContactsTab(Mobilenumber)
+    
 
 
     this.step2();
@@ -313,13 +315,14 @@ step0() {
 
     cy.get('span').contains('Customized').click();
 
-    cy.get('#cdk-step-label-0-0 > .mat-step-label > .mat-step-text-label > .d-flex > .step-title').click()
+    this.step0();
     cy.wait(500)
 
-    this.step1();
-    cy.wait(500)
+    
     cy.get('#groupsDD > .cuppa-dropdown > .selected-list > .c-btn').click()
     cy.get('#groupsDD > .cuppa-dropdown > .dropdown-list > .list-area > [style="overflow: auto; max-height: 160px;"] > .lazyContainer > :nth-child(1)').click()
+    this.step1();
+    cy.wait(500)
 
     this.step2();
     cy.wait(500)
