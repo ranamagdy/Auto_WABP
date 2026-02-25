@@ -13,6 +13,7 @@ class BasePage {
     addNewBtn: () => cy.contains('span', 'Add'),
     createBtn: () => cy.contains('span', 'Create'),
     saveBtn: () => cy.contains('span', 'Save'),
+    cancelBtn: () => cy.contains('span', 'Agents'),
     exportBtn: () => cy.get('button[title="Export To Excel"]'),
     dialog: () => cy.get('.mat-dialog-container', { timeout: 8000 }),
     dialogConfirm: () => cy.get('.mat-dialog-actions > .btn-black'),
@@ -30,6 +31,10 @@ class BasePage {
 
   clickClear() {
     this.elements.clearBtn().click();
+  }
+
+  clickCancel() {
+    this.elements.cancelBtn().click();
   }
 
   clickEdit() {
@@ -177,6 +182,12 @@ class BasePage {
       template: Cypress._.sample(fixtureData.templateNames),
     };
   }
+  static generateEgyptMobile() {
+  const prefixes = ['010', '011', '012', '015'];
+  const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+  const rest = Math.floor(10000000 + Math.random() * 90000000);
+  return prefix + rest;
+}
 
 }
 

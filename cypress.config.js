@@ -12,7 +12,7 @@ module.exports = defineConfig({
     experimentalSessionAndOrigin: true,
 
     retries: { 
-      runMode: 3,  // retry failed tests 3 times in "cypress run"
+      runMode: 3,  // retry failed tests 3 times in "cypress run"""
       openMode: 3  // no retries in "cypress open"
     }
   },
