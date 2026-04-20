@@ -1,0 +1,11 @@
+{
+    "TemplateName": "auto_template",
+    "Language": ["English" , "Hindi" , "Arabic" , "French" , "Spanish"],
+    "Availability": ["Available" , "Unavailable"],
+    "Category": ["Marketing", "Utility"],
+    "Channel": "TND",
+    "Body": "This is the body of the template",
+    "footer": "This is footer of the template",
+    "headertxt": "This is header of the template"
+
+}
