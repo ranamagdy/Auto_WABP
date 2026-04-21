@@ -11,18 +11,27 @@ class CampaignPage extends BasePage {
     cy.contains('span.nav-link-text', 'Campaigns').click();
   }
 
-step0() {
-   cy.get('#cdk-step-content-0-0 > .card-head-btns-add-campain-wrapper > .mat-stepper-next').click();
-  }
-  step1() {
-    cy.get('#cdk-step-content-0-1 > .card-head-btns-add-campain-wrapper > .mat-stepper-next > span').click();
-  }
+  step0() {
+  cy.get('#cdk-step-content-0-0')
+    .find('button.mat-stepper-next')
+    .click({ force: true });
+}
 
-  step2() {
-    cy.get('#cdk-step-content-0-2 > .card-head-btns-add-campain-wrapper > .mat-stepper-next > span').click();
-  }
+step1() {
+  cy.get('#cdk-step-content-0-1').should('exist');
+  cy.get('#cdk-step-content-0-1')
+    .find('button.mat-stepper-next')
+    .click({ force: true });
+}
 
-  step3() {
+step2() {
+  cy.get('#cdk-step-content-0-2').should('exist');
+  cy.get('#cdk-step-content-0-2')
+    .find('button.mat-stepper-next')
+    .click({ force: true });
+}
+
+step3() {
     cy.get('mat-step-header').eq(3).click({ force: true });
 
   }
@@ -293,19 +302,15 @@ step0() {
     this.step0();
     cy.wait(500)
 
-this.ContactsTab(Mobilenumber)
+    this.ContactsTab(Mobilenumber)
     this.step1();
     cy.wait(500)
-    
-
+  
 
     this.step2();
     cy.wait(500)
 
-    this.step3();
-    cy.wait(500)
-
-    this.clickSave();
+  this.clickSave();
 
   }
 
@@ -328,6 +333,7 @@ this.ContactsTab(Mobilenumber)
     cy.wait(500)
 
     this.step3();
+    
     cy.wait(500)
 
     this.clickSave();
@@ -346,11 +352,7 @@ this.ContactsTab(Mobilenumber)
     this.step2();
     cy.wait(500)
 
-    cy.get('#templatesDD .c-btn')
-      .should('exist')
-      .then($btn => {
-        $btn[0].click(); // native DOM click
-      });
+    cy.get('#templatesDD .c-btn').should('exist').then($btn => {$btn[0].click();});
 
     cy.get('#templatesDD > .cuppa-dropdown > .dropdown-list > .list-area > .list-filter > .c-input').should('be.visible').clear().type(templateNames);
     cy.get('#templatesDD > .cuppa-dropdown > .dropdown-list > .list-area > [style="overflow: auto; max-height: 160px;"] > .lazyContainer > .pure-checkbox > label').click()
@@ -360,8 +362,8 @@ this.ContactsTab(Mobilenumber)
     cy.scrollTo('bottom');
     cy.get('input[type="file"]').attachFile('TestImage.jpg', { force: true });
 
-    this.step3()
-    this.step3()
+    cy.scrollTo('top');
+    cy.get('#cdk-step-content-0-2 > .card-head-btns-add-campain-wrapper > .mat-stepper-next > span').click({ force: true });
 
     cy.wait(500)
     this.clickSave();
