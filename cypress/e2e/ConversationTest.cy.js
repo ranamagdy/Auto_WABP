@@ -77,7 +77,7 @@ describe('Conversation Page Tests Using Fixtures', () => {
     it ('Should export the grid )', function () {
         ConversationPage.export('Conversation');
     });
-      it.only ('Should export the chat)', function () {
+      it ('Should export the chat)', function () {
          ConversationPage.ChatPage()
         ConversationPage.exportChat('chat-conversation');
     });
