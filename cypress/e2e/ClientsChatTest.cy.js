@@ -35,6 +35,20 @@ describe('Clients Chat Report Tests Using Fixtures', () => {
 
    cy.contains('td.mat-column-agentName', 'Mohamed Desouky')
 
+  });
+    it('Should Search by the Conversation Type and return related values successfully ', function () {
+    ClientsChatReport.SerchByconversationType('Comment') 
+
+     cy.get('td.mat-column-conversationTypeName')
+    .should('contain.text', 'Comment')
+
+  })
+   it('Should Search by the Conversation Type and return related values successfully ', function () {
+    ClientsChatReport.SerchByconversationType('Message') 
+
+     cy.get('td.mat-column-conversationTypeName')
+    .should('contain.text', 'Message')
+
   })
   it('Should clear the fields succeefully  ', function () {
     ClientsChatReport.SearchByClientName(this.ClientsChatData.ClientName)
@@ -57,8 +71,7 @@ describe('Clients Chat Report Tests Using Fixtures', () => {
   it('Should View the Support History successfully ', function () {
     ClientsChatReport.ViewSupportHistory();
     cy.get('#mat-dialog-0').should('contain','Support History')
-    
-
+  
 
   })
 

@@ -73,7 +73,7 @@ it('Should not allow creating agent with duplicate mobile number', function () {
       'Please Select Role',
       'Please Enter Integration Id',
       'Please Select Team',
-      'Please Enter Max Assigned Client Count'
+      'Minimum Value 1'
 
     ];
 

@@ -1,14 +1,14 @@
 import BasePage from "./BasePage";
 
 class ClientsChatReport extends BasePage {
-    
+
     // ==========================
     // Navigation
     // ==========================
-    
+
     visit() {
-        cy.contains('span.nav-link-text' , 'Clients Chat').click();
-        
+        cy.contains('span.nav-link-text', 'Clients Chat').click();
+
     }
 
 
@@ -19,7 +19,7 @@ class ClientsChatReport extends BasePage {
         cy.get('#phone').type(MobileNumber);
         this.clickSearch();
     }
-    
+
     SearchByClientName(ClientName) {
         cy.get('input[formcontrolname="clientName"]').type(ClientName);
         this.clickSearch();
@@ -35,13 +35,15 @@ class ClientsChatReport extends BasePage {
     SerchByAgentName(AgentName) {
         cy.get('input[formcontrolname="agentName"]').type(AgentName);
         this.clickSearch();
-        cy.contains('span' , 'View Support History').click();
-        
-
-
-
+        cy.contains('span', 'View Support History').click();
     }
-    
+    SerchByconversationType(type) {
+        cy.get('[formcontrolname="conversationTypeId"]').click()
+        cy.contains('mat-option', type).click()
+        this.clickSearch();
+       
+    }
+
     // ============
     // Search
     // ============
@@ -51,7 +53,7 @@ class ClientsChatReport extends BasePage {
 
     }
     ViewSupportHistory() {
-     cy.get(':nth-child(1) > .py-2 > .btn-group-actions-list > :nth-child(2) > .btn > span').click();
+        cy.get(':nth-child(1) > .py-2 > .btn-group-actions-list > :nth-child(2) > .btn > span').click();
 
 
     }

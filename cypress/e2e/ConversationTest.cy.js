@@ -41,20 +41,21 @@ describe('Conversation Page Tests Using Fixtures', () => {
         ConversationPage.ClearSearch(this.ConversationData.Name);
     }
     );
-    it('Should send Client Follow Up Message', function () {
+    it.only('Should send Client Follow Up Message', function () {
         
 
-        ConversationPage.openSearch();
-        ConversationPage.SearchByInAction('No');
+       ConversationPage.openSearch();
+        ConversationPage.SearchBymobile(this.ConversationData.MobileNumber);
+        
         ConversationPage.ClientFollowUp(this.ConversationData.TemplateName);
         cy.contains('Message sent successfully').should('be.visible');
     }
     );
-    it('Should send Client Follow Up Message and show in chat ', function () {
+    it.only('Should send Client Follow Up Message and show in chat ', function () {
         
 
         ConversationPage.openSearch();
-        ConversationPage.SearchByInAction('No');
+        ConversationPage.SearchBymobile(this.ConversationData.MobileNumber);
         ConversationPage.ClientFollowUpwithShow (this.ConversationData.TemplateName)
 
         cy.contains('Message sent successfully').should('be.visible');

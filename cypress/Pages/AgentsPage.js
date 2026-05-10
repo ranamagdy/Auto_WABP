@@ -45,7 +45,14 @@ class AgentsPage extends BasePage {
     if (!$checkbox.is(':checked')) {
       cy.wrap($checkbox).click({ force: true });
     }
-    cy.get('[formcontrolname="maxAssignedClientCount"]').type(6);
+    cy.get('[formcontrolname="maxAssignedWhatsAppMessageCount"]').clear().type(6);
+    cy.get('[formcontrolname="maxAssignedFacebookMessageCount"]').clear().type(6);
+     cy.get('[formcontrolname="maxAssignedFacebookCommentCount"]').clear().type(6);
+     cy.get('[formcontrolname="maxAssignedInstagramMessageCount"]').clear().type(6);
+     cy.get('[formcontrolname="maxAssignedInstagramCommentCount"]').clear().type(6);
+     
+    
+
   });
     });
 
