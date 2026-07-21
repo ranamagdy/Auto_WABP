@@ -10,5 +10,8 @@ class ForgotPassword  extends BasePage {
         cy.get('#Email').type(email);
         cy.get('button[type="submit"]').click();
     }
+    BackToLogin() {
+        cy.contains('a', 'Back to Login').click();
+    }
 }
 export default new ForgotPassword();

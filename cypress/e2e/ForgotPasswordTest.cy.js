@@ -18,5 +18,10 @@ describe('Forgot Password Page Tests', () => {
         ForgotPassword.submitForgotPassword(this.ForgotPasswordData.email);
         cy.contains('h1', 'Check your email').should('be.visible');
     });
+    it('Should navigate back to the login page', function () {
+        ForgotPassword.visit();
+        ForgotPassword.BackToLogin();
+       cy.contains('h1', 'Login').should('be.visible');
+    });
 
 });
