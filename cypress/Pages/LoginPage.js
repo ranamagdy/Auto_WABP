@@ -20,12 +20,12 @@ class LoginPage {
     LoginWithEmptydata(email, password) {
 
         if (email) {
-            cy.get('input[formcontrolname="userName"]').clear().type(email);
+            cy.get('#UserName').clear().type(email);
         }
         if (password) {
-            cy.get('input[formcontrolname="password"]').clear().type(password);
+            cy.get('#Password').clear().type(password);
         }
-        cy.get('.btn').click()
+        cy.get('.login-btn').click()
     }
     
 }

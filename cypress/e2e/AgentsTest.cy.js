@@ -10,7 +10,7 @@ describe('Agents Page Tests Using Fixtures', () => {
     AgentsPage.assertPageNavigation('agents');  // dynamically asserts URL
     });
 
-  it('Should add a new agent successfully', function () {
+  it.only('Should add a new agent successfully', function () {
     const dynamicFullName = BasePage.generateDynamicName(this.AgentsData.FullName);
     const dynamicEmail = BasePage.generateDynamicEmail(this.AgentsData.email);
     const integrationId = Math.floor(1000 + Math.random() * 9000).toString();

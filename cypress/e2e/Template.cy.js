@@ -7,7 +7,7 @@ describe('Template Page Tests Using Fixtures', () => {
     TemplatePage.assertPageNavigation('templates');  // dynamically asserts URL
    });
     it.only('Should create template with no header , no variables ,no footer , no buttons', function () {
-        TemplatePage.NoHederTemplate(this.TemplateData.TemplateName,this.TemplateData.Category,this.TemplateData.Channel,this.TemplateData.Type,this.TemplateData.footer,this.TemplateData.Body);
+        TemplatePage.NoHederTemplate(this.TemplateData.TemplateName,this.TemplateData.Category[0],this.TemplateData.Channel,this.TemplateData.Type,this.TemplateData.Body);
     });
     it('Should create template with text header , 1 variables ,with footer and 1 buttons (mobile number variable )', function () {
         TemplatePage.TxtHederTemplate(this.TemplateData.Name,this.TemplateData.Language,this.TemplateData.Availability,this.TemplateData.Category,this.TemplateData.Channel,this.TemplateData.Type,this.TemplateData.footer,this.TemplateData.Body);

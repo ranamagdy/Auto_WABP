@@ -7,8 +7,8 @@ Cypress.Commands.add('login', (email, password) => {
   cy.get('.spinnerParent', { timeout: 10000 }).should('not.exist');
 
   // ✅ Use reliable selectors
-  cy.get('input[formcontrolname="userName"]', { timeout: 10000 }).should('be.visible').type(email);
-  cy.get('input[formcontrolname="password"]').should('be.visible').type(password);
+  cy.get('#UserName').should('be.visible').type(email);
+  cy.get('#Password').should('be.visible').type(password);
 // Correct login button locator using button text
 cy.contains('button', 'Login').should('be.visible').click();
 

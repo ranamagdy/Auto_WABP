@@ -1,5 +1,5 @@
 {
-  "templateNames": ["new_temp_image", "templatewithvideo", "doc_temp","templatewithheadetext"],
+  "templateNames": ["image3", "jaspers_market_plain_text_v1", "quick_text_header_with_variables","templatewithheadetext"],
   "campaigns": [
     {
       "CampaignName": "Test Auto Campaign",
